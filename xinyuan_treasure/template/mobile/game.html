@@ -54,10 +54,54 @@
 		#submit_btn{
 			{if $this->settings['game_submit'] !=''}background-image:url({php echo toimage($this->settings['game_submit'])}){/if};
 		}
-		.jilu div:not(:last-child){
-		
-			margin-right:3rem;
+		/*last10 time game*/
+		.record{
+			width: 90%;
+			margin: 0 auto;
 		}
+		.record .shiC{
+			font-size: .9rem;
+			color: #000;
+		}
+
+		.shuJ{
+			width: 100%;
+			overflow: hidden;
+			margin-top: 10%;
+		}
+		.shuJ .cai{
+			font-size: .9rem;
+			color: #666666;
+			float: left;
+		}
+		.shuJ .liR{
+			font-size: .9rem;
+			color: #5da8dd;
+			float: left;
+			margin-left: .6rem;
+		}
+		.shuJ .weiS{
+			width: 26%;
+			float: right;
+		}
+		.shuJ .weiS p{
+			font-size: .9rem;
+			color: #666666;
+			float: left;
+			margin-right: 10%;
+		}
+		.shuJ .weiS .data{
+			width: 2rem;
+			height: 1.4rem;
+			background: #5da8dd;
+			border-radius: .5rem;
+			text-align: center;
+			line-height: 1.4rem;
+			float: left;
+			font-size: .9rem;
+			color: #FFF;
+		}
+		/*end*/
 	</style>
     <div class="wrap">
     <!-- 信息，充值 -->
@@ -103,32 +147,34 @@
             <div class="sming">每次"猜大"、"猜小"、"猜单"、"猜双" 提.现1金（存入微信零.钱），提.现后微信交.易单号尾数"5~9"为大、"0~4"为小</div>
         </div>
 		
-        <!-- 10调游戏记录 -->
-        <p class="xiane">最近10次夺.宝记录</p>
-        <div>
-			{loop $game10 $game}
-			<div class="jilu">
-				<div class="pull-left">
-					{php echo date("m-d H:i",strtotime($game['game_time']))}
-				</div>
-				<div class="pull-left">
-					{$game['game_second']}手{$option[$game['game_option']]}
-				</div>
-				<div class="pull-left bgcolor text-center" style="color:#fff;border-radius:50%;height:1.5rem;width:1.5rem;">
-					{php echo substr($game['game_mchnum'],-1,1)}
-				</div>
-				<div class="pull-left">
-					{if $game['game_result'] == 2}
-						+
-					{else}
-						-
-					{/if}
-					
-					{$game['game_profit']}
-				</div>
-			</div>
-			{/loop}
+		<div class="record" style="margin-bottom: 3rem;">
+        <p class="shiC">最近十次夺宝记录</p>
+		{loop $game10 $game}
+        <div class="shuJ">
+            <p class="cai">{$game['game_second']}手{$option[$game['game_option']]}</p>
+            <p class="liR fontcolor">
+			{if $game['game_result'] == 2}
+				盈利
+			{else}
+				输
+			{/if}
+			
+			{$game['game_profit']}积分
+			</p>
+            <div class="weiS">
+                <p>尾数</p>
+                <div class="data bgcolor">
+                   {php echo substr($game['game_mchnum'],-1,1)}
+                </div>
+            </div>
+        </div>
+		{/loop}
+        
 		</div>
+		
+		
+		
+		
     </div>
     <!-- 新加确定是否真的下注弹框 -->
     <div class="que_sure que_sure1">

@@ -1,27 +1,45 @@
 {template 'header'}
 	<link rel="stylesheet" type="text/css" href="{MODULE_URL}static/css/rank.css"/>
-	<script src="{MODULE_URL}static/js/rem.js" type="text/javascript" charset="utf-8"></script>
-	<script src="{MODULE_URL}static/js/rank.js" type="text/javascript" charset="utf-8"></script>
-	<div class="top">
-		<h1>排行榜</h1>
-		<!-- <p>数据更新于:<span>hahahahah</span></p> -->
-		<h2>代理收益榜</h2>
-	</div>
-	<div class="center">
-		{loop $rank_list $k $rank}
-		<div class="head" style="display: block;">
-			<div class="left">{php echo $k+1}</div>
-			<div class="right">
-				<a href="JavaScript:;">
-					<img src="{$rank['member_avatar']}">
-				</a>
-				<div class="text">
-					<h1>{$rank['member_nickname']}</h1>
-					<h2>代理收益:<span>{$rank['reward']}元</span></h2>
+	<div class="beiJ">
+		<img class="fanH" src="{MODULE_URL}static/img/fanH.gif" alt="">
+		<img class="jiangB" src="{MODULE_URL}static/img/222.png" alt="">
+		<img class="caiD" src="{MODULE_URL}static/img/1111.png" alt="">
+		<img class="caiD_copy" src="{MODULE_URL}static/img/1111.png" alt="">
+		<img class="jingY" src="{MODULE_URL}static/img/333.png" alt="">
+
+
+		<!-- 排行榜 -->
+		<div class="paiH">
+			<div class="paiH_T">
+				<div class="paiM">
+					排名
+				</div>
+				<div class="yongH">
+					用户
+				</div>
+				<div class="niC">
+					昵称
+				</div>
+				<div class="jiF">
+					代理收益
 				</div>
 			</div>
+			{loop $rank_list $k $rank}
+			<div class="paiH_B">
+				<div class="first">
+					{php echo $k+1}
+				</div>
+				<div class="second">
+					<img src="{$rank['member_avatar']}" alt="">
+				</div>
+				<div class="thirdly">
+					<p>{$rank['member_nickname']}</p>
+				</div>
+				<div class="fourth">
+					<p>{$rank['reward']}元</p>
+				</div>
+			</div>
+			{/loop}
 		</div>
-		{/loop}
-		
 	</div>
 {template 'footer'}

@@ -4,13 +4,19 @@
 	load()->library('qrcode/phpqrcode');
 	$query = load()->object('query');
 	$filepath = ATTACHMENT_ROOT;
-	$width = 300;
-	$height= 500;
+	$width = 320;
+	$height= 504;
 	$fontfile = MODULE_ROOT.'/static/font/FZDHTK.TTF';
 	$member = $query->from($this->table['member'])->select(array('member_nickname','member_avatar'))->where(array('member_id'=>$_SESSION['ids']))->get();
 	$public_id = $_W['uniaccount']['uniacid'];
+
+	if(!is_dir(MODULE_ROOT.'/static/sz_qr')){
+		mkdirs(MODULE_ROOT.'/static/sz_qr');
+
+	}
+
 	//生成qr
-	$qr = MODULE_ROOT.'/static/sz_qr'.$_SESSION['ids'].'.png';
+	$qr = MODULE_ROOT.'/static/sz_qr/sz_qr'.$_SESSION['ids'].'.png';
 
 	$qrurl = '';
 	if(!file_is_image($qr) || !file_exists($qr)){
@@ -27,18 +33,18 @@
 	
 	$bg = $filepath.cache_load('poster_bg');
 	$poster_data = cache_load('poster');
-
 	$resoure = imagecreatetruecolor($width,$height);
 	$white = imagecolorallocate($resoure,255,255,255);
 	imagefill($resoure,0,0,$white);
 
-	list($bgwidth,$bgheight) = getimagesize($bg);
+
 	//bg
-	if(file_exists($bg)){
-	$imgfunc = 'imagecreatefrom'.getext($bg);
-	
-	$bgres = $imgfunc($bg);
-	imagecopyresized($resoure,$bgres,0,0,0,0,$width,$height,$bgwidth,$bgheight);
+	if(file_is_image($bg) && file_exists($bg)){
+		list($bgwidth,$bgheight) = getimagesize($bg);
+		$imgfunc = 'imagecreatefrom'.getext($bg);
+		
+		$bgres = $imgfunc($bg);
+		imagecopyresized($resoure,$bgres,0,0,0,0,$width,$height,$bgwidth,$bgheight);
 	}
 	
 	foreach($poster_data as $v){
@@ -78,11 +84,12 @@
 	}
 
 	//avatar
-	// list($avatarwidth,$avatarheight) = getimagesize($member['member_avatar']);
-	// $avatar_img = imagecreatefromstring(file_get_contents($member['member_avatar']));
-	// $avatar_data = $poster['img'];
-	// imagecopyresized($resoure,$avatar_img,$avatar_data['left'],$avatar_data['top'],0,0,$avatar_data['width'],$avatar_data['height'],$avatarwidth,$avatarheight);
-	// imagedestroy($avatar_img);
+	$avatar = $_W['siteroot']."web/index.php?c=utility&a=wxcode&do=image&attach=".urlencode($member['member_avatar']);
+	list($avatarwidth,$avatarheight) = getimagesize($avatar);
+	$avatar_img = imagecreatefromstring(file_get_contents($avatar));
+	$avatar_data = $poster['img'];
+	imagecopyresized($resoure,$avatar_img,$avatar_data['left'],$avatar_data['top'],0,0,$avatar_data['width'],$avatar_data['height'],$avatarwidth,$avatarheight);
+	imagedestroy($avatar_img);
 	
 	//show
 	header('Content-Type: image/jpeg');

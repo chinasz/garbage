@@ -1,0 +1,52 @@
+{template 'common/header'}
+    <style>
+        td,th{
+            text-align: center;
+        }
+    </style>
+    <div class="main">
+        <div class="alert alert-info" role="alert"><h4>{$_W['page']['title']}</h4></div>
+        <div class="panel panel-default">
+                <div class="table-responsive panel-body">
+                    <table class="table table-hover">
+                        <thead class="navbar-inner">
+                        <tr>
+                            <th>内部单号</th>
+                            <th>用户</th>
+                            <th>微信打款单号</th>
+                            <th>手续费</th>
+                            <th>下注</th>
+                            <th>结果</th>
+                            <th>时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {loop $game_list $game}
+                            <tr>
+                                <td>{$game['game_num']}</td>
+                                <td><img src="{php echo toimage($game['member_avatar'])}" width="60"/><br>{$game['member_nickname']}</td>
+                                <td>{$game['game_mchnum']}</td>
+                                <td>{$game['game_spend']}积分</td>
+                                <td>{$game['game_second']}手{$option[$game['game_option']]}</td>
+                                <td>
+                                    {if $game['game_result'] == 2}
+                                    <label class="label label-success">赢</label>
+                                    <br>+{$game['game_profit']}积分
+                                    {else}
+                                    <label class="label label-warning">输</label>
+                                    <br>-{$game['game_profit']}积分
+                                    {/if}
+                                </td>
+                                <td>{$game['game_time']}</td>
+                            </tr>
+                            {/loop}
+                        </tbody>
+                        <tr>
+                            <td colspan="7">{$limit_html}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+    </div>
+
+{template 'common/footer'}

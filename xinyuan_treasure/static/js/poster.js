@@ -115,14 +115,13 @@ $('#posterbg').find('button:first').click(function(){
          var bg = $(':input[name="data[poster_bg]"]').val();
          if(oldbg!=bg){
         	 var img = PreviewImg(attachurl+bg);
-        	 $('#bgtd').css('width',img.width/2+'px').css('height',img.height/2+'px');
-        	 $('#jun_poster').css('width',img.width/2+'px').css('height',img.height/2+'px');
-        	 
+        	 $('#bgtd').css('width','300px').css('height','500px');
+        	         	 
                if(bg.indexOf('http://')==-1){
                     bg = attachurl + bg;
                }
               $('#jun_poster .bg').remove();
-              var bgh = $("<img src='" + bg + "' class='bg' style='width:"+img.width/2+"px;height:"+img.height/2+"px'/>");
+              var bgh = $("<img src='" + bg + "' class='bg' style='width:300px;height:500px'/>");
                var first = $('#jun_poster .drag:first');
                 if(first.length>0){
                    bgh.insertBefore(first);  

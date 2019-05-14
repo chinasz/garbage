@@ -36,68 +36,80 @@ class Xinyuan_treasureModuleSite extends WeModuleSite {
 	
 	
 	// public function getRuleMenus(){
-		// global $_W,$_GPC;
-		// return array(
-			// array(
-				// 'title'	=> '开始游戏',
-				// 'url'	=>	$this->createMobileUrl('index',$_W['account'])
-			// ),
-			// array(
-				// 'title'	=> '充值',
-				// 'url'	=>	$this->createMobileUrl('krypton',$_W['account'])
-			// ),
-			// array(
-				// 'title'	=> '交易明细',
-				// 'url'	=>	$this->createMobileUrl('detail',$_W['account'])
-			// ),
-			// array(
-				// 'title'	=> '积分商城',
-				// 'url'	=>	$this->createMobileUrl('exchange',$_W['account'])
-			// ),
-			// array(
-				// 'title'	=> '新手教程',
-				// 'url'	=>	$this->createMobileUrl('course',$_W['account'])
-			// ),
-			// array(
-				// 'title'	=> '分享海报',
-				// 'url'	=>	$this->createMobileUrl('poster',$_W['account'])
-			// ),
-			// array(
-				// 'title'	=> '排行榜',
-				// 'url'	=>	$this->createMobileUrl('rank',$_W['account'])
-			// ),
-		// );
+	// 	global $_W,$_GPC;
+	// 	return array(
+	// 		array(
+	// 			'title'	=> '开始游戏',
+	// 			'url'	=>	$this->createMobileUrl('index'),
+	// 		),
+	// 		array(
+	// 			'title'	=> '充值',
+	// 			'url'	=>	$this->createMobileUrl('krypton')
+	// 		),
+	// 		array(
+	// 			'title'	=> '交易明细',
+	// 			'url'	=>	$this->createMobileUrl('detail')
+	// 		),
+	// 		array(
+	// 			'title'	=> '积分商城',
+	// 			'url'	=>	$this->createMobileUrl('exchange')
+	// 		),
+	// 		array(
+	// 			'title'	=> '新手教程',
+	// 			'url'	=>	$this->createMobileUrl('course')
+	// 		),
+	// 		array(
+	// 			'title'	=> '分享海报',
+	// 			'url'	=>	$this->createMobileUrl('poster')
+	// 		),
+	// 		array(
+	// 			'title'	=> '排行榜',
+	// 			'url'	=>	$this->createMobileUrl('rank')
+	// 		),
+	// 	);
 	// }
 	
 	public function getMenus(){
 		return array(
 			array(
 				'title'	=> '新手教程',
-				'url'	=>	$this->createWebUrl('setting')
+				'url'	=>	$this->createWebUrl('setting'),
+				'icon'	=>	'wi wi-apply'
 			),
 			array(
 				'title'	=> '会员管理',
-				'url'	=>	$this->createWebUrl('member')
-			),
-			array(
-				'title'	=> '商品管理',
-				'url'	=>	$this->createWebUrl('goods')
+				'url'	=>	$this->createWebUrl('member'),
+				'icon'	=>	'wi wi-user-group'
 			),
 			array(
 				'title'	=> '商品分类',
-				'url'	=>	$this->createWebUrl('gclass')
+				'url'	=>	$this->createWebUrl('gclass'),
+				'icon'	=>	'fa fa-pencil-square-o'
+			),
+			array(
+				'title'	=> '商品管理',
+				'url'	=>	$this->createWebUrl('goods'),
+				'icon'	=>	'fa fa-gift'
 			),
 			array(
 				'title'	=> '订单管理',
-				'url'	=>	$this->createWebUrl('order')
+				'url'	=>	$this->createWebUrl('order'),
+				'icon'	=>	'fa fa-truck',
+			),
+			array(
+				'title'	=> '游戏记录',
+				'url'	=>	$this->createWebUrl('game'),
+				'icon'	=>	'fa fa-keyboard-o',
 			),
 			array(
 				'title'	=> '充值记录',
-				'url'	=>	$this->createWebUrl('krypton')
+				'url'	=>	$this->createWebUrl('krypton'),
+				'icon'	=>	'fa fa-book'
 			),
 			array(
 				'title'	=>	'充值套餐',
-				'url'	=>	$this->createWebUrl('meal')
+				'url'	=>	$this->createWebUrl('meal'),
+				'icon'	=>	'fa fa-credit-card'
 			),
 		);	
 	}
