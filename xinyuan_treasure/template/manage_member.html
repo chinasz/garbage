@@ -1,0 +1,192 @@
+{template 'common/header'}
+	<style>
+		th{
+			text-align: center !important;
+		}
+		td{
+			text-align: center !important;
+			white-space: normal !important;
+			word-break: break-all !important;
+		}
+		.account-stat-num > div{width:50%; float:left; font-size:16px; text-align:center;}
+		.account-stat-num > div span{display:block; font-size:30px; font-weight:bold;}
+	</style>
+	<div class="main">
+		<div class="alert alert-info" role="alert"><h4>{$_W['page']['title']}</h4></div>
+		<div class="panel panel-default">
+		<div class="panel-heading">
+			数据统计
+		</div>
+			<div class="panel-body">
+				<div class="account-stat-num row">
+					<div>今日会员人数<span>{$today_member}</span></div>
+					<div>总会员人数<span>{$total_member}</span></div>
+				</div>
+			</div>
+		</div>
+		
+		<form action="" method="post" class="form-horizontal">
+		<div class="panel panel-info">
+			
+			<div class="panel-heading">筛选</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">关键字</label>
+					<div class="col-xs-12 col-sm-2 col-lg-2">
+						<input class="form-control" name="keyword" type="text" value="" placeholder="请输入昵称">
+					</div>
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">状态</label>
+					<div class="col-xs-12 col-sm-2 col-lg-2">
+						<select name="status" class="form-control">
+							<option value="">全部</option>
+							<option value="0">正常</option>
+							<option value="1" selected="">黑名单</option>
+						</select>
+					</div>
+					<input name="token" type="hidden" value="{$_W['token']}" />
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label"></label>
+					<div class=" col-xs-12 col-sm-3 col-lg-3">
+						<input type="submit" name="submit" class="btn btn-primary span3" value="搜索" />
+						<button class="btn btn-primary" id="export">导出会员信息</button>
+						<a class="btn btn-danger" onclick="$(&quot;#modal-module-menus-pass&quot;).modal()">增加虚假会员数据</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+		<div class="panel panel-default">
+			<div class="table-responsive panel-body">
+				<table class="table table-hover">
+					<thead class="navbar-inner">
+					<tr>
+						<th>id</th>
+						<th>上级id</th>
+						<th>昵称</th>
+						<th>头像</th>
+						<th>可用余额</th>
+						<th>状态</th>
+						<th>时间</th>
+						<th>操作</th>
+					</tr>
+					</thead>
+					<tbody id="mem-list">
+					{loop $member_list $member}
+					<tr>
+						<td>{$member['member_id']}</td>
+						<td>{$member['member_fid']}</td>
+						<td>{$member['member_nickname']}</td>
+						<td><img src="{$member['member_avatar']}" style="width:60px;"></td>
+						<td>{$member['member_score']}</td>
+						<td>{if $member['is_del']==0}<label class="label label-default">黑名单</label>{else}<label class="label label-success">正常</label>{/if}</td>
+						<td>{$member['member_firsttime']}</td>
+						<td>
+						   <a class="btn btn-primary btn-sm add_layer" data-id="{$member['member_id']}" data-toggle="modal" data-target="#myModal">充值余额</a>
+						   
+						   <br>
+						   <a class="btn btn-danger btn-sm del-member" data-id="{$member['member_id']}">删除</a>
+						</td>
+					</tr>
+					{/loop}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							充值余额
+						</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+                        <label class="col-xs-12 col-sm-4 col-md-3 control-label">余额</label>
+							<div class="col-xs-12 col-sm-8 col-lg-8">
+								<input class="form-control infoearn" name="money" id="money" type="number" placeholder="请输入充值金额">
+								<span class="help-block">金额必须为正整数!</span>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary tooltip-hide" id="add_score" title="请输入正确的金额!">提交更改</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		
+		require(['jquery','bootstrap'],function(){
+			
+			$(function () { $('.tooltip-hide').tooltip('hide');});
+			
+			$('.add_layer').on('click',function(){
+			
+				$('#myModal').attr('data-id',$(this).data('id'));
+			});
+			
+			$('#add_score').on('click',function(){
+				var id = $('#myModal').data('id');
+				var score = $("#money").val();
+				if(score==''|| !(/(^[1-9]\d*$)/.test(score))){
+				
+					$(this).attr('data-toggle',"tooltip");
+					$(this).attr('data-placement',"top");
+					$('#add_score').tooltip('show');
+					return false;
+				}else{
+					$.ajax({
+						url:"{php echo $this->createWebUrl('score')}",
+						type:'POST',
+						data:{score:score,id:id,token:'{$_W["token"]}'},
+						dataType:'json',
+						success:function(res){
+							if(res.error){
+								alert(res.error);
+							}else if(res.msg){
+								alert(res.msg);
+								location.reload();
+							}
+							
+						}
+					});
+				}
+			});
+			
+			$('.del-member').on('click',function(e){
+				var id = $(this).data('id');
+				if(confirm('确认删除?')){
+					$.ajax({
+						url:"{php echo $this->createWebUrl('dmember');}",
+						type:"POST",
+						data:{id:id,token:'{$_W["token"]}'},
+						dataType:'json',
+						success:function(res){
+							if(res.error){
+								alert(res.error);
+							}else if(res.msg){
+								alert(res.msg);
+								location.reload();
+							}
+						}
+					});
+				
+				}
+			});
+			
+			$('#export').on('click',function(e){
+				window.open(location.href+'&export=1','_blank');
+			
+			});
+		
+		});
+	</script>
+{template 'common/footer'}

@@ -1,0 +1,253 @@
+{template 'header'}
+	{template 'style'}
+	<link rel="stylesheet" type="text/css" href="{MODULE_URL}static/css/global.css" />
+	<link rel="stylesheet" type="text/css" href="{MODULE_URL}static/css/index.css" />
+	<script type="text/javascript" src="{MODULE_URL}static/js/jquery.range.js"></script>
+	<script type="text/javascript" src="{MODULE_URL}static/js/index.js"></script>
+	<style>
+		body{width:100% !important;}
+		.xinshou{width: 100%;height: 6.367rem;background: url({if $this->settings['web_banner']} {php echo toimage($this->settings['web_banner']);}{else}{MODULE_URL}static/img/xinshou.png{/if}) no-repeat center center;background-size: cover;}
+		.res-layer{
+			background-color:#fff;width:16rem;position:fixed;z-index:5;top:5rem;left:3rem;padding:0 0 .8rem 0;
+		}
+		.res-layer .res-banner{
+			margin-top:-50px;
+		}
+		.res-layer .txt-suc .btn-suc{
+			width:100%;border-radius:2px;color:#E1E1E1;font-size:14px;
+		
+		}
+		.res-layer .txt-suc .suffix-num{
+			height:3rem;width: 3rem;border-radius: 50%;display:block;font-size: 22px;color: #fff;line-height: 3rem;	
+		
+		}
+		.res-layer .txt-suc .btn-confirm{
+			width:8rem;
+			font-size:14px;color:#E1E1E1;height:1.8rem;line-height:1.8rem;border-radius:3px;
+		}
+		
+		.res-error .txt-suc .btn-suc{
+			background-color:#737373;
+		}
+		.res-error .txt-suc .suffix-num{
+			background-color:#737373;
+		}
+		.res-error .txt-suc .btn-confirm{
+			background-color:#737373;
+		}
+		.res-suc .txt-suc .btn-suc{
+			background-color:#FD4128;
+		}
+		.res-suc .txt-suc .suffix-num{
+			background-color:#FD4128;
+		}
+		.res-suc .txt-suc .btn-confirm{
+			background-color:#FD4128;
+		}
+		
+		.theme-green .back-bar .pointer{
+			{if $this->settings['game_slide1'] !=''}background-image:url({php echo toimage($this->settings['game_slide1'])}){/if};
+		}
+		.flag_redpack{
+			{if $this->settings['game_slide2'] !=''}background-image:url({php echo toimage($this->settings['game_slide2'])}){/if};
+		}
+		#submit_btn{
+			{if $this->settings['game_submit'] !=''}background-image:url({php echo toimage($this->settings['game_submit'])}){/if};
+		}
+		.jilu div:not(:last-child){
+		
+			margin-right:3rem;
+		}
+	</style>
+    <div class="wrap">
+    <!-- 信息，充值 -->
+        <div id="info_recharge">
+            <em class="flag_data"></em>
+            <span>剩余积分 : &nbsp;</span>
+            <em id="my_money">{$member_score}</em>
+            <span id="btn_recharge">积分充值</span>
+            <em id="arrow_right"></em>
+        </div>
+     	<div class="xinshou"></div>  
+        <!-- 游戏盒子 -->
+        <div class="game_box">
+            <div class="game_main">
+                <div class="right_box">
+                    <div class="right_top">
+                        <div class="right_top_left">
+                            <div class="jian"></div>
+                            <div class="num"><span  id='total_hand'>1</span></div>
+                            <div class="jia"></div>
+                        </div>
+                        <div class="flag_dialog"><p>有机会获得<em id="getMoney">10</em>积分</p></div>
+                    </div>
+                    <!-- 进度条 -->
+                    <div class="demo">
+                        <input type="hidden" class="single-slider" id="sz_time" value="1" />
+                        <!-- flag-redpack -->
+                        <div class="flag_redpack"></div>
+                    </div> 
+                </div>
+            </div>
+            <div class="daxiao_box">
+                <div class="da_box" data="2">猜大</div>
+                <div class="xiao_box" data="1">猜小</div>
+                <div class="dan_box" data="3">猜单</div>
+                <div class="shuang_box on" data="4">猜双</div>
+            </div>
+            <!-- 确定按钮 -->
+            <div id="submit_box">
+                <a href="javascript:void(0);" id="submit_btn"></a>
+                <div id="selection">当前选择 : <span id="type">猜双</span>撸<span id="money">20</span>手</div>
+            </div>
+            <div class="sming">每次"猜大"、"猜小"、"猜单"、"猜双" 提.现1金（存入微信零.钱），提.现后微信交.易单号尾数"5~9"为大、"0~4"为小</div>
+        </div>
+		
+        <!-- 10调游戏记录 -->
+        <p class="xiane">最近10次夺.宝记录</p>
+        <div>
+			{loop $game10 $game}
+			<div class="jilu">
+				<div class="pull-left">
+					{php echo date("m-d H:i",strtotime($game['game_time']))}
+				</div>
+				<div class="pull-left">
+					{$game['game_second']}手{$option[$game['game_option']]}
+				</div>
+				<div class="pull-left bgcolor text-center" style="color:#fff;border-radius:50%;height:1.5rem;width:1.5rem;">
+					{php echo substr($game['game_mchnum'],-1,1)}
+				</div>
+				<div class="pull-left">
+					{if $game['game_result'] == 2}
+						+
+					{else}
+						-
+					{/if}
+					
+					{$game['game_profit']}
+				</div>
+			</div>
+			{/loop}
+		</div>
+    </div>
+    <!-- 新加确定是否真的下注弹框 -->
+    <div class="que_sure que_sure1">
+        <div class="bou">
+            <div class="bou_left">数量(手)</div>
+            <div id="total" class="bou_right">1手</div>
+        </div>
+        <div class="bou">
+            <div id="guessType" class="bou_left">猜单双</div>
+            <div id="guessCont" class="bou_right" >双</div>
+        </div>
+        <div class="bou">
+            <div class="bou_left">手续费</div>
+            <div id="fee" class="bou_right">1.00</div>
+        </div>
+        <div class="bou">
+            <div class="bou_left">预期收益</div>
+            <div id="total_get" class="bou_right">10.00</div>
+        </div>
+        <div class="cad">
+             <div id="sure_btn">确定</div>
+             <div id="qu_btn">取消</div>
+        </div>
+    </div>
+    <!-- 公共弹框 -->
+    <div class="ggtk"></div>
+	<div class="layer_bg"></div>
+	<div class="res-layer" style="display:none;">
+		<img src="{MODULE_URL}static/img/cg.png" class="res-banner"/>
+		<div class="bg-suc text-center">
+			<img src="{MODULE_URL}static/img/xinshou.png" class="res-em"/>
+		</div>
+		<div class="txt-suc text-center" style="padding:.3rem .5rem;">
+			<div class="btn-suc">
+				夺宝结果
+			</div>
+			<div>
+				<h1 style="font-weight:800;font-size:18px;" class="suc-font">夺宝结果</h1>
+				<p class="text-center"><span class="res-num" style="font-size:12px;">dsfdsfdsfdsdfdsfdsfdsds</span><span class="num-last" style="font-size:18px;color:#900;">7</span></p>
+				<p class="text-center"><span class="center-block suffix-num">0</span></p>
+				<p class="text-center"><span class="res-option">猜一手</span> <span style="color:#900;" class="res-msg">猜错了</span></p>
+			</div>
+			<div class="btn-confirm center-block">
+				确定
+			</div>
+		</div>
+	
+	</div>
+	{template 'gohome'}
+	<script>
+		$('#btn_recharge').on('click',function(){
+			location = "{php echo $this->createMobileUrl('krypton');}";
+		});
+		$(".btn-confirm").on('click',function(){
+			$(".res-layer,.layer_bg").fadeOut("400");
+		});
+	
+		$("#sure_btn").on('click', function(event) {
+			var number = Number($(".daxiao_box>.on").attr('data'));
+			var time = Number($("#sz_time").val());
+			
+			var game_suc = "{php echo toimage($this->settings['game_suc'])}" || "{MODULE_URL}static/img/shine.png";
+			var game_fail = "{php echo toimage($this->settings['game_fail'])}" || "{MODULE_URL}static/img/cry.png";
+			if(number && time>=1){
+				util.loading().show();
+				$.ajax({
+					url:"{php echo $this->createMobileUrl('game')}",
+					type:"POST",
+					data:{token:"{$_W['token']}",submit:"1",number:number,time:time},
+					dataType:"json",
+					success:function(res){
+						util.loading().hide();
+						if(res.code ==0){
+							$(".que_sure").hide();
+							
+							if(res.data.result == 1){
+								$(".res-layer .res-banner").attr('src',"{MODULE_URL}static/img/sb.png");
+								$(".res-layer .res-em").attr('src',game_fail);
+								$(".res-layer .btn-suc").text('很遗憾猜错了!');
+								$(".res-layer .res-num").text(res.data.num);
+								$(".res-layer .suffix-num").text(res.data.suffix);
+								$(".res-layer .num-last").text(res.data.suffix);
+								$(".res-layer .res-option").text('猜'+res.data.second+"手"+res.data.option);
+								$(".res-layer .res-msg").text('猜错了');
+								$(".res-layer").show();
+								$(".layer_bg").show();
+								
+								$(".res-layer").addClass("res-error");
+							}else if(res.data.result ==2){
+								$(".res-layer .res-banner").attr('src',"{MODULE_URL}static/img/cg.png");
+								$(".res-layer .res-em").attr('src',game_suc);
+								$(".res-layer .btn-suc").text('恭喜你猜中了!');
+								$(".res-layer .res-num").text(res.data.num);
+								$(".res-layer .suffix-num").text(res.data.suffix);
+								$(".res-layer .num-last").text(res.data.suffix);
+								$(".res-layer .res-option").text('猜'+res.data.second+"手"+res.data.option);
+								$(".res-layer .res-msg").text('+'+res.data.money);
+								$(".res-layer,.layer_bg").show();
+								$(".layer_bg").show();
+								$(".res-layer").addClass("res-suc");
+							}
+						
+						}else{
+							$(".que_sure,.layer_bg").fadeOut('400');
+							util.toast(res.msg || '请求失败',"",'error');
+						
+						}
+					
+					},
+					fail:function(){
+						util.toast('网络错误,请重试',"",'error');
+					}
+				
+				})
+				
+				
+			}else{
+				util.toast("请下注","",'error');
+			}
+		});
+	</script>
+{template 'footer'}

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.w7.cc" versionCode="">
+	
+	<application setting='true'>
+		<name><![CDATA[财神夺宝]]></name>
+
+		<identifie><![CDATA[xinyuan_treasure]]></identifie>
+
+		<version><![CDATA[1.2.0]]></version>
+
+		<ability><![CDATA[财神夺宝]]></ability>
+
+		<type><![CDATA[activity]]></type>
+
+		<description><![CDATA[财神夺宝]]></description>
+
+		<author><![CDATA[心缘心科技]]></author>
+
+		<url><![CDATA[]]></url>
+
+		<setting><![CDATA[]]></setting>
+
+	</application>
+
+	
+	<platform>
+		<subscribes>
+			<message type="text" />
+
+			<message type="image" />
+
+			<message type="voice" />
+
+			<message type="video" />
+
+			<message type="shortvideo" />
+
+			<message type="location" />
+
+			<message type="link" />
+
+			<message type="subscribe" />
+
+			<message type="qr" />
+
+			<message type="trace" />
+
+			<message type="click" />
+
+			<message type="merchant_order" />
+
+			<message type="user_get_card" />
+
+			<message type="user_del_card" />
+
+			<message type="user_consume_card" />
+
+		</subscribes>
+
+		<handles>
+
+			<message type="text" />
+			<message type="image" />
+			<message type="voice" />
+			<message type="video" />
+			<message type="shortvideo" />
+			<message type="location" />
+			<message type="link" />
+			<message type="subscribe" />
+			<message type="qr" />
+			<message type="trace" />
+			<message type="click" />
+			<message type="merchant_order" />
+			<message type="user_get_card" />
+			<message type="user_del_card" />
+			<message type="user_consume_card" />
+		</handles>
+
+		<rule embed="false" />
+
+		<rule embed="false" />
+
+	<supports>
+
+			<item type="app" />
+	</supports>
+
+	</platform>
+
+	
+	<bindings>
+		<cover>
+			<entry title="首页" do="home" state="" direct="true" />
+			<entry title="开始游戏" do="index" state="" direct="true" />
+			<entry title="充值" do="krypton" state="" direct="true" />
+			<entry title="交易明细" do="detail" state="" direct="true" />
+			<entry title="积分商城" do="exchange" state="" direct="true" />
+			<entry title="新手教程" do="course" state="" direct="true" />
+			<entry title="分享海报" do="poster" state="" direct="true" />
+			<entry title="排行榜" do="rank" state="" direct="true" />
+			<entry title="代理提现" do="cash" state="" direct="true" />
+		</cover>
+		<menu call="getMenus">
+			
+		</menu>
+
+		<rule>
+			
+		</rule>
+
+	</bindings>
+
+	<install><![CDATA[install.php]]></install>
+	<uninstall><![CDATA[uninstall.php]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>

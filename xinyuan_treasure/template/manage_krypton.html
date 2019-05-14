@@ -1,0 +1,101 @@
+{template 'common/header' }
+	<style>
+		.form-group{
+			overflow:hidden;
+		}
+	</style>
+	<div class="main">
+		<div class="alert alert-info" role="alert"><h4>{$_W['page']['title']}</h4></div>
+		
+		<div class="panel panel-info">
+			<div class="panel-heading">筛选</div>
+			<div class="panel-body">
+				<form action="" method="post" class="form-horizontal" role="form" id="form1">
+					
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">充值单号</label>
+						<div class="col-sm-8 col-lg-9 col-xs-12">
+							<input class="form-control" name="keyword" id="" type="text" value="{$keyword}" placeholder="单号">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">支付状态</label>
+						<div class="col-sm-8 col-lg-9 col-xs-12">
+							<select name="status" class="form-control">
+								<option value="" selected>不限</option>
+								<option value="1" {if $status == 1}selected{/if}>已支付</option>
+								<option value="0" {if $status === 0}selected{/if}>未支付</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">起止时间</label>
+						<div class="col-sm-4 col-xs-12">
+							<input name="time[start]" type="hidden" value="{$starttime}">
+							<input name="time[end]" type="hidden" value="{$endtime}">
+							<button class="btn btn-default daterange daterange-date" type="button"><span class="date-title">{php echo date('Y-m-d')} 至 {php echo date('Y-m-d',strtotime('+1 day'))}</span> <i class="fa fa-calendar"></i></button>
+						</div>
+						<div class="col-sm-4 col-xs-12">
+							<input type="hidden" name="token" value="{$_W['token']}"/>
+							<button class="btn btn-default" type="submit" name="submit" value="1"><i class="fa fa-search"></i> 搜索</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="table-responsive panel-body">
+				<table class="table table-hover">
+					<thead class="navbar-inner">
+					<tr>
+						<th style="text-align:center;">充值单号</th>
+						<th style="text-align:center;">用户</th>
+						<th style="text-align:center;">充值金额</th>
+						<th style="text-align:center;">实际支付</th>
+						<th style="text-align:center;">状态</th>
+						<th style="text-align:center;">下单时间</th>
+					</tr>
+					</thead>
+					<tbody id="level-list">
+						{loop $krypton_list $krypton}
+						<tr>
+							<td style="text-align:center;">{$krypton['recharge_num']}</td>
+							<td style="text-align:center;"><img src="{php echo toimage($krypton['member_avatar'])}" width="40"/><br>{$krypton['member_nickname']}</td>
+							<td style="text-align:center;">{$krypton['gold']}</td>
+							<td style="text-align:center;">{$krypton['recharge_pay']}</td>
+							<td style="text-align:center;">{if $krypton['status']==0}未支付{else}已支付{/if}</td>
+							<td style="text-align:center;">{$krypton['add_time']}</td>
+						</tr>
+						{/loop}
+						<tr>
+							<td colspan="6">{$limit_html}</td>
+						</tr>
+					</tbody>
+				</table>
+					
+			</div>
+		</div>
+		
+	</div>
+	
+	<script type="text/javascript">
+	require(["daterangepicker"], function(){
+		$(function(){
+			$(".daterange.daterange-date").each(function(){
+				var elm = this;
+				$(this).daterangepicker({
+					startDate: $(elm).prev().prev().val() || moment(new Date()),
+					endDate: $(elm).prev().val() || moment(new Date()),
+					format: "YYYY-MM-DD"
+				}, function(start, end){
+					$(elm).find(".date-title").html(start.toDateStr() + " 至 " + end.toDateStr());
+					$(elm).prev().prev().val(start.toDateStr());
+					$(elm).prev().val(end.toDateStr());
+				});
+			});
+		});
+	});
+	</script>
+{template 'common/footer'}

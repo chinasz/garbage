@@ -1,0 +1,136 @@
+{template 'header'}
+	{template 'style'}
+	<style>
+		.nav-list div{
+			height:4rem;
+			line-height:4rem;
+			font-size:12px !important;
+			cursor:pointer;
+		}
+		.nav-list .active{
+			color:#BC1F1F;
+		}
+		.detail{
+			display:none;
+
+		}
+		.detail .game{
+			border-bottom:1px solid #ccc;
+		
+		}
+		.detail .game div{
+		
+			word-wrap: break-word;
+		}
+	</style>
+	<div class="container-fluid" style="padding:0;background:#f7f7f7;margin-bottom:4rem;">
+		<div class="row clearfix" style="margin:0;border-bottom:1px solid #da6b2a;">
+			<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 nav-list">
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3 active">
+					游戏明细
+				</div>
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					代理收益
+				</div>
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					充值明细
+				</div>
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					提现明细
+				</div>
+			
+			</div>
+			
+		
+		</div>
+		<div class="row detail" style="display:block;">
+			<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 text-center">
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					时间
+				</div>
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					选项
+				</div>
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					尾号
+				</div>
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					结果
+				</div>
+			</div>
+			{loop $game_list $game}
+			<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 text-center game">
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					{php echo date('m-d H:i',strtotime($game['game_time']))}
+				</div>
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					{$game['game_second']}手{$game_option[$game['game_option']]}
+				</div>
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					{php echo substr($game['game_mchnum'],-1,1)}
+				</div>
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					{php echo $game['game_result']==2?'赢':'输'}<br>{php echo $game['game_result']==2?'+':'-'}{$game['game_profit']}		
+				</div>
+			</div>
+			{/loop}
+		</div>
+		
+		<div class="row detail">
+			<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 text-center">
+				代理收益:{$member_fid['reward']}元
+				我的团队:上级:{$member_fid['member_fid']}
+			</div>
+		</div>
+		
+		<div class="row detail">
+			<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 text-center">
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					单号
+				</div>
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					付款
+				</div>
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					积分
+				</div>
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					时间
+				</div>
+			</div>
+			{loop $krypton_list $krypton}
+			<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 text-center game">
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					{$krypton['recharge_num']}
+				</div>
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					{$krypton['recharge_pay']}
+				</div>
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					+{$krypton['gold']}
+				</div>
+				<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+					{$krypton['add_time']}		
+				</div>
+			</div>
+			{/loop}
+		</div>
+		
+		<div class="row detail">
+			<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 text-center">
+				暂无数据
+			</div>
+			
+		</div>
+		
+	</div>
+	<script>
+
+		$('.nav-list div').on('click',function(){
+			$(this).addClass('active');
+			$(this).siblings('div').removeClass('active');
+			$('.detail').hide();
+			$('.detail').eq($(this).index()).show();
+		})
+	</script>
+{template 'footer'}

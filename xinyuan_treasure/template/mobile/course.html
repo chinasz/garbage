@@ -1,0 +1,82 @@
+{template 'header'}
+{template 'style'}
+	<style>
+		body{
+			background:#f7f7f7;
+		}
+		.list{
+			overflow:hidden;
+			border-bottom:1px solid #ccc;
+		}
+		.list .page-title{
+			height:4rem;
+			line-height:4rem;
+			background:#fff;
+			
+		}
+		.list .list-head{
+			height:4rem;
+			line-height:4rem;
+			background:#fff;
+		}
+		.list .list-head img{
+			position: absolute;
+			right: .5rem;
+			bottom: 1rem;
+			width: 2rem;
+		}
+		.list .list-foot{
+			padding:.5rem;
+			font-size:12px;
+			display:none;
+		}
+		.list .list-foot *{
+			margin:0;
+		}
+		.rol{
+			transform:rotate(90deg);
+		}
+	</style>
+	<div class="container-fluid" style="padding:0;">
+		<div class="row clearfix" style="margin:0;">
+			<div class="list" style="border:0;">
+				<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 page-title text-center" style="margin-bottom:1rem;background:url({MODULE_URL}static/img/index3.png) no-repeat;background-size: 2rem;background-position-x: 2rem;background-position-y: center" onclick="history.go(-1)">
+					新手教程
+				</div>
+			</div>
+			{php $i=1;}
+			{loop $course_list $course}
+			
+			<div class="list">
+				<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 list-head" data-target="#collapse{$i}">
+					({$i}){$course['course_title']}
+					<img src="{MODULE_URL}static/img/arrow-right.png" class="pull-right"/>
+				</div>
+				<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 list-foot" id="collapse{$i}" >
+					{php echo htmlspecialchars_decode($course['course_text']);}
+				</div>
+			</div>
+			{php $i++}
+			{/loop}
+		</div>
+	</div>
+	<script>
+
+	
+	$('.list .list-head').on('click',function(e){
+		var id = $(this).attr('data-target');
+		if($(this).find('img').hasClass('rol')){
+			$(this).find('img').removeClass('rol');
+		}else{
+			$(this).find('img').addClass('rol');
+			
+		}
+		$(id).fadeToggle("slow");
+	
+	})
+
+
+	
+	</script>
+
+{template 'footer'}

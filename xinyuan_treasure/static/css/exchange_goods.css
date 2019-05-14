@@ -1,0 +1,183 @@
+*{
+    margin:0;
+    padding:0;
+	font-family: "微软雅黑";
+}
+body,html{
+    font-size: 26.67vw;
+    height: 100%;
+    /* display: -webkit-flex; */
+    /* flex-direction: column; */
+    background:#2c66f2;
+    overflow-x: hidden;
+    overflow-y: hidden; 
+}
+.topB{
+    width: 100%;
+    height: .59rem;
+    margin-top: .17rem;
+    line-height: .59rem;
+}
+.topB span{
+    font-size: .16rem;
+    color: #FFF;
+    float: left;
+    margin-left: .15rem;
+}
+.topB h3{
+    font-size: .16rem;
+    color: #FFF;
+    text-align: center;
+}
+
+/* 商品图片 */
+.shangP{
+    width: 90%;
+    height: 2.25rem;
+    border: .02rem solid #e6e6e6;
+    position: absolute;
+    left: .18rem;
+    border-radius: .2rem;
+    background: #FFF;
+}
+
+/* 商品详情 */
+.shopBig{
+    width: 100%;
+    height: 5rem;
+    background: #FFF;
+    margin-top: 1.2rem;
+    border: .01rem solid transparent;
+}
+.shopName{
+    width: 80%;
+    height: .53rem;
+    margin: 0 auto;
+    margin-top: 1.5rem;
+}
+.shopName .shopName_L{
+    width: 70%;
+    height: .53rem;
+    float: left;
+}
+.shopName_L .mingC{
+    font-size: .18rem;
+    color: #333333;
+    font-weight: 600;
+}
+.shopName_L .miaoS{
+    font-size: .11rem;
+    color: #999999;
+    margin-top: .13rem;
+}
+.shopName .price{
+    width: .68rem;
+    height: .3rem;
+    background: #2c66f2;
+    border-radius: .15rem;
+    text-align: center;
+    line-height: .3rem;
+    float: right;
+    font-size: .11rem;
+    color: #FFF;
+    margin-top: .1rem;
+}
+
+/* 商品规格 */
+/* .specification{
+    width: 80%;
+    height: .53rem;
+    margin: 0 auto;
+    margin-top: .2rem;
+}
+.specification h3{
+    font-size: .18rem;
+    color: #666666;
+}
+.xuanZ{
+    width: 23%;
+    height: .2rem;
+    font-size: .11rem;
+    color: #000;
+    background: #cccccc;
+    text-align: center;
+    line-height: .2rem;
+    float: left;
+    margin-left: .05rem;
+    border-radius: .05rem;
+    margin-top: .1rem;
+} */
+
+
+/* 商品原价 */
+.originalPrice{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: .3rem;
+}
+.originalPrice del{
+    font-size: .12rem;
+    color:#666666;
+    display: block;
+}
+.originalPrice h3{
+    font-size: .16rem;
+    color: #e60000;
+}
+
+
+/* 底部 */
+.bottomB{
+    width: 80%;
+    height: .45rem;
+    margin: 0 auto;
+    background: #FFF;
+    margin-top: .6rem;
+}
+/* .bottomB .bot_1{
+    width: 11%;
+    height: .35rem;
+    background: url("../img/diB_1.jpg") no-repeat;
+    background-size: 100% 100%;
+    float: left;
+    margin-right: .2rem;
+}
+.bottomB .bot_2{
+    width: 11%;
+    height: .35rem;
+    background: url("../img/diB_2.jpg") no-repeat;
+    background-size: 100% 100%;
+    float: left;
+    margin-right: .2rem;
+}
+.bottomB .bot_3{
+    width: 11%;
+    height: .35rem;
+    background: url("../img/diB_3.jpg") no-repeat;
+    background-size: 100% 100%;
+    float: left;
+    margin-right: .2rem;
+} */
+
+.purchase_L{
+    width: 41%;
+    height: .45rem;
+    border-radius: .2rem;
+    font-size: .15rem;
+    color: #FFF;
+    text-align: center;
+    line-height: .45rem;
+    float: left;
+    background: #2c66f2;
+}
+.purchase_R{
+    width: 41%;
+    height: .45rem;
+    border-radius: .2rem;
+    font-size: .15rem;
+    color: #FFF;
+    text-align: center;
+    line-height: .45rem;
+    float: right;
+    background: #2c66f2;
+}

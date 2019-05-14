@@ -1,0 +1,76 @@
+{template 'common/header'}
+	<style>
+		.form-group{
+			overflow:hidden;
+		}
+	</style>
+	<div class="main">
+		
+		<div class="tabbable" id="tabs-848674">
+			<ul class="nav nav-tabs" id="tabs">
+			  <li class="active"><a href="#panel-543332" data-toggle="tab">分类管理</a></li>
+			  <li><a href="{php echo $this->createWebUrl('gclass',array('op'=>'new'))}">添加分类</a></li>
+			</ul>
+			
+			<div class="tab-content">
+				<div class="tab-pane active" id="panel-543332">
+					<div class="panel panel-default">
+						<div class="table-responsive panel-body">
+							<table class="table table-hover">
+								<thead class="navbar-inner">
+								<tr>
+									<th>排序</th>
+									<th>分类</th>
+									<th>状态</th>
+									
+									<th>操作</th>
+								</tr>
+								</thead>
+								<tbody id="level-list">
+									{loop $class_list $class} 
+									<tr>
+										<td width="150">{$class['class_sort']}</td>
+										<td><img src="{php echo toimage($class['class_thumb'])}" width="30" height="30" style="padding:1px;border: 1px solid #ccc;float:left;">{$class['class_name']}</td>
+										<td>{if $class['class_status'] ==1}<label class="label label-success">显示</label>{else}<label class="label label-warning">不显示</label>{/if}</td>
+										<td>
+										   <a class="btn btn-default btn-sm edit-class" data-id="{$class['class_id']}">编辑</a>
+										   <a class="btn btn-danger btn-sm del-class" data-id="{$class['class_id']}">删除</a>
+										</td>
+									</tr>
+									{/loop}
+								</tbody>
+							</table>
+							<div>
+								<!-- <ul class="pagination pagination-centered"> -->
+									<!-- <li><a class="pager-nav">首页</a></li> -->
+									<!-- <li><a href="" class="pager-nav">«上一页</a></li> -->
+									<!-- <li class="active"><a href="javascript:;">1</a></li> -->
+									<!-- <li><a href="" class="pager-nav">下一页»</a></li> -->
+									<!-- <li><a href="" class="pager-nav">尾页</a></li> -->
+								<!-- </ul> -->
+							</div>    
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		require(['jquery','bootstrap'],function(){
+			$('.edit-class').on('click',function(){
+				var id = $(this).data('id');
+				location = "{php echo $this->createWebUrl('gclass',array('op'=>'edit'));}&id="+id;
+			
+			});
+			$(".del-class").on('click',function(){
+				var id = $(this).data('id');
+				if(confirm('是否删除?')){
+					location = "{php echo $this->createWebUrl('gclass',array('op'=>'del'));}&id="+id+"&token={$_W['token']}";
+				}
+			});
+			
+		})
+	
+	</script>
+{template 'common/footer'}

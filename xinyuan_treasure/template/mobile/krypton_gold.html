@@ -1,0 +1,200 @@
+{template 'header'}
+	{template 'style'}
+	<style>
+		body{
+			background:#F0F0F0;
+		
+		}
+		.right{
+			float:right;
+			overflow:hidden;
+		}
+		.left{
+			float:left;
+			overflow:hidden;
+		}
+		.top-btn{
+			padding:1rem 0;
+		}
+		.top-btn div .btn{
+			color:#fff;
+			border:1px solid #fff;
+			border-radius:0;
+		}
+		.web_notice{
+			background: url({MODULE_URL}static/img/2019-04-02_145119.png) no-repeat left center;
+			background-size: 4rem;
+			color:#fff;
+			margin:1rem 0;
+			text-indent:4rem;
+			height:4rem;
+			line-height:4rem;
+			overflow:hidden;
+		}
+		.gold_menu{
+			overflow:hidden;
+			background:#fff;
+			padding:1rem 0 0 0;
+		}
+		.gold_menu ul{
+			list-style:none;
+			padding:0;
+			overflow:hidden;
+			margin:0;
+		}
+		.gold_menu ul li{
+			float:left;
+			width:33%;
+			text-align:center;
+			margin-bottom:1rem;
+		}
+		.gold_menu ul li .btn{
+			border:1px solid;
+			background:#fff;
+		}
+		#commit{
+			width:100%;
+			padding:0 8rem;
+			margin-top:3rem;
+		}
+		#commit .btn{
+			width:100%;
+			color:#fff;
+			
+		}
+	</style>
+
+	<div class="container-fluid">
+		<div class="row clearfix top-btn bgcolor">
+			<div class="col-md-6 left"><button class="btn btn-default bgcolor">ID:{$_SESSION['ids']}</button></div>
+			<div class="col-md-6 right"><button class="btn btn-default bgcolor">余额:{$member_score}</button></div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-md-12 col-lg-12 web_notice bgcolor">	
+				<marquee rolldelay="150" direction="left" align="middle" >{php echo $this->settings['web_notice']}</marquee>
+			</div>
+		
+		</div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-md-12 col-lg-12 gold_menu">
+				<ul>
+					{loop $recharge_list $recharge}
+					<li><button class="btn btn-default  fontcolor bordercolor" data-id="{$recharge['id']}" data-num="{$recharge['pay']}">{$recharge['gold']}</button></li>
+					{/loop}
+				</ul>
+			
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-md-12 col-lg-1" id="commit">
+				<button class="btn bgcolor mui-disabled">确认充值</button>
+			
+			</div>
+			
+		</div>
+	</div>
+	{template 'gohome'}
+	<script>
+	
+		$('.gold_menu li .btn').on('click',function(){
+			
+			var num = $(this).data('num');
+			var otxt = $('#commit .btn').text();
+			$('#commit .btn').text('充值'+'￥'+num);
+			$('#commit .btn').removeClass("mui-disabled");
+			$('#commit .btn').attr('data',$(this).attr('data-id'));
+			
+		});
+		{if $payment == 'code'}
+			$('#commit .btn').on('click',function(){
+				var id = $(this).attr('data');
+				if(id >0){
+					$.ajax({
+						url:"{php echo $this->createMobileUrl('recharge')}",
+						type:'POST',
+						data:{id:id,token:"{$_W['token']}",submit:"1"},
+						dataType:'json',
+						success:function(res){
+							if(res.code ==0){
+								location = "{php echo $this->createMobileUrl('test');}&id="+res.data.id;
+							
+							}else{
+								return false;
+								util.toast(res.error || '支付失败',"",'error');
+							}
+						}
+					});
+				
+				}else{
+					
+					util.toast('请选择要充值的金额',"",'error');
+				
+				}
+			});
+		{/if}
+		
+		{if $payment == 'wechat'}
+		document.addEventListener('WeixinJSBridgeReady',function onBridgeReady() {
+			$('#commit .btn').on('click',function(){
+				var id = $(this).attr('data');
+				if(id >0){
+					$.ajax({
+						url:"{php echo $this->createMobileUrl('recharge')}",
+						type:'POST',
+						data:{id:id,token:"{$_W['token']}",submit:"1"},
+						dataType:'json',
+						success:function(res){
+							if(res.code ==0){
+								util.pay({
+									orderFee : res.data.fee,
+									payMethod : 'wechat',
+									orderTitle : '充值' + res.data.fee + '元',
+									orderTid : res.data.num,
+									module : '{$_W["current_module"]["name"]}',
+									success : function(result) {
+										util.loading().show();
+										
+										$.ajax({
+											url:"{php echo $this->createMobileUrl('pover')}",
+											type:"POST",
+											data:{ordid:res.data.id,token:"{$_W['token']}",submit:"1"},
+											dataType:'json',
+											success:function(data){
+												
+												if(data.code==0){
+													util.toast('充值成功');
+												}else{
+													util.toast(data.error || '充值失败',"",'error');
+												
+												}
+												util.loading().hide();
+											
+											}
+										})
+										
+									},
+									fail : function(result) {
+										util.toast('支付失败',"",'error');
+									},
+									complete : function(result) {
+										
+									}
+								});
+							}else{
+								util.toast(res.error || '支付失败',"",'error');
+							
+							}
+						}
+					})
+				}else{
+					return false;
+					util.toast('请选择要充值的金额',"",'error');
+				
+				}
+				
+			})
+		});
+		{/if}
+	</script>
+{template 'footer'}

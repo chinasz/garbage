@@ -1,0 +1,185 @@
+{template 'common/header'}
+	<div class="main">
+		<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>新增</button>
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>
+							套餐(充值积分)
+						</th>
+						<th>
+							价格
+						</th>
+						<th>
+							操作
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{loop $meal_list $meal}
+					<tr data-id="{$meal['id']}" class="meal-info">
+						<td data = "gold" title="双击修改">
+							{$meal['gold']}
+						</td>
+						<td data = "pay" title="双击修改">
+							{$meal['pay']}
+						</td>
+						<td>
+							<button type="button" class="btn btn-danger btn-xs sz_del_meal">删除</button> 
+						</td>
+					</tr>
+					{/loop}
+				</tbody>
+			</table>
+		</div>
+		</div>
+		<!-- <div class="alert alert-danger alert-dismissable col-md-6 center-block text-center"> -->
+            <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+            <!-- <text>错误！请进行一些更改。</text> -->
+        <!-- </div> -->
+		
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">新增</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group clearfix">
+							<label class="col-xs-12 col-sm-4 col-md-3 control-label">套餐(充值积分)</label>
+							<div class="col-xs-12 col-sm-8 col-lg-8">
+								<input class="form-control infoearn" name="gold" id="add_gold" type="number" placeholder="请输入">
+							</div>
+						</div>
+						<div class="form-group clearfix">
+							<label class="col-xs-12 col-sm-4 col-md-3 control-label">付款金额</label>
+							<div class="col-xs-12 col-sm-8 col-lg-8">
+								<input class="form-control infoearn" name="pay" id="add_pay" type="number" placeholder="请输入">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" id="sz_add_meal">提交</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<script>
+		$(document).ready(function(){
+			$(".meal-info td").on('dblclick',function(){
+				var id = $(this).parent('tr').attr("data-id");
+				var old = $(this).text().replace(/(^\s*)|(\s*$)/g, "");
+				var name = $(this).attr('data');
+				
+				var html = '<input class="sz_mod_meal text-left" data="'+id+'" name="'+name+'" type="text" value="'+old+'" placeholder="请输入">';
+
+				if(name){
+					window.old = old;
+					$(this).html(html);
+					$(".sz_mod_meal").focus();
+				}
+			});
+			$(document).on('blur','.sz_mod_meal',function(){
+				var that = $(this);
+				var name = $(this).attr('name');
+				var val = $(this).val();
+				var id = $(this).attr('data');
+				if(val == old){
+					$(this).parent('td').html(old);
+				}else{
+					
+					$.ajax({
+						url:"{php echo $this->createWebUrl('meal',array('op'=>'edit'))}",
+						type:"POST",
+						data:{id:id,name:name,val:val,token:"{$_W['token']}",submit:1},
+						dataType:'json',
+						success:function(res){
+							if(res.code == 0){
+								that.parent('td').html(res.data.newval);
+								alert('操作成功');
+								location.reload();
+							}else{
+								//$(".alert-danger text").text(res.error || "操作失败");
+								
+								//$(".alert-danger").show();
+								alert(res.error || "操作失败");
+								that.focus();
+							
+							}
+							
+						
+						}
+					
+					})
+				}
+			
+			});
+			
+			//新增
+			$("#sz_add_meal").on('click',function(){
+				var gold = $("#add_gold").val();
+				var pay = $("#add_pay").val();
+				if(gold == ''){
+					$("#add_gold").attr('placeholder','请输入');
+					$("#add_gold").focus();
+				}else if(pay == ''){
+					$("#add_pay").attr('placeholder','请输入');
+					$("#add_pay").focus();
+				
+				}else{
+					$.ajax({
+						url:"{php echo $this->createWebUrl('meal',array('op'=>'add'))}",
+						type:"POST",
+						data:{gold:gold,pay:pay,token:"{$_W['token']}",submit:1},
+						dataType:"json",
+						success:function(res){
+							if(res.code == 0){
+								$("#myModal").modal('hide');
+								alert('操作成功');
+								location.reload();
+								
+							}else{
+							
+								alert(res.error || '操作失败');
+							}
+						}
+					})
+				
+				}
+			
+			
+			})
+			/*-end-*/
+			//del
+			$(".sz_del_meal").on('click',function(){
+				var id = $(this).parent('td').parent('tr').attr('data-id');
+				if(confirm('是否删除?')){
+					$.ajax({
+						url:"{php echo $this->createWebUrl('meal',array('op'=>'del'))}",
+						type:"POST",
+						data:{id:id,token:"{$_W['token']}",submit:1},
+						dataType:"json",
+						success:function(res){
+							if(res.code == 0){
+								alert('操作成功');
+								location.reload();
+								
+							}else{
+							
+								alert(res.error || '操作失败');
+							}
+						
+						}
+					})
+				}
+			})
+			/*-end-*/
+		});
+	</script>
+{template 'common/footer'}

@@ -1,0 +1,422 @@
+﻿{template 'common/header'}
+	<style>  
+		.settings{
+
+			display:none;
+		}
+
+	</style>
+	<ul class="nav nav-tabs" id="snav">
+		<li class="active"><a>页面设置</a></li>
+		<li><a>基础设置</a></li>
+		<li><a>游戏设置</a></li>
+		<li><a>分销设置</a></li>
+		<li><a>提现设置</a></li>
+		<li><a>支付参数</a></li>
+	</ul>
+	<script>
+	$('#snav li').click(function(){
+		$('#snav li').removeClass('active');
+		$(this).addClass('active');
+		$('.settings').hide();
+		$('.settings').eq($(this).index()).show();
+	});
+	</script>
+	<form action="" method="post" class="form-horizontal form" id="setting-form">
+	<div class="settings" style="display:block">
+		<div class="panel panel-default">
+			<div class="panel-heading">页面设置</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">网页标题</label>
+					<div class="col-sm-8">
+						<input type="text" name="data[web_title]" class="form-control" value="{$settings['web_title']}" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">公告</label>
+					<div class="col-sm-8">
+						<input type="text" name="data[web_notice]" class="form-control" value="{$settings['web_notice']}" />
+					</div>
+					
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">背景颜色</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_color("data[bgcolor]",$settings['bgcolor']);}
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">脚步版权信息</label>
+					<div class="col-sm-8">
+						<input type="text" name="data[web_copy]" class="form-control" value="{$settings['web_copy']}" />
+						<span class="help-block">显示在首页和我的页面不填则不显示</span>
+					</div>
+					
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">分享标题</label>
+					<div class="col-sm-8">
+						<input type="text" name="data[share_title]" class="form-control" value="{$settings['share_title']}" />
+
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">分享描述</label>
+					<div class="col-sm-8">
+						<input type="text" name="data[share_desc]" class="form-control" value="{$settings['share_desc']}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">分享图片</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('data[share_img]',$settings['share_img'],$settings['share_img']);}
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+	<div class="panel panel-info">
+		<div class="panel-heading">底部菜单设置</div>
+		<div class="panel-body">
+            <div class="form-group">
+				<div class="col-sm-12">
+					<table class="table">
+						<thead>
+							<tr>
+								<th style="width:60px;"></th>
+								<th style="width:400px;">图片</th>
+								<th style="width:200px;">文字</th>
+								<th style="width:200px;">链接</th>
+								<th>文字</th>
+							</tr> 
+						</thead>
+						<tbody id="tbody" class="ui-sortable" style="">
+							{loop $settings['web_menu'] $menu}
+							<tr class="recharge-item" style="">
+								<td>
+
+								</td>
+								<td>
+									<div class="input-group img-item">
+										<div class="input-group-addon">
+											<img src="{php echo toimage($menu['icon']);}" style="height:20px;width:50px">
+										</div>
+										<input type="text" name="data[web_menu_tem][icon][]" value="{$menu['icon']}" class="form-control" autocomplete="off">
+										<span class="input-group-btn">
+											<button class="btn btn-default btn-select-pic" type="button">选择图片</button>
+										</span>
+									</div>
+								</td>
+								<td>
+									<input type="text" class="form-control" name="data[web_menu_tem][font][]" value="{$menu['font']}"> 
+								</td>
+								<td>
+									<input type="text" class="form-control" name="data[web_menu_tem][link][]" value="{$menu['link']}"> 
+								</td>
+								<td>
+									<button type="button" class="btn btn-danger  btn-sm" onclick="removeRecharge(this)"><i class="fa fa-remove"></i></button>
+								</td> 
+							</tr>
+							{/loop}							
+						</tbody>
+						<tbody>
+							<tr>
+								<td colspan="4"><button type="button" class="btn btn-default  btn-sm" onclick="addRecharge()"><i class="fa fa-plus"></i> 添加</button></td>
+							</tr>
+						</tbody> 
+					</table>
+				</div>
+			</div>
+        </div>
+	</div>
+
+	</div>
+	<script>
+		function removeRecharge(obj){
+			$(obj).closest('.recharge-item').remove();
+		}
+		function addRecharge(){
+			var html='<tr class="recharge-item">';
+			html+='<td></td>';
+			html+='<td><div class="input-group img-item"><div class="input-group-addon"><img src="" style="height:20px;width:50px"></div><input type="text" name="data[web_menu_tem][icon][]" value="" class="form-control" autocomplete="off"><span class="input-group-btn"><button class="btn btn-default btn-select-pic" type="button">选择图片</button></span></div></td>';
+			html+='<td><input type="text" class="form-control" name="data[web_menu_tem][font][]" /></td>';
+			html+='<td><input type="text" class="form-control" name="data[web_menu_tem][link][]" /></td>';
+			html+='<td><button type="button" class="btn btn-danger  btn-sm" onclick="removeRecharge(this)"><i class="fa fa-remove"></i></button>';
+			html+='</td>';
+			html+='</tr>';
+			$('#tbody').append(html);
+		}
+		
+	</script>
+
+	<div class="settings">
+		<div class="panel panel-default">
+			<div class="panel-heading">基础设置</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">新人奖励</label>
+					<div class="col-sm-8">
+						<input type="text" name="data[reward]" class="form-control" value="{$settings['reward']}" />
+						<span class="help-block">不填或留空则表示新人无奖励</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">客服二维码</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('data[qrcode]',$settings['qrcode'],$settings['qrcode']);}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="settings">
+		<div class="panel panel-default">
+			<div class="panel-heading">游戏设置</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">icon</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('data[game_icon]',$settings['game_icon'],$settings['game_icon']);}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">游戏名称</label>
+					<div class="col-sm-8">
+						<input type="text" name="data[game_name]" class="form-control" value="{$settings['game_name']}" />
+						<span class="help-block">字数不要过长建议4~8个字</span>
+					</div>
+					
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">标注</label>
+					<div class="col-sm-8">
+						<input type="text" name="data[game_remark]" class="form-control" value="{$settings['game_remark']}" />
+						<span class="help-block">字数不要过长建议4~8个字</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">游戏banner</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('data[web_banner]',$settings['web_banner'],$settings['web_banner']);}
+					</div>
+					
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">游戏滑动条图1</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('data[game_slide1]',$settings['game_slide1'],$settings['game_slide1']);}
+						
+					</div>
+					
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">游戏滑动条图2</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('data[game_slide2]',$settings['game_slide2'],$settings['game_slide2']);}
+					</div>
+					
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">确定按钮图片</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('data[game_submit]',$settings['game_submit'],$settings['game_submit']);}
+					</div>
+					
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">夺宝成功图片</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('data[game_suc]',$settings['game_suc'],$settings['game_suc']);}
+					</div>
+					
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">夺宝失败图片</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('data[game_fail]',$settings['game_fail'],$settings['game_fail']);}
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="settings">
+		<div class="panel panel-default">
+			<div class="panel-heading">分销设置</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">排行榜显示人数</label>
+					<div class="col-sm-8">
+						<input type="text" name="data[sale_rank]" class="form-control" value="{$settings['sale_rank']}" />
+
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">一级分销比例</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+							<input type="text" name="data[sale1]" class="form-control" value="{$settings['sale1']}" />
+							<span class="input-group-addon">%</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">二级级分销比例</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+							<input type="text" name="data[sale2]" class="form-control" value="{$settings['sale2']}" />
+							<span class="input-group-addon">%</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">三级分销比例</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+							<input type="text" name="data[sale3]" class="form-control" value="{$settings['sale3']}" />
+							<span class="input-group-addon">%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{template 'poster'}
+	</div>
+
+
+	<div class="settings">
+		<div class="panel panel-default">
+			<div class="panel-heading">提现设置</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">最低提现金额</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+							<input type="text" name="data[cash_low]" class="form-control" value="{$settings['cash_low']}" />
+							<span class="input-group-addon">元</span>
+						</div>
+						<span class="help-block">最低1元</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">提现手续费</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+							<input type="text" name="data[cash_fee]" class="form-control" value="{$settings['cash_fee']}" />
+							<span class="input-group-addon">%</span>
+						</div>
+						<span class="help-block">0~100之间数字</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">每日提现次数</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+							<input type="text" name="data[cash_time]" class="form-control" value="{$settings['cash_time']}" />
+							<span class="input-group-addon">次</span>
+						</div>
+						<span class="help-block">0为不限制</span>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<div class="settings">
+		<div class="panel panel-default">
+			<div class="panel-heading">码支付参数(第三方支付请自行官网申请对接，只要复制对应参数填这里就行了)</div>
+			<div class="panel-body">
+		        <div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">码支付官网</label>
+					<div class="col-sm-9">
+						<div class="help-block"><a target="_blank" href='https://codepay.fateqq.com/i/151241'>点击打开官网</a></div>
+					</div>
+				</div>
+		        <div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">码支付</label>
+					<div class="col-sm-9">
+						<label><input type="radio" name="data[codepay][status]" {if empty($settings['codepay']['status'])}checked="checked"{/if} value="0"> 关闭</label>
+						<label style="margin-left: 10px;"><input type="radio" name="data[codepay][status]" {if $settings['codepay']['status']}checked="checked"{/if} value="1"> 开启</label>
+						<div class="help-block">开启了则优先使用码支付；使用码支付微信收款功能</div>
+					</div>
+				</div>
+		        <div class="form-group">
+		            <label class="col-xs-12 col-sm-3 col-md-2 control-label">码支付ID</label>
+		            <div class="col-sm-9 col-xs-12">
+		                  <input type="text" name="data[codepay][id]" class="form-control"  value="{$settings['codepay']['id']}"  />
+		            </div>
+		        </div>
+		        <div class="form-group">
+		            <label class="col-xs-12 col-sm-3 col-md-2 control-label">码支付通讯密钥</label>
+		            <div class="col-sm-9 col-xs-12">
+		                  <input type="text" name="data[codepay][key]" class="form-control"  value="{$settings['codepay']['key']}"  />
+		            </div>
+		        </div>
+		    </div>
+			
+			<div class="panel-heading">支付参数</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">商户号</label>
+					<div class="col-sm-9 col-xs-12">
+						  <input type="text" name="data[mchid]" class="form-control" value="{$settings['mchid']}">
+						  <div class="help-block">请确保输入内容不带空格！！仔细检查</div>
+						  
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">appid</label>
+					<div class="col-sm-9 col-xs-12">
+						  <input type="text" name="data[appid]" class="form-control" value="{$settings['appid']}">
+						  <div class="help-block">请确保输入内容不带空格！！仔细检查</div>
+						  
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">支付秘钥</label>
+					<div class="col-sm-9 col-xs-12">
+						  <input type="text" name="data[secrect]" class="form-control" value="{$settings['secrect']}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">商户支付证书</label>
+					<div class="col-sm-9 col-xs-12">
+						<textarea class="form-control" name="data[cert1]" rows="8" placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入"></textarea>
+						<span class="help-block">从商户平台上下载支付证书, 解压并取得其中的 <mark>apiclient_cert.pem</mark> 用记事本打开并复制文件内容, 填至此处</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">支付证书私钥</label>
+					<div class="col-sm-9 col-xs-12">
+						<textarea class="form-control" name="data[cert2]" rows="8" placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入"></textarea>
+						<span class="help-block">从商户平台上下载支付证书, 解压并取得其中的 <mark>apiclient_key.pem</mark> 用记事本打开并复制文件内容, 填至此处</span>
+					</div>
+				</div>
+			</div>
+		    
+		</div>
+
+	</div>
+	<button class="btn btn-primary" type="submit" name="submit" value="提交">提交</button>
+	<input type="hidden" name="token" value="{$_W['token']}">
+</form>
+<script>
+	require(['jquery', 'util'], function ($, util) {
+		$(document).on('click','.btn-select-pic',function () {
+			var imgitem = $(this).closest('.img-item');
+
+			util.image('', function (data) {
+				imgitem.find('img').attr('src', data['url']);
+				imgitem.find('input').val(data['attachment']);
+			});
+		});
+	});
+</script>	
+{template 'common/footer'}
