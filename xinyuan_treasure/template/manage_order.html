@@ -60,10 +60,9 @@
 						<th>订单号<br>用户</th>
 						<th>商品</th>
 						<th>收货地址</th>
-						<th>电话</th>
 						<th>支付方式</th>
-						<th>运费</th>
 						<th>总价</th>
+						<th>快递单号</th>
 						<th>状态</th>
 						<th>下单时间</th>
 						<th>操作</th>
@@ -73,19 +72,18 @@
 						{loop $order_list $order}
 						<tr>
 							<td>{$order['order_num']}<br><img src="{php echo toimage($order['member_avatar'])}" height="60"/><br>{$order['member_nickname']}</td>
-							<td><img src="{php echo toimage($order['goods_thumb'])}"  height="60"/><br>{$order['goods_name']}</td>
+							<td>
+								<img src="{php echo toimage($order['goods_thumb'])}"  height="60"/><br>{$order['goods_name']}<br>
+								{if $order['is_real'] == 1}<label class="label label-success">实物</label>{else}<label class="label label-success">虚拟</label>{/if}
+							</td>
 							<td>{$order['order_receiver']}<br>{$order['order_phone']}<br>{$order['order_addr']}</td>
-							<td>{$order['order_phone']}</td>
 							<td><label class="label label-success">{$payment[$order['order_method']]}</label></td>
-							<td>{$order['order_poster']}</td>
 							<td>{$order['order_fee']}</td>
+							<td>{$order['order_express']}</td>
 							<td><label class="label label-success">{$order_status[$order['order_status']]}</label></td>
 							<td>{$order['add_time']}</td>
-							<td>
-								{if $order['order_status'] == 3}
-								<a class="btn btn-primary btn-sm">发货</a>
-								{/if}
-								<a class="btn btn-danger btn-sm">删除</a>
+							<td data-id = "{$order['order_id']}">
+								{if $order['order_status']==3}<button class="btn btn-primary btn-sm" id="layer" data-toggle="modal" data-target="#myModal">发货</button>{/if}
 							</td>
 						</tr>
 						{/loop}
@@ -94,10 +92,38 @@
 			</div>
 		</div>
 		
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							充值余额
+						</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+						<label class="col-xs-12 col-sm-4 col-md-3 control-label">余额</label>
+							<div class="col-xs-12 col-sm-8 col-lg-8">
+								<input class="form-control infoearn" name="" id="danhao" type="text" placeholder="请输入快递单号">
+								<span class="help-block">输入单号!</span>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary tooltip-hide" id="express">提交更改</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		
 	</div>
 	<script type="text/javascript">
-	require(["daterangepicker"], function(){
+	require(["daterangepicker","bootstrap"], function(){
 		$(function(){
 			$(".daterange.daterange-date").each(function(){
 				var elm = this;
@@ -112,6 +138,37 @@
 				});
 			});
 		});
+		$("#layer").on('click',function(){
+			$("#express").attr("data",$(this).parent('td').attr("data-id"));
+
+		})
+		$("#express").on('click',function(){
+			var ordid = $(this).attr('data');
+			var express = $("#danhao").val();
+			if(ordid && express){
+				$.ajax({
+					url:"{php echo $this->createWebUrl('sendgoods')}",
+					type:"POST",
+					data:{ordid:ordid,express:express,token:"{$_W['token']}",submit:1},
+					dataType:"json",
+					success:function(res){
+						if(res.code == 0){
+							alert('操作成功');
+							location.reload();
+						}else{
+							util.message(res.error || '操作失败');
+						}
+					}
+				})
+
+			}else{
+
+				util.message('请填写订单号！');
+			}
+
+		})
+
+
 	});
 	</script>
 {template 'common/footer'}

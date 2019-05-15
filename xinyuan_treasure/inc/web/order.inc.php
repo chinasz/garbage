@@ -9,15 +9,15 @@
 	//公众号id
 	$public_id = $_W['uniaccount']['uniacid'];
 	
-	$field = 'o.order_id,o.order_num,o.order_fee,o.order_actual,o.order_receiver,o.order_addr,o.order_phone,o.add_time,o.order_poster,o.order_status,o.order_method,m.member_nickname,m.member_avatar,g.goods_name,g.goods_thumb';
-		
+	$field = 'o.order_id,o.order_num,o.order_fee,o.order_actual,o.order_receiver,o.order_addr,o.order_phone,o.add_time,o.order_poster,o.order_status,o.order_method,m.member_nickname,m.member_avatar,g.goods_name,g.goods_thumb,g.is_real';
+	
 	$where = '';
 	if(checksubmit()){
 		if(!empty($_GPC['keyword'])){
-			$where .= " and o.order_num like %'".trim($_GPC['keyword'])."'%";
+			$where .= " and o.order_num like '%".trim($_GPC['keyword'])."%'";
 		}
 		if(!empty($_GPC['member'])){
-			$where .= " and o.order_receiver like %'".trim($_GPC['member'])."'% or o.order_phone like %'".trim($_GPC['member'])."'%";
+			$where .= " and o.order_receiver like '%".trim($_GPC['member'])."%' or o.order_phone like '%".trim($_GPC['member'])."%'";
 
 		}
 		if(intval($_GPC['status'])>0){
@@ -30,7 +30,7 @@
 	}
 	
 	
-	$sql = "select * from ".tablename($this->table['order'])." o inner join ".tablename($this->table['member'])." m on o.order_user = m.member_id inner join ".tablename($this->table['goods'])." g on o.order_goods = g.goods_id  where o.public_id = :public_id order".$where." by o.add_time desc";
+	$sql = "select * from ".tablename($this->table['order'])." o inner join ".tablename($this->table['member'])." m on o.order_user = m.member_id inner join ".tablename($this->table['goods'])." g on o.order_goods = g.goods_id  where o.public_id = :public_id ".$where." order by o.add_time desc";
 	
 	$order_list = pdo_fetchall($sql,array(':public_id'=>$public_id));
 	

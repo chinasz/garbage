@@ -1,0 +1,134 @@
+*{
+    margin:0;
+    padding:0;
+	font-family: "微软雅黑";
+}
+body,html{
+    font-size: 26.67vw;
+    height: 100%;
+    /* display: -webkit-flex;
+    flex-direction: column; */
+    /* overflow-x: hidden; */
+    /* overflow-y: hidden;  */
+    background: #FFF;
+}
+/* 头部 */
+.topB{
+    width: 100%;
+    height: .59rem;
+    text-align: center;
+    line-height: .59rem;
+    font-size: .2rem;
+    color: #FFF;
+    background: #43c9ef;
+}
+
+.clearfix{*zoom:1;}
+
+ul,li{
+    list-style-type: none;
+}
+
+.head_nav_wrap {
+    height: 42px;
+    position: relative;
+    z-index: 10;
+    margin: 0 10px;
+    overflow: hidden;
+    background-color: #fff;
+}
+.head_nav {
+    height: 70px;
+    font-size: .16rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.head_nav>li {
+    width: 33.33%;
+    height: .59rem;
+    /* -webkit-box-flex: 0;
+    -webkit-flex: none;
+    -ms-flex: none;
+    flex: none; */
+    text-align: center;
+    line-height: .59rem;
+    padding-top: 4px;
+    margin-right: 31px;
+}
+.head_nav a {
+    display: block;
+    position: relative;
+    line-height: 38px;
+    color: #222;
+}
+.head_nav>li.active a {
+    color: #35c584;
+}
+.selected {
+    color: #f02929;
+    font-size: .16rem;
+}
+
+.chengY{
+    width: 90%;
+    height: .59rem;
+    line-height: .59rem;
+    margin: 0 auto;
+    margin-top: 10%;
+}
+.chengY img{
+    width: .19rem;
+    height: .13rem;
+    float: left;
+    vertical-align: middle;
+    margin-top: .23rem;
+    margin-right: .1rem;
+}
+.chengY_left{
+    width: 30%;
+    font-size: .16rem;
+    color: #000;
+    float: left;
+}
+.chengY_right{
+    width: 50%;
+    font-size: .16rem;
+    color: #000;
+    float: right;
+}
+
+
+
+table.imagetable {
+    width: 90%;
+    margin: 0 auto;
+	font-family: verdana,arial,sans-serif;
+	font-size:.16rem;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+    border-collapse: collapse;
+    margin-top: 5%;
+}
+table.imagetable th {
+	/* background: url('../img/biao.jpg'); */
+	border-width: 1px;
+	padding: 8px;
+	border-style: none;
+}
+table.imagetable td {
+	/* background: url('../img/ge.jpg'); */
+	border-width: 1px;
+	padding: 8px;
+    border-style: none;
+    height: .5rem;
+}
+table.imagetable td img{
+    width: .4rem;;
+    height: .4rem;
+    border-radius: .1rem;
+}

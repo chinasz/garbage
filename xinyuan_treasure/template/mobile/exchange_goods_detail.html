@@ -44,7 +44,7 @@
 			{if $goods['is_real'] == 1}
 			wx.openAddress({
 				success:function(res){
-					order(addr =res.countryName+res.provinceName+res.cityName+res.detailInfo,member=res.userName,phone=res.telNumber);
+					order(addr =res.provinceName+res.cityName+res.countryName+res.detailInfo,member=res.userName,phone=res.telNumber);
 				},
 				cancel:function(res){
 				

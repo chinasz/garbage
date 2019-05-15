@@ -28,6 +28,7 @@
 			$arr = fenxiao($this->table,$_SESSION['ids']);
 
 			$res3=true;
+			$log = true;
 			
 			if(is_array($arr) && !empty($arr)){
 				$arr_length = count($arr);
@@ -39,17 +40,29 @@
 					//返现金额
 					$reward = intval($this->settings['sale'.strval($i+1)])*floatval($meal['pay'])/100;
 					$sql2 = "update ".tablename($this->table['member'])."set reward = reward+".floatval($reward)." where member_id = :member_id";
-					
+					//返现记录
+					$reward_log = array(
+						'from_user'	=>	$_SESSION['ids'],
+						'to_user'	=>	$arr[$i],
+						'level'		=>	$i,
+						'scale'		=>	$this->settings['sale'.strval($i+1)],
+						'recharge'	=>	$meal['pay'],
+						'money'		=>	$reward,
+						'add_time'	=>	date("Y-m-d H:i:s")
+					);
 					if($arr[$i]){
+						
 						$res3 = pdo_query($sql2,array(':member_id'=>$arr[$i]));
+						$log = pdo_insert($this->table['reward'],$reward_log);
 					}
 					
+					
 				}
-				
+
 			}
 			
 			
-			if($res1 && $res2 && $res3){
+			if($res1 && $res2 && $res3 && $log){
 				pdo_query("COMMIT"); 
 				
 			}else{

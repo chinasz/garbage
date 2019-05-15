@@ -19,50 +19,55 @@ img{
 .beiJ{
     width: 100%;
     height: 115.8%;
-    background: url('../img/beiJ.gif') no-repeat;
-    background-size: 100% 100%;
+    /* background: url('../img/beiJ.gif') no-repeat;
+    background-size: 100% 100%; */
     overflow: hidden;
+}
+.beiJ .beiJ_T{
+    width: 100%;
+    height: 100%;
 }
 .beiJ .fanH{
     width: .37rem;
     height: .37rem;
     border-radius: 50%;
     display: block;
-    margin-top: .2rem;
-    margin-left: .2rem;
+    position: absolute;
+    left: 3%;
+    top: 3%;
 }
 .beiJ .jiangB{
     width: 77%;
     height: 1.6rem;
     display: block;
-    position: relative;
+    position: absolute;
     left: 14%;
-    top: 0%;
+    top: 10%;
 }
 
 .beiJ .caiD{
     width: 2.23rem;
     height: 1.35rem;
     display: block;
-    position: relative;
+    position: absolute;
     left: 0;
-    top: -11%;
+    top: 20%;
 }
 .beiJ .caiD_copy{
     width: 2.23rem;
     height: 1.35rem;
     display: block;
-    position: relative;
-    right: -71%;
-    top: -29%;
+    position: absolute;
+    right: -36%;
+    top: 27%;
 }
 
 .beiJ .jingY{
     width: 77%;
     height: .93rem;
     display: block;
-    position: relative;
-    top: -39%;
+    position: absolute;
+    top: 34%;
     left: 12%;
 }
 
@@ -72,8 +77,8 @@ img{
     width: 100%;
     border-radius: .2rem;
     background: #7443e0;
-    position: relative;
-    top: -38%;
+    position: absolute;
+    top: 52%;
     left: 0;
 }
 .paiH .paiH_T{
@@ -143,8 +148,7 @@ img{
     float: left;
 }
 .paiH_B .second img{
-    width: 100%;
-    height: 100%;
+    width:.6rem;
     border-radius: 50%;
     float: left;
 }

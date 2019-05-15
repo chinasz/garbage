@@ -9,5 +9,6 @@ $sql = <<<EOF
 	drop table `ims_xin_recharge_meal`;
 	drop table `ims_xin_game`;
 	drop table `ims_xin_cash`;
+	drop table `ims_xin_reward_log`;
 EOF;
 pdo_run($sql);

@@ -15,7 +15,7 @@ class Xinyuan_treasureModuleSite extends WeModuleSite {
 
 	public $settings;
 	public $prefix = 'ims_';
-	public $table = array('course'=>'xin_course','member'=>'xin_member','goods'=>'xin_goods','goods_class'=>'xin_goods_class','order'=>'xin_order','cash'=>'xin_cash','recharge'=>'xin_recharge','meal'=>'xin_recharge_meal','game'=>'xin_game');
+	public $table = array('course'=>'xin_course','member'=>'xin_member','goods'=>'xin_goods','goods_class'=>'xin_goods_class','order'=>'xin_order','cash'=>'xin_cash','recharge'=>'xin_recharge','meal'=>'xin_recharge_meal','game'=>'xin_game','reward'=>'xin_reward_log');
 	
 	public function __construct(){
 		global $_W,$_GPC;
@@ -29,45 +29,12 @@ class Xinyuan_treasureModuleSite extends WeModuleSite {
 		if($_W['container'] == 'wechat' and $_W['os'] == 'mobile'){
 			
 			$fid = $_GPC['fid']?$_GPC['fid']:0;
+			$fid = $fid == $_SESSION['ids']?0:$fid;
 			login($this->table,$fid,$_W['uniaccount']['uniacid']);
 		}
 
 	}
 	
-	
-	// public function getRuleMenus(){
-	// 	global $_W,$_GPC;
-	// 	return array(
-	// 		array(
-	// 			'title'	=> '开始游戏',
-	// 			'url'	=>	$this->createMobileUrl('index'),
-	// 		),
-	// 		array(
-	// 			'title'	=> '充值',
-	// 			'url'	=>	$this->createMobileUrl('krypton')
-	// 		),
-	// 		array(
-	// 			'title'	=> '交易明细',
-	// 			'url'	=>	$this->createMobileUrl('detail')
-	// 		),
-	// 		array(
-	// 			'title'	=> '积分商城',
-	// 			'url'	=>	$this->createMobileUrl('exchange')
-	// 		),
-	// 		array(
-	// 			'title'	=> '新手教程',
-	// 			'url'	=>	$this->createMobileUrl('course')
-	// 		),
-	// 		array(
-	// 			'title'	=> '分享海报',
-	// 			'url'	=>	$this->createMobileUrl('poster')
-	// 		),
-	// 		array(
-	// 			'title'	=> '排行榜',
-	// 			'url'	=>	$this->createMobileUrl('rank')
-	// 		),
-	// 	);
-	// }
 	
 	public function getMenus(){
 		return array(
@@ -168,7 +135,7 @@ class Xinyuan_treasureModuleSite extends WeModuleSite {
 			$arr = fenxiao($this->table,$member);
 
 			$res3=true;
-			
+			$log = true;
 			if(is_array($arr) && !empty($arr)){
 				$arr_length = count($arr);
 				for($i=0;$i<=$arr_length;$i++){
@@ -179,8 +146,18 @@ class Xinyuan_treasureModuleSite extends WeModuleSite {
 					//返现金额
 					$reward = intval($this->settings['sale'.strval($i+1)])*floatval($meal['pay'])/100;
 					$sql2 = "update ".tablename($this->table['member'])."set reward = reward+".floatval($reward)." where member_id = :member_id";
-					
+					//返现记录
+					$reward_log = array(
+						'from_user'	=>	$_SESSION['ids'],
+						'to_user'	=>	$arr[$i],
+						'level'		=>	$i,
+						'scale'		=>	$this->settings['sale'.strval($i+1)],
+						'recharge'	=>	$meal['pay'],
+						'money'		=>	$reward,
+						'add_time'	=>	date("Y-m-d H:i:s")
+					);
 					if($arr[$i]){
+						$log = pdo_insert($this->table['reward'],$reward_log);
 						$res3 = pdo_query($sql2,array(':member_id'=>$arr[$i]));
 					}
 					
@@ -189,7 +166,7 @@ class Xinyuan_treasureModuleSite extends WeModuleSite {
 			}
 			
 			
-			if($res1 && $res2 && $res3){
+			if($res1 && $res2 && $res3 && $log){
 				pdo_query("COMMIT"); 
 				
 				exit('ok');

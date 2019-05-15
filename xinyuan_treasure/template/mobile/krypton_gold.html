@@ -147,7 +147,7 @@
 						success:function(res){
 							if(res.code ==0){
 								util.pay({
-									orderFee : res.data.fee,
+									orderFee :res.data.fee,
 									payMethod : 'wechat',
 									orderTitle : '充值' + res.data.fee + '元',
 									orderTid : res.data.num,
@@ -161,14 +161,14 @@
 											data:{ordid:res.data.id,token:"{$_W['token']}",submit:"1"},
 											dataType:'json',
 											success:function(data){
-												
+												util.loading().hide();
 												if(data.code==0){
 													util.toast('充值成功');
 												}else{
 													util.toast(data.error || '充值失败',"",'error');
 												
 												}
-												util.loading().hide();
+												
 											
 											}
 										})

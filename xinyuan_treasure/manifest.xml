@@ -99,6 +99,7 @@
 			<entry title="分享海报" do="poster" state="" direct="true" />
 			<entry title="排行榜" do="rank" state="" direct="true" />
 			<entry title="代理提现" do="cash" state="" direct="true" />
+			<entry title="我的团队" do="myteam" state="" direct="true" />
 		</cover>
 		<menu call="getMenus">
 			
@@ -112,5 +113,5 @@
 
 	<install><![CDATA[install.php]]></install>
 	<uninstall><![CDATA[uninstall.php]]></uninstall>
-	<upgrade><![CDATA[]]></upgrade>
+	<upgrade><![CDATA[upgrade.php]]></upgrade>
 </manifest>
