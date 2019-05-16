@@ -82,8 +82,8 @@
 							<td>{$order['order_express']}</td>
 							<td><label class="label label-success">{$order_status[$order['order_status']]}</label></td>
 							<td>{$order['add_time']}</td>
-							<td data-id = "{$order['order_id']}">
-								{if $order['order_status']==3}<button class="btn btn-primary btn-sm" id="layer" data-toggle="modal" data-target="#myModal">发货</button>{/if}
+							<td data-id = "{$order['order_id']}" data-real="{$order['is_real']}">
+								{if $order['order_status']==3}<button class="btn btn-primary btn-sm layer" data-toggle="modal" data-target="#myModal">发货</button>{/if}
 							</td>
 						</tr>
 						{/loop}
@@ -138,12 +138,34 @@
 				});
 			});
 		});
-		$("#layer").on('click',function(){
-			$("#express").attr("data",$(this).parent('td').attr("data-id"));
-
+		$(".layer").on('click',function(){
+			var id = $(this).parent('td').attr("data-id");
+			var is_real = $(this).parent('td').attr("data-real");
+			if(is_real == 1){
+				$("#express").attr("data-id",id);
+			}else if(is_real ==0){
+				$(this).attr('data-toggle','');
+				$(this).attr('data-target','');
+				$.ajax({
+					url:"{php echo $this->createWebUrl('sendgoods')}",
+					type:"POST",
+					data:{ordid:id,express:'',token:"{$_W['token']}",submit:1},
+					dataType:"json",
+					success:function(res){
+						if(res.code == 0){
+							alert('操作成功');
+							location.reload();
+						}else{
+							util.message(res.error || '操作失败');
+						}
+					}
+				})
+				
+			}
 		})
+
 		$("#express").on('click',function(){
-			var ordid = $(this).attr('data');
+			var ordid = $(this).attr('data-id');
 			var express = $("#danhao").val();
 			if(ordid && express){
 				$.ajax({

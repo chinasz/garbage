@@ -251,4 +251,13 @@
 		
 		return $arr;	
 	}
-	
+	/*
+	*wechat browser
+	*/
+	function isWeichatBrowser() {
+		if ( false !== strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'MicroMessenger' ) ) {
+		  return true;
+		}
+		return false;
+	}
+	  

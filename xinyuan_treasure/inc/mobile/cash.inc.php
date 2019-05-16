@@ -20,8 +20,7 @@
 				if(!empty($cash_low)){
 					if($cash_fee>0){
 						
-						$money = $member_reward - $member_reward * $cash_fee / 100;
-						
+						$money = $member_reward - ($member_reward * $cash_fee / 100);
 					}else{
 						$money = $member_reward;
 						
@@ -61,7 +60,7 @@
 					
 					if($res && $res2){
 						pdo_query("COMMIT"); 
-						$return['code'] =1;
+						$return['code'] =0;
 						echo json_encode($return);
 						return;
 						

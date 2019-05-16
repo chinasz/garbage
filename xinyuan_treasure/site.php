@@ -30,9 +30,10 @@ class Xinyuan_treasureModuleSite extends WeModuleSite {
 			
 			$fid = $_GPC['fid']?$_GPC['fid']:0;
 			$fid = $fid == $_SESSION['ids']?0:$fid;
+			
+			
 			login($this->table,$fid,$_W['uniaccount']['uniacid']);
 		}
-
 	}
 	
 	
@@ -77,6 +78,11 @@ class Xinyuan_treasureModuleSite extends WeModuleSite {
 				'title'	=>	'充值套餐',
 				'url'	=>	$this->createWebUrl('meal'),
 				'icon'	=>	'fa fa-credit-card'
+			),
+			array(
+				'title'	=>	'提现',
+				'url'	=>	$this->createWebUrl('cash'),
+				'icon'	=>	'fa fa-money'
 			),
 		);	
 	}

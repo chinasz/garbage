@@ -8,7 +8,7 @@
 
             $is_ord = $query->from($this->table['order'])->where(array('order_id'=>$order_id,'order_status'=>3,'order_express'=>''))->get();
             if(empty($is_ord)){
-                $return = array('code'=>1,'error'=>'订单信息错误');
+                $return = array('code'=>1,'error'=>'订单错误');
                 echo json_encode($return);
                 return;
             }

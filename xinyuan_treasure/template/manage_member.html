@@ -78,7 +78,7 @@
 						<td>{$member['member_nickname']}</td>
 						<td><img src="{$member['member_avatar']}" style="width:60px;"></td>
 						<td>{$member['member_score']}</td>
-						<td>{if $member['is_del']==0}<label class="label label-default">黑名单</label>{else}<label class="label label-success">正常</label>{/if}</td>
+						<td class="sz_del" data-status="{$member['is_del']}" data-id="{$member['member_id']}">{if $member['is_del']==0}<label class="label label-default">黑名单</label>{else}<label class="label label-success">正常</label>{/if}</td>
 						<td>{$member['member_firsttime']}</td>
 						<td>
 						   <a class="btn btn-primary btn-sm add_layer" data-id="{$member['member_id']}" data-toggle="modal" data-target="#myModal">充值余额</a>
@@ -185,7 +185,32 @@
 				window.open(location.href+'&export=1','_blank');
 			
 			});
-		
+			$('.sz_del').on('click',function(){
+				var status = $(this).attr('data-status');
+				var id = $(this).attr('data-id');
+				var that = $(this);
+				$.ajax({
+					url:"{php echo $this->createWebUrl('refuse')}",
+					data:{status:status,id:id,token:"{$_W['token']}",submit:1},
+					dataType:"json",
+					type:"POST",
+					success:function(res){
+						if(res.code ==0){
+							that.html('');
+							if(res.data ==0){	
+								that.html('<label class="label label-default">黑名单</label>');
+							}else if(res.data ==1){
+
+								that.html('<label class="label label-success">正常</label>');
+
+							}
+						}else{
+							util.toast('修改失败');
+						}
+					}
+
+				})
+			})
 		});
 	</script>
 {template 'common/footer'}

@@ -1,0 +1,73 @@
+{template 'common/header'}
+    <style>
+        td,th{
+            text-align: center;
+        }
+    </style>
+    <div class="main">
+        <div class="alert alert-info" role="alert"><h4>{$_W['page']['title']}</h4></div>
+        <div class="panel panel-default">
+            <div class="table-responsive panel-body">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                        <th>用户</th>
+                        <th>提现总金额</th>
+                        <th>微信打款单号</th>
+                        <th>提现手续费<br>(当时设置的为准)</th>
+                        <th>提现状态</th>
+                        <th>备注</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="level-list">
+                        {loop $cash_list $cash}
+                        <tr>
+                            <td><img src="{php echo toimage($cash['member_avatar'])}" style="width:60px;height:60px;"><br>{$cash['member_nickname']}</td>
+                            <td>{$cash['cash_money']}元</td>
+                            <td>{$cash['cash_three_num']}</td>
+                            <td>{$cash['cash_fee']}%</td>
+                            <td>{if $cash['cash_status'] == 2}<label class="label label-warning">未发放</label>{/if}{if $cash['cash_status'] == 1}<label class="label label-success">已发放</label>{/if}</td>
+                            <td>{$cash['cash_msg']}</td>
+                            <td>
+                                {if $cash['cash_status'] == 2}
+                                <a class="btn btn-warning btn-sm cash" data-id ="{$cash['id']}" data-ment="0">手动打款</a><br>
+                                <a class="btn btn-info btn-sm cash" data-id ="{$cash['id']}" data-ment="1">自动打款</a><br>
+                                {/if}
+                                <a class="btn btn-sm btn-danger" data-id ="{$cash['id']}">删除</a>
+                            </td>
+                        </tr>
+                        {/loop}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(".cash").on('click',function(){
+            var id = $(this).attr('data-id');
+            var ment = $(this).attr('data-ment');
+            var status = false;
+            if(ment == 0){
+
+            }else if(ment == 1){
+
+
+            }
+            $.ajax({
+                url:"{php echo $this->createWebUrl('cash')}",
+                data:{id:id,ment:ment,submit:1,token:"{$_W['token']}"},
+                type:"POST",
+                dataType:"json",
+                success:function(res){
+                    if(res.code == 0){
+                        util.message('操作成功');
+                    }else if(res.code ==1){
+                        util.message(res.error || '','','error');
+                    }
+
+                }
+            })
+        })
+    </script>
+{template 'common/footer'}
