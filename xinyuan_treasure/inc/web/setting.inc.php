@@ -4,6 +4,12 @@
 	*
 	*/
 	global $_W,$_GPC;
+
+	/* */
+
+	pageauth($_W['current_module']['name'],$_GPC['do']);
+
+	/* */
 	$_W['page']['title'] = '基础设置';
 	//公众号id
 	$public_id = $_W['uniaccount']['uniacid'];

@@ -1,5 +1,12 @@
 <?php
 	global $_W,$_GPC;
+
+	/* */
+
+	pageauth($_W['current_module']['name'],$_GPC['do']);
+
+	/* */
+
 	$_W['page']['title'] = '充值套餐';
 	$public_id = $_W['uniaccount']['uniacid'];
 	$query = load()->object('query');

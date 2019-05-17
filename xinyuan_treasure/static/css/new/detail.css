@@ -1,0 +1,277 @@
+*{
+    margin:0;
+    padding:0;
+	font-family: "微软雅黑";
+}
+body,html{
+    font-size: 26.67vw;
+    height: 100%;
+    /* display: -webkit-flex;
+    flex-direction: column; */
+    overflow-x: hidden!important;
+    /* overflow-y: hidden!important;  */
+    background: #FFF;
+    -webkit-overflow-scrolling:touch;
+}
+a{
+    text-decoration: none;
+}
+ul,li{
+    list-style: none;
+}
+img{
+    display: block;
+}
+
+/* 顶部 */
+.dingB{
+    width: 100%;
+    height: 2rem;
+    background: url('http://aaa.0362.xyz/static/img/agent_new_bgImg.png') no-repeat;
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+.dingB .daiL{
+    font-size: .16rem;
+    color:  hsla(0, 0%, 100%, .88);
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+/* 立即提现 */
+.promptly{
+    width: 100%;
+    height: .5rem;
+    margin-top: 5%;
+}
+.promptly .biaoZ{
+    font-size: .16rem;
+    color: #FFF;
+    float: left;
+    margin-left: 5%;
+    margin-top: 1%;
+}
+.promptly .qianS{
+    font-size: .2rem;
+    color: #FFF;
+    font-weight: 600;
+    float: left;
+}
+.promptly .tiX{
+    width: 1rem;
+    height: .3rem;
+    font-size: .16rem;
+    color: #f64a28;
+    text-align: center;
+    line-height: .3rem;
+    border-radius: .2rem;
+    float: right;
+    background: #FFF;
+    margin-right: 5%;
+}
+
+/* 收入明细 */
+.detail{
+    width: 100%;
+    margin-top: 6%;
+}
+.detail ul{
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.detail ul li{
+    width: 25%;
+    height: .6rem;
+    float: left;
+}
+.detail ul li .jinR{
+    font-size: .14rem;
+    color:  hsla(0, 0%, 100%, .88);
+    text-align: center;
+    margin-top: 13%;
+}
+.detail ul li .daoL{
+    font-size: .14rem;
+    color:  hsla(0, 0%, 100%, .88);
+    float: left;
+    margin-left: 31%;
+    margin-top: -10%;
+}
+.detail ul li .qian{
+    font-size: .16rem;
+    color:  hsla(0, 0%, 100%, .88);
+    font-weight: 600;
+    float: left;
+    margin-top: -8%;
+    
+}
+.detail ul li .daoL1{
+    font-size: .16rem;
+    color:  hsla(0, 0%, 100%, .88);
+    font-weight: 600;
+    float: left;
+    margin-left: 31%;
+    margin-top: -7%;
+}
+.detail ul li .qian1{
+    font-size: .14rem;
+    color:  hsla(0, 0%, 100%, .88);
+    float: left;
+    margin-top: 8%;
+    margin-left: 6%;
+}
+
+/* 权益佣金二维码 */
+.equity{
+    width: 100%;
+    margin-top: 5%;
+}
+.equity ul{
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.equity ul li{
+    width: 33.3%;
+    height: .79rem;
+    float: left;
+}
+.equity ul li .tu{
+    width: .51rem;
+    height: .54rem;
+    margin: 0 auto;
+}
+.equity ul li .tu img{
+    width: 100%;
+    height: 100%;
+}
+.equity ul li p{
+    font-size: .14rem;
+    color: #000;
+    text-align: center;
+    margin-top: 5%;
+}
+
+/* 代理收益 */
+.agency{
+    width: 100%;
+    margin-top: 10%;
+}
+.agency .agency_T{
+    font-size: .18rem;
+    font-weight: 600;
+    color: #383b45;
+    margin-left: 5%;
+}
+.agency ul{
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 5%;
+}
+.agency ul li{
+    font-size: .14rem;
+    color: #979797;
+    float: left;
+}
+.agency ul .agency_W35{
+    width: 35%;
+    text-align: left;
+}
+.agency ul .agency_W15{
+    width: 15%;
+    text-align: left;
+}
+.agency ul .agency_W20{
+    width: 20%;
+    text-align: right;
+}
+
+
+/* 内容 */
+.neiR{
+    width: 100%;
+    height: 3rem;
+    margin-top: 20%;
+}
+.neiR p{
+    font-size: .16rem;
+    color: #000;
+    margin-top: 5%;
+    text-align: center;
+}
+
+/* 底部 */
+.diB{
+    width: 100%;
+    margin-top: 5%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #FFF;
+    border-top: .02rem solid #f5f5f5;
+    z-index: 11111;
+}
+.diB ul{
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.diB ul li{
+    width: 33.3%;
+    height: .4.5rem;
+    float: left;
+}
+.diB ul li .tu{
+    width: .2rem;
+    height: .2rem;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+.diB ul li .tu img{
+    width: 100%;
+    height: 100%;
+}
+.diB ul li .first{
+    font-size: .14rem;
+    color: #a8a8a8;
+    text-align: center;
+}
+#dianJ{
+    color: #ff3100;
+}
+#tu{
+    width: .2rem;
+    height: .2rem;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+.neiR1{
+    width: 100%;
+    height: 3rem;
+    margin-top: 10%;
+}
+.neiR1 ul{
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 5%;
+}
+.neiR1 ul li{
+    font-size: .14rem;
+    color: #000;
+    float: left;
+}
+.neiR1 ul .agency_W35{
+    width: 35%;
+    text-align: left;
+}
+.neiR1 ul .agency_W15{
+    width: 15%;
+    text-align: right;
+}
+.neiR1 ul .agency_W20{
+    width: 20%;
+    text-align: right;
+}

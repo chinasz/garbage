@@ -1,104 +1,131 @@
 {template 'header'}
-	{template 'style'}
-	<link rel="stylesheet" type="text/css" href="{MODULE_URL}static/css/global.css" />
-	<link rel="stylesheet" type="text/css" href="{MODULE_URL}static/css/personal.css" />
-	<style>
-		.top-list .roll{
-			width:100%;
-			overflow:hidden;
-			text-indent:3rem;
-			background:url({MODULE_URL}static/img/2019-04-02_145119.png) no-repeat left center;
-			background-size:3rem 3rem;
-			color:#fff;
-			height:2rem;
-			line-height:2rem;
-		}
-		
-		.game-url .game-icon{
-			width:2rem;
-			background:url({php echo $this->settings['game_icon'] ==''?MODULE_URL.'static/img/7.png':toimage($this->settings['game_icon'])}) center;
-			background-size:cover;
-			margin-left:1rem !important;
-			overflow:hidden;
-		}
-		
-	</style>
-	<div class="wrap">
-    <div class="top-list bgcolor">
-      <div class="cols1">  
-          <div class="fl">ID:{$_SESSION['ids']}</div>
-        <a href="{php echo $this->createMobileUrl('rank');}"><div class="fr">排行榜</div></a>
-      </div>
-      <div class="roll bgcolor"><marquee rolldelay="150" direction="left" align="middle">{php echo $this->settings['web_notice']}</marquee></div>
-      <div class="cols-menu">我的上级<span class="fr">{$member['member_fid']}</span></div>
-      <div class="cols-menu">游戏余额<span class="fr">{$member['member_score']}</span></div>
-      <div class="cols-menu">佣金<span class="fr">{$member['reward']}</span></div>
-    </div>
-    <div class="content" style="overflow:hidden;">
-		<div  class="t1">
-			充值兑换
-		  </div>
-		<div class="t2" style="">
-			<a href="{php echo $this->createMobileUrl('krypton');}" ><div class="fl bgcolor">充值</div></a>
-			<a href="{php echo $this->createMobileUrl('exchange');}"><div class="fr fontcolor bordercolor">兑换</div></a>
-		</div>
-		<div class="t1">
-			游戏专区
-		</div>
-		<a href="{php echo $this->createMobileUrl('index');}">
-		  <div class="game-url">
-			<div class="game-icon p"></div>
-			<div class="game-desc p">
-				<p style="font-weight:800;margin:0;">{php echo $this->settings['game_name']}</p>
-				<p style="color:#ccc;font-size:12px;">{php echo $this->settings['game_remark']}</p>
-			</div>
-			<p class="game-right p">开始游戏></p>
-		  </div>
-		</a>
-		<div class="menu-list">
-			<ul style="overflow:hidden;margin:0;">
-				<li id="addqq"><p style="width:100%;"><img src="{MODULE_URL}static/img/1.png"/></p><p style="postion:absolute;bottom:0;">联系客服</p></li>
-				{loop $this->settings['web_menu'] $menu}
-				<li><a href="{$menu['link']}"><p style="width:100%;"><img src="{php echo toimage($menu['icon']);}"/></p><p style="postion:absolute;bottom:0;">{$menu['font']}</p></a></li>
-				{/loop}
-			</ul>
-		</div>
-    </div>
-  </div>
-  <!-- 客服 -->    
-    <div id="slideBox2" class="slideBox" style="">
-        <div class="kftan_top">有什么疑问？请联系客服</div>
-        <div class="bd">
-            <ul>
-				<li>
-					<img src="{php echo toimage($this->settings['qrcode']);}" />
-				</li>
-            </ul>
-        </div>
-        
-    </div>
-	
-    <div class="layer" style="display: none">
-        <p></p>
-    </div>
-    <div class="layer_bg" style=""></div>
-	
- <script>
+<link rel="stylesheet" type="text/css" href="{MODULE_URL}static/css/new/home.css"/>
 
-	var addqq = function(){
-		$('.layer_bg').show();
-		
-		$('#slideBox2').css({'opacity':'1','display':''});
-		$('#slideBox2').css('top','2rem');
-	}
-	
-	$('#addqq').click(function(event) {
-	   addqq();
-	});
-	$('.layer_bg').click(function(event) {
-		$('#slideBox2').css('opacity','0');
-		$('#slideBox2').css('top','-50rem');
-		$(".layer_bg,.layer,#layer_redpacket").fadeOut('400');
-	});
-</script> 
+
+<div class="lunB">
+	<img src="{if $this->settings['web_banner']}{php echo toimage($this->settings['web_banner']);} {else} {MODULE_URL}static/img/xinshou.png{/if}" alt="">
+</div>
+
+<!-- 用户信息 -->
+
+<div class="user">
+	<div class="user_W">
+			<div class="user_L">
+					<img src="http://aaa.0362.xyz/static/img/userPort49.png" alt="">
+			</div>
+			<div class="user_C">
+					ID:{php echo $this->member_pre}{$_SESSION['ids']}
+			</div>
+	</div>
+</div>
+
+<!-- 账户信息 -->
+<div class="account">
+	<div class="account_L">
+			<div class="account_L_left">
+					<p>账户余额</p>
+					<p>推广佣金</p>
+			</div>
+			<div class="account_L_right">
+					<p>{$member['member_score']}</p>
+					<p>{$member['reward']}</p>
+			</div>
+	</div>
+	<div class="account_R">
+			<div class="account_R_L">
+				<a href="recharge.html">
+					<div class="tu">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAsBJREFUWAnFl81qFEEUhbs1TBAF4yImRnAjuAgoCJK1gphdXOgjBB8krzAQH2CewKAbEWYjuFBQCAlk40LRkFUMmVVQx+/01J3c6VRPKhObPnCmblXdv67/ybNE9Pv9FqqP4ApchAuBFNnPwG3KDdjN8/yI8vwg8DxchwcwFdKVzfzEGWA8DddgD8ZwSONOoOQYZCsf02dKBAN99QfooSAd+BzOlB2qLfRJp5yQfKWNBor34HdoOEJow9ly0Kq6dIONbA3yebfKpmhHQV/ug3+jfn+s0ZhO2UL5MMh3fCTo0Jz7Yf9IfW6M/6Qu+YDyZVCMk2uCRi0Wg7I+d3DLUL6gH4k16ytKOjX0tto1bxMP+4hjV5FPaGtCsY6ngor2rKHt7CpFlKfgE3izUqnUga4Ws2G96KbWgnbIaPskrXb03sI9+AXeKcWKVtG7Dm2LKmYr42cZGjpRy0gjBgos/IWrEZVoE7odGQUsX0BLZ7vhlQlnKHN05ScVPsaKDHWxGN6ZUGPpYyxOEUi3mtDjBvs1EEd/GS7dhA/hNdfjj+MH6ByEPu3x9/j66nSHomKg26PhClzQGrBFsTPUKgnovIYyTMFvlD5D+7CSt0wxdYkJh6lzp6+9esJTvOEizTfgUrx7pLWvKdBjQtuoMmP6XsJb0IYZMbsNL0kAP+B+IWXZH8pN+CbUY4XF2tVwdDUWAX5eY4bDNvRtG8r0xbDjFAHdGRkEdDUFekYZHptQY+ljbCsBveEMT02osfQxNjQFkx7FdsVqF62mJIyeHiq26wZHsQxpnOQyeobdVrC9nJhAG33D4DIKCTR7HYckmnuQhATqfJJ9snGnjD/J3FQ08yhVAgIZNvcsH6RQJNHcHxOXhNaEFqY9VhFHoP1cz18zS0IlQTQaOifs3Yh4KqQrm+OXr3fqZD2nkoAzPUr++9/zf8DX0S9cdA4LAAAAAElFTkSuQmCC" alt="">
+					</div>
+					<p>充值</p>
+				</a>
+			</div>
+			<div class="account_R_R">
+				<a href="withdrawDeposit.html">
+					<div class="tu">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAA6NJREFUWAnFl89LW0EQxycvoVH8BaIQYi0eRFC0CiIWKUqvVQo99y9Q1EM9FooUeuhBL4qKh57aqwVrobeKJ9GLUlEUwYNicxKN8Ueq0c5neSsxTYzVpBl4b/ftj+93dmd2dp5HbimDg4MPQqHQs8vLyxc6pU7LoMfjCTJd67ta39XqqpbTgUDgh47/TV868aQb0NPTEzg/P3+rwK+UqDjdePp1bFjHfvb5fO/GxsZCN81JqUBfX58/Go2+0cmv9SlIBMnLy5OSkhLTfHBwIKenp4lD+D7SZ9jv978fGRmJJhuQVAFWHYvFvugqnthJEDY1NUljY6PU1tZKfn6+7TLlycmJrK2tyfLysiwtLV1TSHdk3uv1vky2G38p0N3d/VjJvynqQ5B1orS3t0tXV5cUFhYasnSvSCQiMzMzMjc3J4plh+9o5fnk5ORP20B5TQHX3ovabshLS0tF26SysjJ+zq3r29vboquWvb09O2dH/aIlfie8tgebq7N91+862qqqqmRgYEDKy8vtkH8u8ZHW1lbZ2NiQ/f195herWZ+2tbV9WlhYMFvjWFQcztqclff29kpRUZHtvnMJBlhgInC4zm2+jQJsvX7h7cbmbHsmyA2DvsACE39y5bXLKUYBzrl2mKOGw93V5hY9WQkm2K4UuJziEOEIMnRw1PD2bElnZ6fhAB9OuB03vJoIxzm/7VG7i5KYAg5EfaEYbkcrxHYjBJlsSzwH3PiAOXYQE+GyLQkcdT7Vwtxo2D8xvFpliGbr6+tyfHxsm1KW6lxSXV0tZWVlScfAARd3B9w+dYagVq4ulmSzxsfHZXNzU4j36cRxHAkGg9Lf358SkwCFAnBfBaKbgFn5bcjBuLi4kHA4LFtbWzdBmj5d+CUmIJGo4UpNJR0dHSaes3XphGBTUVEhDQ0NKYfGcf3CBLuqRA1bwiqT+QHxnCcTAofNHeDGBKsWmPs825LAseqoFtOWlGQi2xLPAbdDAqmVMMRkMiQT2RKw4UDghNs7Ozsba25ufqRtLZzhs7Mzqa+vN4My/ZqamjLH2cX9ODQ0NG2OIdmrNpJAmjSKTCbTAiYpmitHLqeYC3pxcTGiu8AZ69ATISsrK8brNZu1E+5VHh4eyvDwcHwk/TAxMfEVULMDVEid1S7z1MnhRkdHhYn3FTA0Jb/KC+GAy+LmPCm9pgBa5TQtt9tCvpazHxOrRE5/zawSlOwGCaQ6z//9OY1XgjoJZDZ+z/8A7f/46GUIkz4AAAAASUVORK5CYII=" alt="">
+					</div>
+					<p>提现</p>
+				</a>
+			</div>
+	</div>
+</div>
+
+<!-- 开始游戏 -->
+<div class="start" onclick="location = '{php echo $this->createMobileUrl("index")}'">
+	开始游戏
+</div>
+
+<!-- 游戏 -->
+<div class="game">
+	<ul>
+		{loop $this->settings['web_menu'] $menu}
+		<li onclick="location = '{$menu["link"]}'">
+			<img src="{php echo toimage($menu['icon']);}" alt="">
+		</li>
+		{/loop}
+	</ul>
+</div>
+
+<!-- 新手帮助平台介绍等 -->
+<div class="introduce">
+	<ul>
+		<li>
+			<div class="tu">
+				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAABJ1JREFUaAXVmrtPFFEUxmcfwC6wgQ0QHrYU/AEmWmqhrdBrZdTWUFBbU9BrYqW90mqhpSb8ARS28ggkCxF2F8iC32+Yu5mdnZ25M6v7OMnmvs/9vrn3nPvajPMP5Obmpnh4ePjo+vr6odStKL2ssKxfyVP/R2Elk8n8UribzWa/zc/Pf1W65pWnDjJpW56cnJRrtdoTgX0iHY8VjifRJfBV1f+icLtYLG5PT09XkrQ3dRMT2NvbA+i6fhsCbb6w0ZcqFAlGaFO/raWlJYhZizUBgc3t7+8/l+Y3ii9a95Cgoojso39xcfG94g2bplYEjo+P71xeXn4W8Ls2SrutI/A7o6Ojq7Ozs7/jdMUSODg4uCfj/PS/vnongIyGjH1tYWHhZ6c65GejCjXfnzYaje+9Bg8m+qRvMERh7DgCNJSSD1GNe1Wm0Xgm4/4Y1l8oAaYN7NWgENaoD3n1XC73IGw6tU0hDJY5P0Dg+V4FMIEt+PFaCGjK5Dxv81/cZLDzJGlswsOW87drIYCfV8WeuEo/CNs42Ly1qNmkaQPeCvsLps3SiEihUHBKpZKTz+cdGVlEzdsiDb8bmZiYcE5PTx1Nidg2YRVwr8pfNiu2fwTWbcFrkXHK5bIzMjJiBd4Agaj2PY4WKEc+3mQnCj2MbGVccbWwMVNqw8uLDfiKNl+9kyJGbWZmJjUJsHqYbxcyb1dpvTGTS+uEzTqf0UtLQqNQAjOduSOgDDdh3fs/qmhIpBlNgzmvSFGW/TgtpouLC6dSqbD0t6gA1NTUlDvnKSAdrEM+JLAJjDysnDodhDNIMctJSpFEhxG/QjrFoxD6f+T5PQ2GLz/uXF1d+Zu7cUhMTk625UdlgBnseXXyMKpiXBnuVPv3tq/HF/dPDQy/Wq06R0dHoa7XTzauT1MO9rwSKyYjbRgEG6YHtzk3N+eSCBsFCGj/FdY0Km8FG+AA3hOBRKepwvTCnpII2PFCrAHDKmWmkLX/D2PJsJ+dnbXZQFhdfx7TjtHock0pQaArqdfrzvn5eSodrMgYdzcCAa40ZtIqGR8fd7cEuNAkwgjgwbqUPxDgQik1AYCwQeuTVLICwHXfUArY8UK7Q4n+FvRuXr75mzzJ625IsDClsQG2EN0I2DPqmM3csULr/RCbL/Y2CNsD7c1T4dCFroMTQFjIzKnNRpmmT1VbmNm8IjUdJ7+o0apNw2AdvuLY2Fg/RoCb7Zq7DiiyrRFITYCDSa8FzPTpHmi4n1cG64GVpNh0xepNohOsYEapS8B7XOB+3kpYeZMabZRidCVczTfNg4hLwFO+JWZcWcQKBscpLI338SsHODrQhU4b8TBumbotFzoy5pdS+tYUDmIoAq90J/TOYGshIPC8wvxQOJC3cwK/I9d5X2Hz5OOfQhwBG7yMKLSaSuYr9CIEk4etCZ5+WwiQwbOOVrg1ReukB0TqYAJbEE8bASpwDy/GL4KV+5UGS9jbAHhCCVDAi4gaPlO0nyNRB0On1xlwthgxGUEZ9Ee+WAIQ4mVEfno4n1nNiHgudjgfug0JQu8hZPj+auAnQXxo/+wRJEJa06tvf7f5C1ByP9MBvJ4UAAAAAElFTkSuQmCC" alt="">
+			</div>
+			<p>新手帮助</p>
+		</li>
+		<li>
+			<div class="tu">
+				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAABHdJREFUaAXVWrtOG0EUXa8XsC3MS0hgUqSh4AMiJWVShBboQxXlByhSIyUVBX8QKVLSJ7SkIGUi8QEpaFIEg4QwyGCbhyHnLDPD7LKsZwbjx5VGM7Mz9845835sxmuDXF9f5/f3919fXV29grk5xGfhj8MVhfkq/Eomk9mB/8f3/a2pqakfiNdFurOXcdU8Ojoar9frCwC7ABvz8As2tgC+hvyb8Dfy+fzG2NhYxUZf5rUmsLu7S6ArcO8BWtawtOfkgwRbaA1ufWZmhsSMxZgAwGbL5fJbWF5FuGRcgkVGECnTfqlU+oRw00TViMDBwcGT8/Pz7wD+zMToQ/MA/Pbg4ODi5OTkv1a2WhLY29t7jsH57bFq/T6AbA0M9qXp6enf9+Xhdz8tEf39TbPZ/Nlp8MTEMlk2MaRhvLcFqAgjX9KUO5WG1ljG4P6aVF4iAXYbsodCLkmpC98a2Wz2ZVJ3utOFOGDZ53sIPOsrR0zEFq+8CAF0mayYbR5lmowXbhPnmBDYsrpehADneWTsyFSpgzANE5tYi5SKGgNihd0hU5XqGMCg87A9CB1NYMsROth2tHirxukVsVm5Yge3Sd7KQ8EPDAx4hUIhBI45XJkeGhryRkZGQhK1Ws27uLhQabYBYgQJbmU+UjdsAW7MYPgvEq33NqxtgqYjARMhARKhc2kVlFlFeU+5AQxbQOwqrcBjqVe1TRI2QqKjo6ORVsEANTbBiiZmKHwO2xkfGDGWiYkJD/uUkIAteL0Q2Xq0RZs2IjH7COShOG+jrPdvG720vA42eQbJ+zxJIWB1GEkD0qk0Yib2QBwDrcq9vLy0ym+S2cUmsXMQz5kUoOfBrKVHuxmeC9AUsy4IOABzuZxHnzNIvAaZJvs1asprNBqRYoIg8DiTofwwjb6tEDtbgLcH1jI8POwVizczLwFiB6tsEHx8Vjk8PIyQ4MwjCVarVY/OQcY5jVrN/7IQWTjjejgpnvRN19HDzGshxdv13kKrl7KSgFPb9QiJKgk4XSj1CIGKj1mE1319KcTOFvjTl+hvQPOe1d/qVwLE7otbYqv7SBLWFx6uA7roafJ7/JuuE0+TOmk+uk+N2AME6jhObiLzYppCPO3k5MQjCOiHK7GezlX3+PhYrQ/MF1+JK5WKWol5sHEQ3mzXwwMNAhuoBSsCBEUSScIaPT09TUpS387Ozjw6VyFm6jodKblycrvQTmEL6d0qzTbAR4+UPFuiG/F+/kOaokxD/kchwP2SoazJBxF9K7EOZryyaClsgXaLqU2BcV2Wr5CIe5ZVmZDm854Hd6dtdbRpKKvyToj5I9cJGHx8hfkFvydv51D723i9eQFfvd6oFgjZIIEvI6ZdybDG2pKNmAQ2BZ6GIwT4gc866I9LCEaPUEzsnjSIidjiEO4QYAbew4Pxu3jmbsWJJeltgHgSCTCBLyJQXEawmy3RIAZiIaYkiQzipAy9/sjXkgBJ9fUzq2wVMcX250O3JEFfPIT0368GOgmG+/ZnjzgRxtG9uva7zX9x43yv93WQwgAAAABJRU5ErkJggg==" alt="">
+			</div>
+			<p>平台介绍</p>
+		</li>
+		<li>
+			<div class="tu">
+				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAABDNJREFUaAXVWj9PGzEUTy4RJJWQgCKR0JWBD1CpHduhrNC9TBVfgIGZoRNDv0GnsresdKBjK/EBGFhDQEoVJKTkhJTQ3++wTz7jOLZzkIulk5/t9979nt/zn7OvXMoh3d/f16+vrz8Mh8P3ULeB8jryJTwLQv0t8m65XL5Afh5F0enq6uovlPuiPTgrh0re3Nws9fv9LYDdgo5N5C98dAF8D/wnyI/r9frx4uJi10de8nobcHl5SaB7ePYBWvaw1BeUwwh66BDP17W1NRrmnJwNANhKu93+DM0HoJvOb/BghCFt6m82m99AD1xEnQzodDqv7u7ufgL4axelk/IA/Nnc3Nz2yspKa5yusQZcXV29weD88VS9PgogvYHB/rHRaPwdxcP6yNaIeP80GAx+Pzd4YuI7+W5isGEc6QEKQsl3m/BztcEbOxjcR6b3GQ1g2NB6CNRMQlOoiyuVyjtTOD0KIQ5YxnyBwLO/asREbHrnZQxAyFTEbPMk06T+cp8yx4TAVlHlMgZwngfjs0yVKghXmtjEWpSKpGNArLAXtDRtLSDB6RWw1uWKXVUw7rmCX15eLs3PzyuiWRK9lFRgRU1yvZzlfijFcVzqdsdvh4gRRnAr84WSSQhxYwZ6nxUuqVarlaDE+Kjy5FHTKBnWU6dH2heYHwwQu8pcNmYeIIJZ4YUFYqaCxAOoSAohGjF2Snygw1mcvFLOWUhjlJgjEHW0bWrtuRQJUsZ/LgqzSvgNUq/ySwqE18eIqgezgVp0ohnzIXKqcmIm9kh8BqptudEEKWei3JQqioid0+iGUudEwnonPp3JJmdr0/Uo5Y0qBNeVCicyNK5D5UaBInbOQlwDZjUtMYS85391ANL1smfVeluPmPhUPTZZrW2BBngnvsyU9Hp9JZYyOh/rTXWS35aXW61WBwwvbUyhbexpApMeCtVjkfvHMTB+B2XRMOWmbhVu5hbaayYyxbA0xNbjqpzKF+opYqcHzuXL884Jks8TJp6zRqeTvMAGkrGPA4JJ1FtliT0Sp8Re55GqVoLk49LT0liZq3p8aYRPj9g5BvrYNZ5AwbavEvJDfiR4PbZzno14st1PvgdAHIeApww3awRKQ0LSBHIJ5mQh4/l8r9e7hWu9V2Uf0Oos5COn88LoW2JmfeIBcbnA83mnhM+5JGxkLOu5VCLr9bKsV3Pq9EiH8kIk9TvGAT9qZu5YJfEALYd7ORMdkC54OhBYE5ipB1iCS3kL8wd5IU/nEPtnmDTeIk9vb1IP0AA28GYE+cPJFCsLkohJYEvBE1rGAFbwWoc3IyBjlguSYmIyXTk9MoCAeQ4Pi3cLAp6RsWu6GyA+owFswEA5guAOyGl6IiYGYiEmU8oMYhND0S/5xhpAo2b6mlV6RUyxs3nRLY1gLlbs2fvVQDWC9Mz+7KEbwjLCa2q/2/wHtBddhgVf4HIAAAAASUVORK5CYII=" alt="">
+			</div>
+			<p>获取二维码</p>
+		</li>
+	</ul>
+</div>
+
+<!-- 底部 -->
+<div class="diB">
+	<ul>
+		<li>
+			<a href="#">
+				<div class="tu">
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAAAAXNSR0IArs4c6QAAB/FJREFUWAm1WVusXVUVHfvc04eRD8GA5TaivdKGEKIBW28lt0lJMDFU+qFYjRgDpn6gpQVjSYhECTGalB8eUTESIRKMXrTRtmA/iMojtA0YjR8oaBpM4FI0WkVIaOjtdoy17th77nX26eU5k33WfIw551jrrP06p8KbkLpGhUswjRqbqE2x1CTHSUykscYAz9M3x1HHYfrvx09xqKqY8QaleiN59cW4mHmf5rGZRFaQJNIxWBhte4z+AY4wZw/J31f9BA8y43XJ6yJMoutxHLvYcENDUhUioWjbL0rSdUjsr/AIiV9X3YuDObD452siTKJTeBU3s9wnQ7M+ApFMXvU4Aevi1Z3AbizDzupH3DaLyKKE6xl+/RVm2eDUVKtdnXYbKNAl0JI1SY2lbjvnH2WNLdWPT75N1Gas1BfiajbZT8CpndPEp4waStcose64fI5Jt8S4c3KP/fUV7HkSGUuYZG9hs9twgrusFJNom7WI0hfJGeV82VEHe53AbfWV7D1GegnX6znLGjs6q+oCJuBGth2333Y5lnjZo74d9Rf7V3qkPMnqkrWfM59I+1INNS0hdZQ6XY3P0zfOdpkTa8V8+3P+PIb4ePXD7p52SaWBJ9gUh1keeRuUMxdIcjK/my6GGxdv87U9ZuurEiehk3QI4xgvXScWrgZGqIDFusc+4qXPWNWw7tF14xjza3LJl9MG0RCup3lT0HVWxWKSoLY1WpdfUuIvuhzYS9AeHt94IGOco9F6jozml/XIqd6auKWMhjDm040hl/EKODnabqRxnD9iIkHjHbftsfTLVn7VckuE63XpRJtpVstNMthlnNyukuLGCsWnGpzxfmlZzjwb2Ph54LQzs+16zhnJJ6z05cyZ+kuJYzq/wX27Jfld0DP2mJPazz7/6rXAHU8CX/hWi5tcDVxzD/CDvwNfuQsYLsuxvnxF+voLm/162MIgPSJWuFTGiAioI0ppq+CqDwG7fge895yIbPXhEmDNNHD82Gi9FtVq7uH+eYKbxXWID/N5tlp4RGxTsiZgBrcR2SoUY1t3Acvf2WIO/xF47ing9LOAqfOBpcuB39yV42W+67umRp9ZjimzJscvY3rIxptyJX5GQAblkPyOxYLSJ4bABzdmnD4fvx+46RPthN51Bs/z64CHuDUkZb7q2uc+su13X+Uex6Yh9+9UMyMBJQa5gHwuKj3K8lOAJUuDx8l0SX3xH8DdX8ur5pUL6E5d9zfO/T0BvtUMSHYy5jdk7XQR2U50TAVf/g/wfHiMXXcJcMOvgLPOy/iYY901w9xcsllZOYRzTrYnNZfJ5JRDBWIx645pjOJi++6IXmB6M3D7n0h8L7D6I92YLBN1fuxj32iWPJMTN67Ad7jKS5simoILaiztMqYyfzkArFjFE4xXC4uuySvXAB/byssZt8yTDzFCNjHfunvIli6Rbtu4CssmblyJ6xla1gBKcLRdxKNibnbgl3w//ivwgQuAU/LLicLpZnLuBmD+OPDnh1siruF828qJvlRDH0mOVfX5eIqANQ3hCHaR0idbh0SYGB/yQW/mMuAzNwDv4z62iPBVq4Cjz3bxfT1iPdfPdZ5WaC7pTpThPSVfKfb17TXF5ueBh38G7OD19xGOFl3+VvPm4Xz5rXs0dnz/uZawQCXQtgt5LP26tEnkV3MdJ7iiD3yXSpD3rMqG8z0GSJMvXxmvQML6RSbKKKiNeiU8GrudV4mv/zzf1eyruBYbPtvmSjvyt2w7vxvNlvMdi9gah6v6Aj5rVjjQzExrLtEocGnbp1HHO3hLnn2hvTX/m79OvfAMn9p4W373SgIW5L//BLadDbzyYlvbtQQZ18/9hR3io0P8Hoewjj8f8cKkvCQKSjRqxjFJfovi6/ncFJ8j9Cjpx0njtK/v3JbJ2qcx9unzy6f+wlXk+D0cGiz8MLdHsYagvxaDU5AftmP84D7g3puAl3jH65Pnnga+zUk9xlfFvnzXUq4XKPrs5zuMuOa1q3Bf6uWC42aeQAuFrb/yEnDPN4HP8Qv66oXAE792BPgtH3i28ZHzD8GnqOu3yKz19W8nkTgmwtXjfJXWD3OlqICOKKXt5q/yWVd3vGd4S7b871/MLxIK09DOaIxGHeTm133vTu1TPgMWIjIm5JBnLLuMyedm0vukzHcN52WCOdOxYcvNrgTgm/MvqOQ3Z0V8aFqemnzSY6xPt6/El7bruofiEvcYYHd1Jz6VnS2NbC/BTipHHWxIyRFn3gAW/LaF8UrJZ9L2mYzxGmNd5xs3IJfMqcnw/JKjepQ3kYovpBVf+i1uJjsWl+3C0i3RVxJwvmtGbMzP8Xlxqb7fvbF1CCunOsgTsMa1iYwLp4ArhrGPQMwJ0I5qomW+QPZVuNYnWswdIawgSd/O4dYEjMWTgx8mpZgbKGbdcfmcL90S485xLONv5a/x4jAivYSFqh7DNfxJcDvVdns43STKZoqXvkiuzJftWjmmbbC9upu9x0gX3gNq/jKo+MOc0Do0TU/VdoxZ9yisdY2lnX1v/i8DlgZPxAf5PrKWDXfLTo01livpmPxeVREpJfqsq/ZSrF3s/w2VckpZtteuN6Ynu5sZnOmsclyxqKu6juiTLtE4wKM8dr7lf3ulBuFj4Y/FLXRdSkIrOoT6CHaJH2HOXj4qzr7tfywGzklt/rqd569HE+mX8kmSz3/f5lWdIzm9gs2R4Fvy1+3/ASMP2U9f4IXPAAAAAElFTkSuQmCC" alt="">
+				</div>
+				<p id="dianJ" class="first">首页</p>
+			</a>
+		</li>
+		<li>
+			<a href="{php echo $this->createMobileUrl('detail')}">
+				<div id="tu" class="tu">
+						<img src="data:image/png;base64,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" alt="">
+				</div>
+				<p class="first">推广赚钱</p>
+			</a>
+		</li>
+		<li>
+			<a href="{php echo $this->createMobileUrl('center')}">
+				<div class="tu">
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAAAAXNSR0IArs4c6QAABMRJREFUWAnVmU1oXUUUx/Ne8jYhBWvFYmqF0kWzKOTrCVUpdRPcpipSuyouFKvgQqpFClIoQQmCpR9QC+JKRJRmK91Yih/gy9ciNFmUgtBKxVahIQm88OLvPGYuZ+bOzZ2blzTJwDBnZs75n/87831fqW0d0tTUVH+j0RgmHwZuT6lU6hbYlZWVexR3y+XyTfJYX1/fpLS3kkqtGE9MTLwOyXNgHIjEmYP4mYGBgR8i9VNqayI8PT29b3l5+VsieCiFGNHACPze0dFxvLe3906EuqNSmDBRPUJUfwRll4NUvPKAaL9GtG8UMS1E2JC9joOK56ROfUwykatVKhWZu231er2bkagiDpucsoP0UBHS0YRlGkDgDxw7kWV4rzE1TlWr1dv0ZaZarbYf3VF0j3pKD/iBz8dOj2jC4+Pjv+k5i/MGjk8PDg6OegRWrYJzCoXPwCpbRZnT4Lxg66uVidFqSrIbaLJGtzBZsTM/8LT2J9jiQ7dlyVGEzdaVYMg0KBrZxBhBbAVDt/k+dJ+WcwnLoYCB3mfrRESGtaVkMGSx2nTA+LL1YJlLmF8uK1ynsbwFppWzZIMhO0uSAr6SPivEEJbjVifHie5Yg+xgQdj3lYLMJYzFHm0l+6yutyIHsBxfIexcwiyO5kXGGttDwdZbKX0s31cIO5dwyGi92trb251zgIW4koedSxiM5jFrgeS4tXKr5dLS0jMexl9ePVXNJYzFXW1l7ga6ac1yAMvxFQLOJczl5KZn6G9zXnehqoMV8JUCiyHsbD0gDMtFJoVUsMFg+IR9XynUXMLmWTOnLCus5kIXHmWbiAZDXzfnYp5QuYTFA0N1JvGEwEI8am5dujlaFlvB0Aa+D92nZWdb0R2+vFWul9GEt90FXiK+rZ5IdooY0pv2CI1adJaslBynNfIFVvl/ur2ILLaCIVhF7EQ3eg7Pzs7umJ+ffw+bD8lPifE6pH/A+KKrq+tST0/Poxi8KMLsEO+zDZ0F8MkY0DXoPCTqn/J0uphnuyrhycnJJ7hUf+3vmR7oLM5+IssRfo877n3074sObbu5L+xG7KbtMPkV5B7pCyX0r7Efv9Xf35853TIJs7iqkP0e4H0B8Ie0nSd/w1Pnz0B/ZhNH8nN0niB/QA6N2B1Iv8HHleD8DhKWxyCRuQHgDnKSiMC/5M87Ozsvx865xNgTZE0sLCycJOofk3d63Y8YqSOhozpF2FxKfgFAhjJJEJUPKceKRjQByBAk4mB/B7b/IUWm1Uv+g9chzGn2NBf0X1F0bmMAjjJEn1AuZ/htqRmyHUzBEUr/88FtnlEv8hnrb+vA2Ych+2WA7Air96ONIitEBNv4GLHETLnfcEqakwibE+znpAcBoK8Aeke3bbTMFnqFSL+t/bAIX7ZfOJsRliFhR3D2QMjWUHpXGz4OWXyKb+1LuAlHaWsSZr99E/mgVcKgwa86KaVte1xlhu+DzIBjwqFJmF/QrChSV9m85VvwpiTj+6p2ToQlqG3lmZkZ2byHdCeyHAqbnXwOQ8K1vLi4+CrMkrcVQzLNQru12WyFg3BRPCrCVSay808Qoe9lM8/9AqOANkyEi499SObwXr91C9f3lgn7s1uYoENNuJYJ+7YhLFz/B3/LCU7nTkLIAAAAAElFTkSuQmCC" alt="">
+				</div>
+				<p class="first">我的</p>
+			</a>
+		</li>
+	</ul>
+</div>
+
+
+<!-- 新手教程 -->
+<div class="course">
+	<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAACGklEQVRIS8WWPWhUQRDHf/80FiIICSpYWOQCBgv1bLRQMYoQ7BQrCwWxOxV7FRWxtNJGEGyEgGgnakLQaKUQgiBG8KPzC7TRTpCROfad7+Jl3+7LYba54ubNb3ZmZ+YvKo6ZrQB2AePAdmAtsB74DXwFPgEvgAfAjKRfMZeK/Wlmh4FrwJqqwML/X4BTku4sZt8TaGZ+i5vAgUTQQrP7wHFJnoGu8w/QzPYDt4GhmrDis2/AEUmTZT9dwAB7CERTnRGIAXslPS6+6Tg2M38Ir4DVGQ5TTL8DmyV9dOMycCa8xhQnuTZPJe3uAM3sIHA34mUC2AaM5JJK9ock3Wvf0MzeAo2IsxZwAzgJXABW1QC/l9SQmTWB2QoHLUnXQ3D+ei8DJ4CBTHDTgeeAS6nAws7MNgEeRLs2iee8A6eAfbnAEtjrfxXYkACdduA8sLEuMKTZ5+0Z4CywMuLrjQN/JDyCTg1jgZnZOuAKcGyR4fGzr8BSmo8Ct3oE1wa+BkaXktISqOqG8w58BPjAjp1oSsPOTKnhVO22qPlK222xBZjLvWHNPtxajLZ3wHBstPVh0nyQNFwAq4Z3MUv992JCG/WK/e/wDs0bW09L3RbPJLkQ69qHvoBfAoMJIyrHpPcCDrfcA0z3WWKMSXpSRLi8IqrUW/9PJpaLU0MIfwZOZwvhBVBfPTuD1N8RpL4rcS+HC12HPAdcXlZK/T+02thhGMXjvgAAAABJRU5ErkJggg==" alt="">
+	<p>新手教程</p>
+</div>
+
 {template 'footer'}

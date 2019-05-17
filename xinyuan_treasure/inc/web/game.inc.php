@@ -2,6 +2,12 @@
     global $_W,$_GPC;
     $_W['page']['title'] = '游戏记录';
 
+     /* */
+
+     pageauth($_W['current_module']['name'],$_GPC['do']);
+
+     /* */
+
     $option =array(
 		1=>'小',2=>'大',3=>'单',4=>'双'
     );

@@ -1,0 +1,292 @@
+*{
+    margin:0;
+    padding:0;
+	font-family: "微软雅黑";
+}
+body,html{
+    font-size: 26.67vw;
+    height: 100%;
+    /* display: -webkit-flex;
+    flex-direction: column; */
+    overflow-x: hidden!important;
+    /* overflow-y: hidden!important;  */
+    background: #FFF;
+    -webkit-overflow-scrolling:touch;
+}
+a{
+    text-decoration: none;
+}
+ul,li{
+    list-style: none;
+}
+img{
+    display: block;
+}
+/* 顶部 */
+.lunB{
+    width: 100%;
+    height: 1rem;
+}
+.lunB img{
+    width: 100%;
+    height: 100%;
+}
+
+/* 用户信息 */
+.user{
+    width: 100%;
+    background: #FFF;
+}
+.user .user_W{
+    width: 70%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.user .user_W .user_L{
+    width: .31rem;
+    height: .31rem;
+    float: left;
+    margin-left: 24%;
+}
+.user .user_W .user_L img{
+    width: 100%;
+    height: 100%;
+}
+.user .user_W .user_C{
+    font-size: .18rem;
+    color: #979797;
+    float: left;
+    margin-left: 7%;
+    margin-top: 3%;
+}
+.user .user_W .user_R{
+    font-size: .14rem;
+    color: #979797;
+    float: left;
+    margin-left: 5%;
+}
+
+/* 账户信息 */
+.account{
+    width: 100%;
+    height: 1rem;
+    background: #FFF;
+}
+.account .account_L{
+    width: 60%;
+    float: left;
+}
+.account .account_L .account_L_left{
+    width: 40%;
+    float: left;
+    margin-left: 5%;
+}
+.account .account_L .account_L_left p{
+    font-size: .14rem;
+    color: #979797;
+    margin-top: 15%;
+}
+.account .account_L .account_L_right{
+    width: 50%;
+    float: right;
+    margin-right: 5%;
+}
+.account .account_L .account_L_right p{
+    font-size: .18rem;
+    color: #383b45;
+    font-weight: 600;
+    margin-top: 9%;
+    text-align: right;
+}
+.account .account_R{
+    width: 39%;
+    float: right;
+    margin-top: 5%;
+}
+.account .account_R .account_R_L{
+    width: 40%;
+    height: .55rem;
+    float: left;
+    background: linear-gradient(306deg, #fe6500, #ff3100);
+    border-radius: .1rem;
+}
+.account .account_R .account_R_L .tu{
+    width: .21rem;
+    height: .21rem;
+    margin: 0 auto;
+    margin-top: 10%;
+}
+.account .account_R .account_R_L .tu img{
+    width: 100%;
+    height: 100%;
+}
+.account .account_R .account_R_L p{
+    font-size: .16rem;
+    color: #FFF;
+    text-align: center;
+}
+.account .account_R .account_R_R{
+    width: 40%;
+    height: .55rem;
+    float: right;
+    border: .01rem solid #a8a8a8;
+    border-radius: .1rem;
+    margin-right: 5%;
+}
+.account .account_R .account_R_R .tu{
+    width: .21rem;
+    height: .21rem;
+    margin: 0 auto;
+    margin-top: 10%;
+}
+.account .account_R .account_R_R .tu img{
+    width: 100%;
+    height: 100%;
+}
+.account .account_R .account_R_R p{
+    font-size: .16rem;
+    color: #666;
+    text-align: center;
+}
+
+/* 开始游戏 */
+.start{
+    width: 80%;
+    margin: 0 auto;
+    height: .4rem;
+    background: linear-gradient(306deg, #fe6500, #ff3100);
+    font-size: .18rem;
+    color: #FFF;
+    text-align: center;
+    line-height: .4rem;
+    border-radius: .2rem;
+}
+
+/* 游戏 */
+.game{
+    width: 100%;
+    background: #FFF;
+}
+.game ul{
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 4%;
+}
+.game ul li{
+    width: 40%;
+    height: 1.4rem;
+    float: left;
+    margin-left: 4%;
+    background: #FFF;
+    border-radius: .1rem;
+    border: .1rem solid #f5f5f5;
+}
+.game ul li img{
+    width: 100%;
+    height: 100%;
+}
+
+/* 新手帮助平台介绍等 */
+.introduce{
+    width: 100%;
+    margin-top: 10%;
+    margin-bottom: 20%;
+    border-top: .1rem solid #f5f5f5;
+}
+.introduce ul{
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.introduce ul li{
+    width: 33.3%;
+    height: .7rem;
+    float: left;
+}
+.introduce ul li .tu{
+    width: .31rem;
+    height: .31rem;
+    margin: 0 auto;
+    margin-top: 8%;
+}
+.introduce ul li .tu img{
+    width: 100%;
+    height: 100%;
+}
+.introduce ul li p{
+    font-size: .14rem;
+    color: #a8a8a8;
+    text-align: center;
+}
+
+/* 底部 */
+.diB{
+    width: 100%;
+    margin-top: 5%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #FFF;
+    border-top: .02rem solid #f5f5f5;
+    z-index: 11111;
+}
+.diB ul{
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.diB ul li{
+    width: 33.3%;
+    height: .4.5rem;
+    float: left;
+}
+.diB ul li .tu{
+    width: .2rem;
+    height: .2rem;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+.diB ul li .tu img{
+    width: 100%;
+    height: 100%;
+}
+.diB ul li .first{
+    font-size: .14rem;
+    color: #a8a8a8;
+    text-align: center;
+}
+#dianJ{
+    color: #ff3100;
+}
+
+.course{
+    width: 1rem;
+    height: .3rem;
+    background: linear-gradient(306deg, #fe6500, #ff3100);
+    position: fixed;
+    right: 0;
+    border-top-left-radius: .2rem;
+    border-bottom-left-radius: .2rem;
+}
+.course img{
+    width: .21rem;
+    height: .21rem;
+    float: left;
+    margin-top: 5%;
+    margin-left: 9%;
+    margin-top: 5%;
+}
+.course p{
+    font-size: .14rem;
+    color: #FFF;
+    margin-top: 5%;
+    margin-left: 35%;
+}
+
+#tu{
+    width: .2rem;
+    height: .2rem;
+    margin: 0 auto;
+    margin-top: 5%;
+}

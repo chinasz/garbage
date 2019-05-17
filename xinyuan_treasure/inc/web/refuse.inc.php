@@ -1,6 +1,4 @@
 <?php
-/**拉黑
-*/
     global $_W,$_GPC;
 	if(!$_W['isajax']){
 		return message('页面不存在','','error');

@@ -6,6 +6,13 @@
 	*/
 
 	global $_W,$_GPC;
+
+	/* */
+
+	pageauth($_W['current_module']['name'],$_GPC['do']);
+
+	/* */
+
 	$query = load()->object('query');
 	$op_arr = array('display','new','edit','del');
 	$op = in_array($_GPC['op'],$op_arr)?$_GPC['op']:'display';

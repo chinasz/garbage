@@ -33,7 +33,6 @@
 	
 	$bg = $filepath.cache_load('poster_bg');
 	$poster_data = cache_load('poster');
-
 	$resoure = imagecreatetruecolor($width,$height);
 	$white = imagecolorallocate($resoure,255,255,255);
 	imagefill($resoure,0,0,$white);
@@ -56,6 +55,8 @@
 	}
 	unset($poster_data);
 	$poster = $poster_tem;
+
+	
 	//code
 	$code	=	$_SESSION['ids'];
 	$code_data = $poster['code'];
@@ -86,9 +87,10 @@
 	//avatar
 	$avatar = $_W['siteroot']."web/index.php?c=utility&a=wxcode&do=image&attach=".urlencode($member['member_avatar']);
 	list($avatarwidth,$avatarheight) = getimagesize($avatar);
-	$avatar_img = imagecreatefromstring(file_get_contents($avatar));
+	
 	$avatar_data = $poster['img'];
 	if(!empty($avatar_data)){
+	$avatar_img = imagecreatefromstring(file_get_contents($avatar));
 	imagecopyresized($resoure,$avatar_img,$avatar_data['left'],$avatar_data['top'],0,0,$avatar_data['width'],$avatar_data['height'],$avatarwidth,$avatarheight);
 	
 	imagedestroy($avatar_img);

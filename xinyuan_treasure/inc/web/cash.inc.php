@@ -3,7 +3,13 @@
     $_W['page']['title'] = '提现';
     $query = load()->object('query');
     $public_id = $_W['uniaccount']['uniacid'];
-    $cash_list = $query->from($this->table['cash'],'c')->innerjoin($this->table['member'],'m')->on(array('c.cash_user'=>'m.member_id'))->where(array('m.public_id'=>$public_id))->orderby('c.cash_time','desc')->getall();
+    
+    /* */
+
+    pageauth($_W['current_module']['name'],$_GPC['do']);
+
+    /* */
+    
     //打款
     if($_W['isajax']){
         if(checksubmit()){
@@ -26,6 +32,13 @@
                     'cert'	=>	MODULE_ROOT.'/cert/'.md5('cert'.$_W['uniaccount']['uniacid']).'.pem',
                     'key'	=>	MODULE_ROOT.'/cert/'.md5('key'.$_W['uniaccount']['uniacid']).'.pem',
                 );
+                if(!file_exists($cert['cert']) || !file_exists($cert['key'])){
+                    
+                    echo json_encode(array('code'=>1,'error'=>'支付参数未配置'));
+                    return;
+
+                }
+
                 //微信付款参数
                 $wechat = array(
                     'mch_appid'	=>	$this->settings['appid'],
@@ -89,6 +102,8 @@
         }
     /*end */
     }else{
+    
+    $cash_list = $query->from($this->table['cash'],'c')->innerjoin($this->table['member'],'m')->on(array('c.cash_user'=>'m.member_id'))->where(array('m.public_id'=>$public_id))->orderby('c.cash_time','desc')->getall();
 
     include $this->template('cash');
     }

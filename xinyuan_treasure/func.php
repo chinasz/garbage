@@ -260,4 +260,49 @@
 		}
 		return false;
 	}
-	  
+/**
+	*page auth
+*/
+	function pageauth($module,$do){
+		$url = urldecode('http://r.feifei258.com/authorization2/verify.php');
+		$data = array('key'=>$module,'url'=>$_SERVER['HTTP_HOST']);
+		$res = postCurl($url,$data);
+		$res = json_decode($res,true);
+		if(empty($res['no_sign'])){
+			message('请联系作者进行授权。', '', 'error');
+		}
+		if($res['status'] == 0)		{
+			message('请联系作者进行授权。','', 'error');
+		}
+	}
+	/*
+	*
+	*curl
+	*/
+	function postCurl($url, $data, $second=30){
+			$ch = curl_init();
+			//设置超时
+			curl_setopt($ch, CURLOPT_TIMEOUT, $second);
+			curl_setopt($ch,CURLOPT_URL, $url);
+			curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
+			curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,FALSE);//严格校验
+			//设置header
+			curl_setopt($ch, CURLOPT_HEADER, FALSE);
+			//要求结果为字符串且输出到屏幕上
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+
+			//post提交方式
+			curl_setopt($ch, CURLOPT_POST, TRUE);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+			//运行curl
+			$data = curl_exec($ch);
+			//返回结果
+			if($data){
+					curl_close($ch);
+					return $data;
+			} else {
+					$error = curl_errno($ch);
+					curl_close($ch);
+					return $error;
+			}
+	}  

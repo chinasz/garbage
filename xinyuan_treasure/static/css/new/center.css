@@ -1,0 +1,145 @@
+*{
+    margin:0;
+    padding:0;
+	font-family: "微软雅黑";
+}
+body,html{
+    font-size: 26.67vw;
+    height: 100%;
+    /* display: -webkit-flex;
+    flex-direction: column; */
+    overflow-x: hidden!important;
+    /* overflow-y: hidden!important;  */
+    background: #FFF;
+    -webkit-overflow-scrolling:touch;
+}
+a{
+    text-decoration: none;
+}
+ul,li{
+    list-style: none;
+}
+img{
+    display: block;
+}
+
+/* 用户信息 */
+.user{
+    width: 100%;
+    height: 1.5rem;
+}
+.user .user_L{
+    width: 30%;
+    height: 100%;
+    float: left;
+}
+.user .user_L img{
+    width: 80%;
+    height: 60%;
+    float: left;
+    margin-top: 13%;
+    margin-left: 10%;
+}
+.user .user_C{
+    width: 40%;
+    float: left;
+    margin-top: 10%;
+}
+.user .user_C .userId{
+    font-size: .16rem;
+    color: #000;
+}
+.user .user_C .userBd{
+    font-size: .14rem;
+    color: #979797;
+}
+.user .user_R{
+    width: 30%;
+    height: 100%;
+    font-size: .14rem;
+    color: #979797;
+    float: right;
+    text-align: center;
+    line-height: 1.5rem;
+}
+.user .user_R img{
+    float: right;
+    margin-right: 32%;
+    margin-top: 56%;
+}
+
+
+/* 各种展开记录 */
+.record{
+    width: 100%;
+    height: 5rem;
+}
+.record .record_W{
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 8%;
+}
+.record .record_W .record_W_left{
+    width: .31rem;
+    height: .31rem;
+    float: left;
+}
+.record .record_W .touZ{
+    font-size: .16rem;
+    color: #383b45;
+    float: left;
+    margin-top: 2%;
+    margin-left: 5%;
+}
+.record .record_W .record_W_right{
+    float: right;
+    margin-top: 1%;
+}
+
+
+/* 底部 */
+.diB{
+    width: 100%;
+    margin-top: 5%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #FFF;
+    border-top: .02rem solid #f5f5f5;
+    z-index: 11111;
+}
+.diB ul{
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.diB ul li{
+    width: 33.3%;
+    height: .4.5rem;
+    float: left;
+}
+.diB ul li .tu{
+    width: .2rem;
+    height: .2rem;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+.diB ul li .tu img{
+    width: 100%;
+    height: 100%;
+}
+.diB ul li .first{
+    font-size: .14rem;
+    color: #a8a8a8;
+    text-align: center;
+}
+#dianJ{
+    color: #ff3100;
+}
+#tu{
+    width: .2rem;
+    height: .2rem;
+    margin: 0 auto;
+    margin-top: 5%;
+}

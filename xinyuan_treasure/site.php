@@ -16,7 +16,7 @@ class Xinyuan_treasureModuleSite extends WeModuleSite {
 	public $settings;
 	public $prefix = 'ims_';
 	public $table = array('course'=>'xin_course','member'=>'xin_member','goods'=>'xin_goods','goods_class'=>'xin_goods_class','order'=>'xin_order','cash'=>'xin_cash','recharge'=>'xin_recharge','meal'=>'xin_recharge_meal','game'=>'xin_game','reward'=>'xin_reward_log');
-	
+	public $member_pre = "1000"; 
 	public function __construct(){
 		global $_W,$_GPC;
 		
@@ -26,6 +26,7 @@ class Xinyuan_treasureModuleSite extends WeModuleSite {
 		$settings = pdo_fetchcolumn($sql, array(':uniacid' => $_W['uniacid'], ':module' => 'xinyuan_treasure'));
 		$this->settings = iunserializer($settings);
 		
+
 		if($_W['container'] == 'wechat' and $_W['os'] == 'mobile'){
 			
 			$fid = $_GPC['fid']?$_GPC['fid']:0;

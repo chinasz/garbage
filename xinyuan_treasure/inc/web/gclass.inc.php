@@ -2,6 +2,12 @@
 	global $_W,$_GPC;
 	//商品分类
 	
+	/* */
+
+	pageauth($_W['current_module']['name'],$_GPC['do']);
+
+	/* */
+
 	$op_arr	=	array('display','new','edit','del');
 	$op	=	in_array($_GPC['op'],$op_arr)?$_GPC['op']:'display';
 	$query	=	load()->object('query');

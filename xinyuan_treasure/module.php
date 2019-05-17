@@ -6,11 +6,16 @@
  * @url
  */
 defined('IN_IA') or exit('Access Denied');
-
+include_once 'func.php';
 class Xinyuan_treasureModule extends WeModule {
 
 	public function settingsDisplay($settings){
 		global $_W, $_GPC;
+		/* */
+
+		pageauth($_W['current_module']['name'],$_GPC['do']);
+
+		/* */
 		if(checksubmit()){
 
 			$data = $_GPC['data'];
