@@ -1,113 +1,60 @@
 {template 'header'}
-	{template 'style'}
-	<style>
-		body{
-			background:#F0F0F0;
-		
-		}
-		.right{
-			float:right;
-			overflow:hidden;
-		}
-		.left{
-			float:left;
-			overflow:hidden;
-		}
-		.top-btn{
-			padding:1rem 0;
-		}
-		.top-btn div .btn{
-			color:#fff;
-			border:1px solid #fff;
-			border-radius:0;
-		}
-		.web_notice{
-			background: url({MODULE_URL}static/img/2019-04-02_145119.png) no-repeat left center;
-			background-size: 4rem;
-			color:#fff;
-			margin:1rem 0;
-			text-indent:4rem;
-			height:4rem;
-			line-height:4rem;
-			overflow:hidden;
-		}
-		.gold_menu{
-			overflow:hidden;
-			background:#fff;
-			padding:1rem 0 0 0;
-		}
-		.gold_menu ul{
-			list-style:none;
-			padding:0;
-			overflow:hidden;
-			margin:0;
-		}
-		.gold_menu ul li{
-			float:left;
-			width:33%;
-			text-align:center;
-			margin-bottom:1rem;
-		}
-		.gold_menu ul li .btn{
-			border:1px solid;
-			background:#fff;
-		}
-		#commit{
-			width:100%;
-			padding:0 8rem;
-			margin-top:3rem;
-		}
-		#commit .btn{
-			width:100%;
-			color:#fff;
-			
-		}
-	</style>
+{template 'style'}
+<style>
+	.mui-toast-container{
+		margin-left: -.7rem !important;
 
-	<div class="container-fluid">
-		<div class="row clearfix top-btn bgcolor">
-			<div class="col-md-6 left"><button class="btn btn-default bgcolor">ID:{$_SESSION['ids']}</button></div>
-			<div class="col-md-6 right"><button class="btn btn-default bgcolor">余额:{$member_score}</button></div>
-		</div>
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-md-12 col-lg-12 web_notice bgcolor">	
-				<marquee rolldelay="150" direction="left" align="middle" >{php echo $this->settings['web_notice']}</marquee>
-			</div>
-		
-		</div>
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-md-12 col-lg-12 gold_menu">
-				<ul>
-					{loop $recharge_list $recharge}
-					<li><button class="btn btn-default  fontcolor bordercolor" data-id="{$recharge['id']}" data-num="{$recharge['pay']}">{$recharge['gold']}</button></li>
-					{/loop}
-				</ul>
-			
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-md-12 col-lg-1" id="commit">
-				<button class="btn bgcolor mui-disabled">确认充值</button>
-			
-			</div>
-			
-		</div>
-	</div>
-	{template 'gohome'}
+	}
+</style>
+<link rel="stylesheet" type="text/css" href="{MODULE_URL}static/css/new/style.css"/>
+<link rel="stylesheet" type="text/css" href="{MODULE_URL}static/css/new/krypton.css"/>
+	<div class="dingB">
+        <a href="javascript :;" onClick="javascript :history.back(-1);">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAmCAYAAADAzmuWAAAAAXNSR0IArs4c6QAAA9FJREFUSA2tl01oE0EUx+dtUptSJCiCtEQTbfxG0Ys03aZG064Bq2LBj4NgK1JB8KQevNWLJz2oCBV6UPxAG1SsiDFVjG3SFC+iglolNaSlR4u0NWmT3fFNdDa7MYlJ2r3Mm/+b99vHm8m8DZAFehxNUgORyXVCaIoKwklYCK7D6XFTqjwhlFaneQDvhfmC6xulvYQqz1RoGkgn55Wx2CQdlmV6G1kVaoJAvpqMRnfZGTsapeOyTO7pofChurKqKRB4Pl5WxvVO6TRR6BWEqvEA8NZAKjzB4LNJln3JGTtE6TxCr+qgBAaEpaZmDi0Z7HBKFymhF1kgfzBTH6k1e0J9fVNcY2NRGVNKoUGUrlKFntcGYyEeWWrM+8Neb1yn48SYLWTPu7q6BMy0B/UOvQ/urKgxt3u9Xlmv/5mpxc/l7OzsrPj46fsdSskhrR+DuoeC/lNYBqrVtXZesMvVbppNTXixDK26AAEuhQf957RaLjsnWJKk6qkZ0ocbtUsXBNA1HPRf0Gl5Jv+Am5sPmmfiP58j1KGNEUA4OxR8cVmrFbJ1YJdr77LZZMKPhduWCQIFCD0VDvXfyGj/t1Sw2LKvVo7HXxJKNvAwAIJXILQPD/jvcq3YMQ12uTy22ZT8Cnd/dSYQ5nDTj4SD/Y8zWvEWiDs96+SkgplSCw/Dt8WJYDgQHvS94FqpoxGht/RQmAIDaR0a8A2UCtOuL+onrQ0o1hYMFcIxAjDOA/CYLaYy9Tkad3u4Vs4ohF77RkxGwYknYJQD8LhV4S/uiSh62rhW6pguRSDgiwpVVU68rT5nAHSRAkpvg7PlaEYr3lJrHOrvmzAZTU14It7xcMzaoChwyyG2nORasaNBuzAa/frLXrflgaykdqC+4q+PnfXWldY102OxSFi7vpCtA7OF0eiXxMYNdffnklCP01U8GDdVsljtZDwWecO1QuM/YLY4Eokk7XXOXplOb8XpWg3AZbHWLR6Pjfo1Wk5TrXG2NxC4mdi80daGp6VX56PkDLb+btaudHrWpKCTrWWtyfcy1IOXU4c+FltTbZmtiYNYdmLj7isKoae5xkZsTY+xmR7Bvjen1dO+bKHQPN3+szp1uv3XmNuyO3XOzcsHxxPxymJbk8RLy61ZY4epWad126aHYyMjauYlgRkM4YMWm/0H1pzdJXyPrCQhu20r1z+Mxb4l2Lq8p4I58z3Dg/5rWIITyFX4GtyH7SmSDLjd+5Yzjb+R+0saC33GzgvMsmAf3ghh3x+ValZAAmWVQgWggd8ZTwkIe/DszWR0WDLvjDks+8/Nby/EX03R5eFeAAAAAElFTkSuQmCC" alt="">
+        </a>
+        充值
+    </div>
+    <!-- 余额 -->
+    <div class="money">
+        <p class="balance">余额</p>
+        <p class="data">{$member_score}</p>
+        <p class="unit"></p>
+    </div>
+
+    <!-- 充值金额选择 -->
+    <div class="choice">
+        <ul>
+			{loop $recharge_list $recharge}
+            <li data-id="{$recharge['id']}" data-num="{$recharge['pay']}">
+                <p>{$recharge['gold']}</p>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAAAXNSR0IArs4c6QAAAplJREFUaAXt2MlrFEEUwOFfTzImkxBR/wAPnjyI4IKIHhSXoIggiOhFkHgQ9KIiqGAwGjEaJOCOEQ0iEsU1iSAq5CBec83JS+4KgtvBaFsvY9k9ay/V3VMB3yFU1WTqffN4VZM0/I9sKuB2LujJJlOCWQTtbp7nypa5BPdNdauZSru/T+skswJejha89fBqaOvhtdBWw+uhrYUHoa2Eh0FbBw+LtgoeBW0NPCraCngcdMPhcdENhZugGwY3RTcEngQ6c3hS6EzhSaIzgyeNzgSeBjp1eFroVOFpolODG6ObmuFQPwxPwu7D4qwIp2LFcMEYnZ8D3fdg9Zai5PsX2LGwROW8/eyoj5ZcmKNb4MwDWLnRQ71W8yqRGNwY3VKAs8OwbJ3HfDkEN096c98oEbgxurUdzj2CpWs92sggXD/uzctGxs9V6qI37IKBV7DzYFla37StA/qelqKfXKuLlncbHc66aNn9+RS0z5URjN2Bq8eKY/1TXut7BotX6BV1kwzAUK83rzKSwxm74oFoSTgx7qXdvh+OXFGl+lurjvnQP1qKvn8hEK03jNXjodCS4eIBaG2DVZ3FfFv3Qj4Pt9WzS2mPRUu0A+6qKj9U1Q4ZkVslNFoDmhX0lLod1mzTK/DjGxTUgdQx2A3S1yEjcqtERgtk+if07oN3IzIrhh9940QktN4idI/HQussv6bhfBeMP9Yr4Lpw+Si8uOWtRRiFahUjtB8jB3OPwi5fD3JPvx/zvxp6LK0SCE8MHZoV/IuBPW4jWt2nX+Wj1exxO9FK7LgfasKtRYvYzalvrSoVtxqNM0Uhd6kCbjcaFyfX5Yx+VP9Z+CpuN1pV2mna5Lz59O+Pn5nr0E60uj3kIEpPq/bQlZZqz+r4A3qgIijYkX6VAAAAAElFTkSuQmCC" alt=""> 
+			</li>
+			{/loop}
+		</ul>
+    </div>
+
+    <!-- 充值 -->
+    <a href="#" id="commit">
+        <div class="weiChart">
+            充值
+        </div>
+    </a>
+    <!-- 充值问题联系 -->
+
 	<script>
-	
-		$('.gold_menu li .btn').on('click',function(){
-			
+		$('.choice ul li').on('click',function(){
 			var num = $(this).data('num');
-			var otxt = $('#commit .btn').text();
-			$('#commit .btn').text('充值'+'￥'+num);
-			$('#commit .btn').removeClass("mui-disabled");
-			$('#commit .btn').attr('data',$(this).attr('data-id'));
-			
-		});
+			var otxt = $('#commit div').text();
+
+			$('#commit div').text('');
+			$(this).children('img').show();
+			$(this).siblings('li').children('img').hide();
+			$('#commit').attr('data',$(this).attr('data-id'));
+			$('#commit div').text('充值￥'+num);
+		})
+		//code pay
 		{if $payment == 'code'}
-			$('#commit .btn').on('click',function(){
+			$('#commit').on('click',function(){
 				var id = $(this).attr('data');
 				if(id >0){
 					$.ajax({
@@ -133,10 +80,10 @@
 				}
 			});
 		{/if}
-		
+
 		{if $payment == 'wechat'}
 		document.addEventListener('WeixinJSBridgeReady',function onBridgeReady() {
-			$('#commit .btn').on('click',function(){
+			$('#commit').on('click',function(){
 				var id = $(this).attr('data');
 				if(id >0){
 					$.ajax({
@@ -147,7 +94,7 @@
 						success:function(res){
 							if(res.code ==0){
 								util.pay({
-									orderFee :res.data.fee,
+									orderFee :0.01,
 									payMethod : 'wechat',
 									orderTitle : '充值' + res.data.fee + '元',
 									orderTid : res.data.num,
@@ -196,5 +143,9 @@
 			})
 		});
 		{/if}
+
+
+
+
 	</script>
 {template 'footer'}

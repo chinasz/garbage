@@ -1,0 +1,53 @@
+/* 顶部 */
+.dingB{
+    width: 100%;
+    height: .59rem;
+    font-size: .18rem;
+    color: #000;
+    text-align: center;
+    line-height: .59rem;
+}
+.dingB img{
+    width: .11rem;
+    height: .21rem;
+    float: left;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+/* 明细 */
+.detail{
+    width: 100%;
+    height: .59rem;
+    margin-top: 5%;
+}
+.detail img{
+    width: .5rem;
+    height: .5rem;
+    border-radius: 50%;
+    float: left;
+    margin-top: 2%;
+    margin-left: 5%;
+}
+.detail .tiX{
+    height: 100%;
+    float: left;
+    margin-left: 5%;
+}
+.detail .tiX .first{
+    font-size: .16rem;
+    color: #383b44;
+    margin-top: 9%;
+}
+.detail .tiX .second{
+    font-size: .14rem;
+    color: #a9a9a9;
+    margin-top: 8%;
+}
+.detail .ziJ{
+    font-size: .16rem;
+    color: #000;
+    float: right;
+    margin-top: 5%;
+    margin-right: 5%;
+}

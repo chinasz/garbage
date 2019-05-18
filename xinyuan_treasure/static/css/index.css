@@ -130,12 +130,12 @@ html,body{width: 100%;height: 100%;background: #fff;}
 .flag_redpack{position: absolute;bottom: 0rem;right: -2.3rem;width:2rem;height:2rem;background: url(../../static/img/flag_redpack.png) no-repeat center center;background-size: contain;z-index: 3;}
 
 .daxiao_box{overflow: hidden;margin-top: 0.8rem;padding: 0 0.8rem;}
-.daxiao_box>div{width: 23%;height:2rem;;background:#8206ff;color:#fff;font-size:0.9rem;text-align: center;line-height: 2rem;float: left;cursor: pointer;font-weight:bold;border-radius: 0.2rem;border-bottom: 3px solid #6404bf;
+.daxiao_box>div{width: 23%;height:2rem;;background:linear-gradient(360deg,#a72149,#dc6433);color:#fff;font-size:0.9rem;text-align: center;line-height: 2rem;float: left;cursor: pointer;font-weight:bold;border-radius: 0.2rem;border-bottom: 3px solid #dc6433;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.daxiao_box>div.on{background: #cb09f6;border-bottom-color: #9c07b8;}
+.daxiao_box>div.on{background: linear-gradient(360deg,#f42e2e,#db6234);border-bottom-color: #db6234;}
 .daxiao_box>.xiao_box{margin:0 2%;}
 .daxiao_box>.dan_box{margin-right: 2%;}
 /*确定按钮*/

@@ -1,5 +1,6 @@
 {template 'header'}
 {template 'style'}
+<link rel="stylesheet" type="text/css" href="{MODULE_URL}static/css/new/style.css"/>
 <link rel="stylesheet" type="text/css" href="{MODULE_URL}static/css/new/detail.css"/>
 <!-- 顶部 -->
 <div class="dingB">
@@ -8,7 +9,7 @@
     <div class="promptly">
         <p class="biaoZ"></p>
         <p class="qianS">&yen;{$member['reward']}</p>
-        <div class="tiX">
+        <div class="tiX" onclick="javascript:location='{php echo $this->createMobileUrl("cash")}';">
             立即提现
         </div>
     </div>
@@ -49,17 +50,25 @@
             </div>
             <p>代理权益</p>
         </li>
-        <li>
+        <li onclick="location = '{php echo $this->createMobileUrl("rank")}'">
             <div class="tu">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAAAAXNSR0IArs4c6QAACmxJREFUeAHtXA2MVFcV/u6bN7PDzu7sRkgtCAJrDQ1VC2VpKyKagtEG0FZcqoYiJaltmmpsa7HVGlataNPSaDG0JopITUoWW0UkjRVqoDTELGCplZZCd2lpaWu6dnf2Z3Z35r3rOXd3Zt/Ozsx7b+a+XXbDSWDu3HvuOed+e3/PvWcERpFkY6PR0do835C43JZijhByjoSYDci4gKiGRLUyR6BTQnYCIiEgW6UUJw0hT9oCx2tmL/yXaGy0R8tsEbSi7vVfnJZOy1WAvZTA+AykrC1LpxDtBNoBwNhvmuLJ2La/nCtLnkvlQACS69ZFE/K9VdQj1pL+ZVJKw8WOkoqFENyT9kFgR1xMeVJs395bkqAilbQCJG9rqOrs7r1VSvsuKXFxEb3ai4TAO0IYm6tj0cfE1l1duhRoAYjmFrOz5ci3JfB96i2TdRlXihzqVW3UqE3VdfWP0FyVLkWGs07ZACXWrlxsw95Kw+njTsFjnhb4twHjtviOPYfKsaVkgGRjQyTR0vMQAXM79ZyS5ZRjvFtdMorWBfwqXlf5XdG4q9+NP195SQ1rX7+8Dmk0kfoF+YSed3kCR2Fide22vS1+bfMNUOdNK6+xLPspAqfGr7Ix5RfoCIWML1f/bs+zfuzwtfy237i8wU7Lp8cdOIwI/UHZdm5DIAAlblxxM60QO2mHG/Gj4HziZdu5DdwWr3Z5GmKMugInoA2fV2N18VFbbNqOfLX28b273GS6AsRzDnfN8dxz8oFAZ79+wxTXus1JRQEaXK2Ojcs5Jx8quXk0cdPqdkWx1a3gJM37nMGlfHytVrkgFPvOKzFtV1RbC/AVBGhwEzg+9jkFGucpm/Zyqq0FmPMOMT4+0IHz4KjtkCMViF73NZgLP6XMTDc/j94/PwH09xUwW282gSDpoLsk37FkBEB88OxoaeZ5J7CzlaiOkzssoVopqmsQu+8BhKZOH9Zq6+030X3/94ivY5BvqM4wRl1f6OxWU7fwitwD7giAEmtX3Elr4GZdejNyjOkzEV29DuacyyAmVUIme5B+5SUYUy5CaMasDNuwT+vsGdjv/RfmpR8bqnPyP+ht2g77zdeH8er4YghxV3zHXx92yhoGEPtzEl3JM7pdFmb9J1F5+z0QRsipu+S0tC30bPk50kcPlywjX0XaH7XFqybNcvqThk3SA84uvf4cUfsBVN58hzZwuGEMdOU3SSbJ1kncMRgDp8wsQOwmZU+gs1BH2rxsnhoeOmQ5ZfAwZdm6SXlDCYuM3CxA7EMOwk1qXDwto0v7ZxCyGQPlTx+0NgsQrVrsYNdONk20QVFgsh1YKID4aoYasSyIhqRoIrXeOqtdtPXWG2DZAdGyQUygAEpb8is0QQ31Jp1aLQvdmzfCet23M6+gFSyre3MjQLKDIMZi4C6Pbt+UAimXBqEoI1O+/z9Y5/T1IpbFMoMlW2Ei1HVwy5G2sm88C1kbnYTYd+6DOffyQhwl5adPHEf3L+4HepMl1XetRDe4NXX1k0X7N5YvgI0jrhVKYFDHiLt/hNCsS0qo7V7FOnMa3Q9uzB5H3Gv45DBQb/BDAp/VvLFXRBG7d1Ng4LARDHzs3p8CpCsIYmwMfmURhPDKW+5EiM5fQVNo+iywriCIsaHzmdQOUOTa6xGuX+Rqs3XqBHof/zVNuG0jeGXH++h59EFYp14eUZabwbpYp25ibKgX8fscfSTitcq340Vi7+4m9P19D7of2gj73bezVTjds+VnSB0+gOTObdn8Ygn2J7FuncTY0DIv4zqFRlet8Xz2MufMhQiHwW6N5LYtkOTa4H+cTr96QpWF5y30ZB6fzVi3XpJxQ73s0iWVlvTwYu9bqoovXIfI578EYZpIv/wiUs2H0H/wGZUWIVOVMY9XUrrJBl3E2Jh0BqvWJTC84Gr1V/csLxxBtIGOgH29SJHzzJxLp/N0CqkXmmFecimi138dIB6vxL2RbUg9/w+vVYrzETZmcQ5/peH5V3mvYKXR9/RTtNHrVUMyMv9K1YNYQPgTA3cFfbt3wpg2A+ErPw1QL/NCbIM2gEihSc9DOqkXTfai3I3HuGiqG0u2PP3SC+j7007IVH82L28iEkGMHGTm1UvyFudm+rEht+6I74SNSTemnVSgBSAxecoIHYUyjKkfgjHzI0Cye4DFtsGOeiblwDcGz87Uc0I03LySHxvcZDI21G8FXS/QBY8GEhXeJ0j+S1dt+LFy3rNqds53/eRuZUX0hnUIzf6oSotYFUDXQl7Jjw3uMkWCVjHZ6s7ojUMm2r0xZrhoxZF02EwfP4LUi8cyuUi3vqZWMplK+QKHBfi2Iat1ZIKxMfmRtq4eZNPul69xPBNd/fT85pcjdst9u59QIkIz61D1gwcAH0s326CLGBtTvWDXM8Ig230aF43SHigMI0Y7DWnB7ulRbTMq6d7MMNUKBlq6/ZBvG4oIZ2xMft6vaQpCms5NvA/xTMJA7I4fqvlHdnWia9M9qmp0zS3qMtH4IHmCacPoh9gGXcTYGBz7AHIO6RCaPnbYvxgaPnzrioqhidiY9uGBFc7H0Moo1naZyA4zwsbgwBC6Xj2YUVDOp/3OOXLQv1GaCJqsBa9W/I+ezZdCrNt+V0/oBseDMDYDmw0h9pdiUL46fX/bnS/bNY/3OhWfW4HIos+W7EcqVXd+4wyFiQLIDIk/8ru9/Iz+clMHnoHVetpfJeamM1fFDTdh0vpvUdrfxMzVWSfr1kGMBUcSsSwF0GBI0T4dwsn5j+SOR2lRsrSI8yKEdSV/v5VWQk3LMUUQZcKsBoYYW0EhRV6M8cJjvXYSyccoSoGOD0ET62BdVsur+lQ5sMgCpOKtKKRIl5bUP59D8rePBAqSAod0sC5dxGFVjEVGXhYgDkbjeKtMgY7P1HP76JXYhuwhVIfMjIyBF2gbwDp0EmPgDMwbtp4G9YCKJ92KlasRWbocBj2/K4dserrXv38v+vY0AXxW00j5HlANA4h1BfUET7WDXBfhq5Ygsvga5cIQHu+zJHkcrdOvoP/QszScDpLXMa0RliFRrk/wmHU0HnEqk8jfY8yYDZPcGiJeA1FVDeXaYBu6u8BHD5nooJP9KdhnyeEQ9ITv9REnGz/qz4AVYmP3Hw2jgs+As5O00zz1Xpgi9Zx5EzrNUYkFQjfzAsRgcBgj7Y2OTmhguHHURtXWAg0dMUk7+S4Es2QeUDlRcaQ5CobDGDl0yJE9IZLcJm5bsUgfbmjBIZZBgeOpyLu/RtdhNiN3LD+5Ldwmt1gxttEVIGbiyDwhcetEAInbwG3xEm3IbS86BzGDk1RoJsQfCH3v98FOAWOc5mHFPccrOGyuL4C4woWwcEahCKlxS2GM42oLwNsVstnLnJPbdE9zUG4lnvlr6ioXkWtgC+9Cc8vPl+9sG9vItrqtVoVs9j3EcgVN9B83KakHOUHiLTpH6vFJmFaINmfZWKTZBraFbSp0fPBjV9k9yKnswg8sOdEokr7wE11FwMktUj/yRsEydONAP/KGJWWHPKgfeeOLTrFv3P7IWy5Ime+yqSHUsbdnHr9gHy8/E/h/ZVUg4zbqOaAAAAAASUVORK5CYII=" alt="">
             </div>
             <p>&nbsp;佣金排行</p>
         </li>
-        <li>
+        <li id="tutu">
             <div class="tu">
                 <img src="http://aaa.0362.xyz/static/img/agent_item_qr.fb21e64.png" alt="">
             </div>
-            <p>代理权益</p>
+            <p>获取二维码</p>
+            <div class="erweiM">
+                {if $this->settings['poster_status'] == 0}
+                <p style="font-size:.2rem;color:#fff;">海报功能未开启</p>
+                {else}
+                <img src="{php echo $this->createMobileUrl('showposter')}" alt="">
+                {/if}
+                
+            </div>
         </li>
     </ul>
 </div>
@@ -90,7 +99,7 @@
 
 <!-- 内容 -->
 {if empty($reward_log)}
-<div class="neiR">
+<div class="neiR" style="display:block;">
     <p>暂无记录</p>
     <p>马上邀请获取三级高额收益吧!</p>
 </div>

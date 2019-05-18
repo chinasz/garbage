@@ -1,0 +1,160 @@
+*{
+    margin:0;
+    padding:0;
+	font-family: "微软雅黑";
+}
+body,html{
+    font-size: 26.67vw;
+    height: 100%;
+    overflow-x: hidden!important;
+    background: #FFF;
+    -webkit-overflow-scrolling:touch;
+}
+a{
+    text-decoration: none;
+}
+ul,li{
+    list-style: none;
+}
+img{
+    display: block;
+}
+
+/* 顶部 */
+.dingB{
+    width: 100%;
+    height: .59rem;
+    font-size: .18rem;
+    color: #000;
+    text-align: center;
+    line-height: .59rem;
+}
+.dingB img{
+    width: .11rem;
+    height: .21rem;
+    float: left;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+/* 余额 */
+.money{
+    width: 100%;
+    overflow: hidden;
+}
+.money .balance{
+    font-size: .14rem;
+    color:  rgb(151, 151, 151);
+    float: left;
+    margin-left: 5%;
+    margin-top: 3%;
+}
+.money .data{
+    font-size: .25rem;
+    font-weight: 600;
+    color: #000;
+    float: left;
+    margin-left: 3%;
+}
+.money .unit{
+    font-size: .16rem;
+    color: #000;
+    font-weight: 600;
+    float: left;
+    margin-top: 2%;
+    margin-left: 3%;
+}
+
+/* 充值金额选择 */
+.choice{
+    width: 100%;
+    overflow: hidden;
+}
+.choice ul{
+    width: 100%;
+    overflow: hidden;
+    margin-top: 5%;
+}
+.choice ul li{
+    width: 26%;
+    height: .39rem;
+    font-size: .16rem;
+    color: #000;
+    border: .01rem solid rgb(255, 167, 142);
+    border-radius: .08rem;
+    float: left;
+    text-align: center;
+    line-height: .39rem;
+    margin-left: 5%;
+    position: relative;
+}
+.choice ul li img{
+    width: .21rem;
+    height: .21rem;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+/* .choice ul li:hover img{
+    display: block;
+} */
+.choice ul li p{
+    font-size: .16rem;
+    color: #000;
+    display: inline-block;
+}
+
+/* 微信充值 */
+.weiChart{
+    width: 90%;
+    height: .49rem;
+    font-size: .16rem;
+    color: #FFF;
+    text-align: center;
+    line-height: .49rem;
+    border-radius: .06rem;
+    background: rgb(81, 170, 56);
+    margin: 0 auto;
+    margin-top: 10%;
+}
+
+.issue{
+    font-size: .14rem;
+    color: rgb(151, 151, 151);
+    text-align: center;
+    margin-top: 5%;
+}
+.issue a{
+    font-size: .16rem;
+    color: rgb(9, 108, 235);
+    border-bottom: .01rem solid rgb(9, 108, 235);
+}
+
+/* 大额充值 */
+.wholesale{
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 31%;
+}
+.wholesale p{
+    font-size: .16rem;
+    font-weight: 600;
+    color: #000;
+    float: left;
+    margin-left: 10%;
+    margin-top: 2%;
+}
+.wholesale .qq{
+    width: 1.3rem;
+    height: .3rem;
+    border: .02rem solid rgb(255, 69, 16);
+    text-align: center;
+    line-height: .3rem;
+    color: rgb(255, 69, 16);
+    font-size: .16rem;
+    font-weight: 600;
+    float: left;
+    border-radius: .1rem;
+    margin-left: 5%;
+}

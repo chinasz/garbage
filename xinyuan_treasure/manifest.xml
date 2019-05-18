@@ -96,7 +96,6 @@
 			<entry title="交易明细" do="detail" state="" direct="true" />
 			<entry title="积分商城" do="exchange" state="" direct="true" />
 			<entry title="新手教程" do="course" state="" direct="true" />
-			<entry title="分享海报" do="poster" state="" direct="true" />
 			<entry title="排行榜" do="rank" state="" direct="true" />
 			<entry title="代理提现" do="cash" state="" direct="true" />
 			<entry title="我的团队" do="myteam" state="" direct="true" />

@@ -1,0 +1,116 @@
+/* 顶部 */
+.dingB{
+    width: 100%;
+    height: .59rem;
+    font-size: .18rem;
+    color: #000;
+    text-align: center;
+    line-height: .59rem;
+}
+.dingB img{
+    width: .11rem;
+    height: .21rem;
+    float: left;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+.quickness{
+    width: 100%;
+    height: 2.5rem;
+}
+.quickness img{
+    width: 100%;
+    height: 100%;
+}
+
+/* 平台特点 */
+.trait{
+    font-size: .2rem;
+    font-weight: 600;
+    color: #000;
+    text-align: center;
+    margin: 10% 0;
+}
+.quanW{
+    width: 100%;
+    margin-top: 10%;
+}
+.quanW img{
+    width: 1.05rem;
+    height: 1rem;
+    margin: 0 auto;
+}
+.quanW p{
+    text-align: center;
+    margin-top: 5%;
+}
+.quanW .gongZ{
+    font-size: .18rem;
+    color: #000;
+    font-weight: 600;
+}
+.quanW .kaiJ{
+    font-size: .16rem;
+    color: rgb(168, 168, 168);
+}
+
+.trait1{
+    font-size: .2rem;
+    font-weight: 600;
+    color: #000;
+    text-align: center;
+    margin: 20% 0 10% 0;
+}
+.quanW .kaiJ1{
+    font-size: .16rem;
+    color: #666;
+}
+
+
+/* 面向全球 */
+.daL{
+    width: 100%;
+    height: 4rem;
+    background: url('http://aaa.0362.xyz/static/img/pldes_09.ca6a4d9.png') no-repeat;
+    background-size: 100% 100%;
+}
+#mianX{
+    margin-top: 20%;
+}
+.mianX{
+    font-size: .4rem;
+    color: #000;
+    text-align: center;
+    margin-top: 10%;
+}
+.erW{
+    width: 1.2rem;
+    height: 1.2rem;
+    margin: 10% auto;
+}
+
+.shangW{
+    font-size: .16rem;
+    color: #2f56df;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* 底部 */
+.diB{
+    width: 100%;
+}
+.diB ul{
+    width: 100%;
+    background: #313037;
+    overflow: hidden;    
+}
+.diB ul li{
+    width: 100%;
+    height: .59rem;
+    font-size: .16rem;
+    color: #FFF;
+    text-align: center;
+    line-height: .59rem;
+    float: left;
+}

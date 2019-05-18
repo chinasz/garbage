@@ -1,0 +1,152 @@
+*{
+    margin:0;
+    padding:0;
+	font-family: "微软雅黑";
+}
+body,html{
+    font-size: 26.67vw;
+    height: 100%;
+    overflow-x: hidden!important;
+    background: #FFF;
+    -webkit-overflow-scrolling:touch;
+}
+a{
+    text-decoration: none;
+}
+ul,li{
+    list-style: none;
+}
+img{
+    display: block;
+}
+input{
+    border: none;
+    outline: none;
+}
+
+
+/* 顶部 */
+.dingB{
+    width: 100%;
+    height: .59rem;
+    font-size: .18rem;
+    color: #000;
+    text-align: center;
+    line-height: .59rem;
+}
+.dingB img{
+    width: .11rem;
+    height: .21rem;
+    float: left;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+/* 余额 */
+.money{
+    width: 100%;
+    overflow: hidden;
+    margin-top: 5%;
+}
+.money .balance{
+    font-size: .14rem;
+    color:  rgb(151, 151, 151);
+    float: left;
+    margin-left: 5%;
+    margin-top: 3%;
+}
+.money .data{
+    font-size: .25rem;
+    font-weight: 600;
+    color: #000;
+    float: left;
+    margin-left: 3%;
+}
+.money .unit{
+    font-size: .16rem;
+    color: #000;
+    font-weight: 600;
+    float: left;
+    margin-top: 2%;
+    margin-left: 3%;
+}
+
+/* 输入金额 */
+.import{
+    width: 100%;
+    margin-top: 10%;
+    overflow: hidden;
+}
+.import p{
+    font-size: .2rem;
+    color: #000;
+    float: left;
+    margin-left: 5%;
+}
+.import input{
+    font-size: .2rem;
+    float: left;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    margin-left: 3%;
+    border: 0;
+    height: auto;
+}
+
+
+/* 可提现金额 */
+.yongJ{
+    font-size: .14rem;
+    color: rgb(151, 151, 151);
+    margin-left: 5%;
+    margin-top: 10%;
+}
+
+
+/* 微信充值 */
+.weiChart{
+    width: 90%;
+    height: .49rem;
+    font-size: .16rem;
+    color: #FFF;
+    text-align: center;
+    line-height: .49rem;
+    border-radius: .06rem;
+    background: rgb(81, 170, 56);
+    margin: 0 auto;
+    margin-top: 10%;
+}
+
+
+.issue{
+    font-size: .14rem;
+    color: rgb(151, 151, 151);
+    text-align: center;
+    margin-top: 5%;
+}
+.issue a{
+    font-size: .16rem;
+    color: rgb(9, 108, 235);
+    border-bottom: .01rem solid rgb(9, 108, 235);
+}
+
+.erweiM{
+    width: 1.2rem;
+    height: .3rem;
+    background: rgba(0, 0, 0, .4);
+    position: fixed;
+    bottom: 46%;
+    left: 36%;
+    display: none;
+    border-radius: .05rem;
+}
+.erweiM img{
+    width: 100%;
+    height: 100%;
+}
+
+#tutu:hover .erweiM{
+    display: block;
+}

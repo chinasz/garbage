@@ -1,35 +1,35 @@
 {template 'header'}
 {template 'style'}
-<link rel="stylesheet" type="text/css" href="{MODULE_URL}static/css/new/style.css"/>
-<link rel="stylesheet" type="text/css" href="{MODULE_URL}static/css/new/course.css"/>
- <!-- 顶部 -->
- <div class="dingB">
+<link rel="stylesheet" href="{MODULE_URL}static/css/new/style.css">
+<link rel="stylesheet" href="{MODULE_URL}static/css/new/cash_log.css">
+<!-- 顶部 -->
+<div class="dingB">
     <a href="javascript :;" onClick="javascript :history.back(-1);">
         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAmCAYAAADAzmuWAAAAAXNSR0IArs4c6QAAA9FJREFUSA2tl01oE0EUx+dtUptSJCiCtEQTbfxG0Ys03aZG064Bq2LBj4NgK1JB8KQevNWLJz2oCBV6UPxAG1SsiDFVjG3SFC+iglolNaSlR4u0NWmT3fFNdDa7MYlJ2r3Mm/+b99vHm8m8DZAFehxNUgORyXVCaIoKwklYCK7D6XFTqjwhlFaneQDvhfmC6xulvYQqz1RoGkgn55Wx2CQdlmV6G1kVaoJAvpqMRnfZGTsapeOyTO7pofChurKqKRB4Pl5WxvVO6TRR6BWEqvEA8NZAKjzB4LNJln3JGTtE6TxCr+qgBAaEpaZmDi0Z7HBKFymhF1kgfzBTH6k1e0J9fVNcY2NRGVNKoUGUrlKFntcGYyEeWWrM+8Neb1yn48SYLWTPu7q6BMy0B/UOvQ/urKgxt3u9Xlmv/5mpxc/l7OzsrPj46fsdSskhrR+DuoeC/lNYBqrVtXZesMvVbppNTXixDK26AAEuhQf957RaLjsnWJKk6qkZ0ocbtUsXBNA1HPRf0Gl5Jv+Am5sPmmfiP58j1KGNEUA4OxR8cVmrFbJ1YJdr77LZZMKPhduWCQIFCD0VDvXfyGj/t1Sw2LKvVo7HXxJKNvAwAIJXILQPD/jvcq3YMQ12uTy22ZT8Cnd/dSYQ5nDTj4SD/Y8zWvEWiDs96+SkgplSCw/Dt8WJYDgQHvS94FqpoxGht/RQmAIDaR0a8A2UCtOuL+onrQ0o1hYMFcIxAjDOA/CYLaYy9Tkad3u4Vs4ohF77RkxGwYknYJQD8LhV4S/uiSh62rhW6pguRSDgiwpVVU68rT5nAHSRAkpvg7PlaEYr3lJrHOrvmzAZTU14It7xcMzaoChwyyG2nORasaNBuzAa/frLXrflgaykdqC+4q+PnfXWldY102OxSFi7vpCtA7OF0eiXxMYNdffnklCP01U8GDdVsljtZDwWecO1QuM/YLY4Eokk7XXOXplOb8XpWg3AZbHWLR6Pjfo1Wk5TrXG2NxC4mdi80daGp6VX56PkDLb+btaudHrWpKCTrWWtyfcy1IOXU4c+FltTbZmtiYNYdmLj7isKoae5xkZsTY+xmR7Bvjen1dO+bKHQPN3+szp1uv3XmNuyO3XOzcsHxxPxymJbk8RLy61ZY4epWad126aHYyMjauYlgRkM4YMWm/0H1pzdJXyPrCQhu20r1z+Mxb4l2Lq8p4I58z3Dg/5rWIITyFX4GtyH7SmSDLjd+5Yzjb+R+0saC33GzgvMsmAf3ghh3x+ValZAAmWVQgWggd8ZTwkIe/DszWR0WDLvjDks+8/Nby/EX03R5eFeAAAAAElFTkSuQmCC" alt="">
     </a>
-    新手帮助
+    资金明细
 </div>
 
-<div class="xian">
-
-</div>
-
-<!-- 内容 -->
-<div class="neiR">
-    {loop $course_list $course}
-    <div class="neiR_W">
-        <p>{$course['course_title']}</p>
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAYAAAAI0W+oAAAAAXNSR0IArs4c6QAAAgFJREFUOBHFU79LG1Ecf+8ZwaGLS0WK6VQ7uQWEbM6au9xL1EJBHVpwq4Lu4iqFOkccXBSilx+X6lAxuOcvcLPQ0ba4GHp6X7+fFxPOpJ7RFn1wd9/v9/Pr3j1OiCdaEjm7bnFNSJlSFLO0Hj/5H9mu+3WYpO8RiXJWp5cVTKUU04LoLQOHnufF/zUIHvDikGHjzYaNoB41x3F1Bob++MFhqVQaeGwYtPCAFzyFkrPwMkHaso6EUlNSyksS9MYP6FulUul/aBg00MIDXkrIyYxtV1tBKLLplMfADJeBIDFS968OqtXqC2DdLHChgZb5Aby0tipNrdlRs3Eca5sJ86YnGv3567zMBn1N/K4nOODyOY+CAw94hfm3ggBobed420uo+ROMnf0+z9dqtV70f1vAwAEXOLTwaOd2BIGQcezPSqlVQyaaOP3+Y4uIOriYAeOdTIALDbRG13Yz/1HbrNW6hdKXgOgTBkzcyOj0xxbIxZ5bzJEQHzBTUq5rx14I4+G64y3DoJO2FvlbbGIGQw5uvS3qZgg4hhsWt9WROzIB/HncQnmHz2ASPZ/Bys3cPKWQee1Y73geYH7XitwRRDB4HX/1nv/wffR8Liu4UGPWwKJDwL03CKREIuEPDrzMcugxeizUmAFrTKLvXQXBIplMXsSUSPGnOsKFGrNo+2dArwHAL9iLfqInUwAAAABJRU5ErkJggg==" alt="">
-        <div class="yinC">{php echo htmlspecialchars_decode($course['course_text']);}</div>
+<!-- 明细 -->
+{loop $cash_log $cash}
+<div class="detail">
+    <img src="{MODULE_URL}static/img/logo.png" alt="">
+    <div class="tiX">
+        <p class="first">提现</p>
+        <p class="second">{$cash['cash_time']}</p>
     </div>
-    {/loop}
+    <p class="ziJ">-￥{$cash['cash_money']}</p>
 </div>
-<script>
-    $('.neiR_W').on('click',function(){
-        $(this).children('div.yinC').fadeToggle();
-        $(this).siblings('div').children('div.yinC').fadeOut(400);
-    });
-</script>
+{/loop}
+{loop $reward_log $reward}
+<div class="detail">
+    <img src="{MODULE_URL}static/img/daiL.png" alt="">
+    <div class="tiX">
+        <p class="first">代理收益</p>
+        <p class="second">{$reward['add_time']}</p>
+    </div>
+    <p class="ziJ">+￥{$reward['money']}</p>
+</div>
+{/loop}
 
 {template 'footer'}
-
