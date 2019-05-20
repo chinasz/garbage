@@ -150,6 +150,7 @@
 						$result = pdo_query($setDec_sql,array(':member_id'=>intval($member_id)));
 						//微信付款  失败
 						echo json_encode(array('code'=>1,'error'=>$res['err_code'],'msg'=>$res['err_code_des']."请联系客服"));
+						return;
 					}	
 					
 					

@@ -5,11 +5,17 @@
 	$query = load()->object('query');
 	$member_reward = $query->from($this->table['member'])->where(array('member_id'=>intval($_SESSION['ids']),'is_del'=>1))->getcolumn('reward');
 	$cash_low = floatval($this->settings['cash_low']);
+
+	$cert = array(
+		'cert'	=>	MODULE_ROOT.'/cert/'.md5('cert'.$_W['uniaccount']['uniacid']).'.pem',
+		'key'	=>	MODULE_ROOT.'/cert/'.md5('key'.$_W['uniaccount']['uniacid']).'.pem',
+	);
+
 	if(empty($cash_low)){
 		message('提现未设置');
 		
 		
-	}else if(empty($this->settings['mchid']) ||empty($this->settings['appid']) || empty($this->settings['secrect']) || !file_exists($cert['cert']) || !file_exists($cert['key'])){
+	}else if(empty($this->settings['mchid']) || empty($this->settings['appid'])|| empty($this->settings['secrect']) || !file_exists($cert['cert']) || !file_exists($cert['key'])){
 				
 		message('请联客服,支付参数未设置');
 		
@@ -93,8 +99,8 @@
 
 					if($is_auto == 1 && $r_money<=$auto_num){
 						//微信打款
-						
-					
+						$url = 'https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers';
+
 						$pay = new pay($this->settings['secrect'],$cert);
 						
 						$data['sign'] = $pay->sign($data);
@@ -120,11 +126,18 @@
 							);
 
 
+						}else{
+
+							$return['code'] =1;
+							$return['error']=$res['err_code_des'];
+							echo json_encode($return);
+							return;
+
 						}
 
 
 					}
-					//－佣金
+					//减佣金
 					$sql = "update ".tablename($this->table['member'])." set reward = reward - ".floatval($money)." where member_id = :member_id";
 					pdo_query("START TRANSACTION");
 					//cash order
@@ -134,13 +147,14 @@
 					if($res && $res2){
 						pdo_query("COMMIT"); 
 						$return['code'] =0;
+						$return['msg']	= $payment_no?'':'提现请求已提交';
 						echo json_encode($return);
 						return;
 						
 					}else{
 						pdo_query("ROLLBACK"); 
 						$return['code'] =1;
-						$return['error']='数据写入失败,请重试';
+						$return['error']='服务其繁忙,请重试';
 						echo json_encode($return);
 						return;
 					}

@@ -1,75 +1,107 @@
-{template 'exchange_header'}
-	{template 'style'}
-    <link rel="stylesheet" href="{MODULE_URL}static/css/exchange_order.css">
-<!-- 头部 -->
-    <div class="back bgcolor">
+{template 'header'}
+{template 'style'}
+<link rel="stylesheet" href="{MODULE_URL}static/css/new/style.css"/>
+<link rel="stylesheet" href="{MODULE_URL}static/css/new/exchange_show_order.css"/>
+ <!-- 头部 -->
+    <div class="back">
         <div class="topB_1">
-            <div class="fanH" onclick="goback()">
+            <a href="javascript :;" onClick="javascript :history.back(-1);">
+                <div class="fanH">
 
-            </div>
-            积分兑换
+                </div>
+            </a>
+            我的订单
         </div>
     </div>
- 
-    <div class="head_nav_wrap">
-        <ul class="head_nav">
-            <li class="active selected order_status" data="0">全部</li>
-            <li class="address_li order_status order_status1" data="1">已完成</li>
-            <li class="address_li order_status order_status3" data="3">待发货</li>
-            <li class="address_li order_status order_status2" data="2">待收货</li>
+    
+    <!-- 导航 -->
+    <div class="mac">
+        <ul>
+            <li class="active">
+                全部
+            </li>
+            <li>
+                代发货
+            </li>
+            <li>
+                待收货
+            </li>
+            <li>
+                已完成
+            </li>
         </ul>
     </div>
 
-    <div id="test" style="display:block;margin: 20px 0 0 0">
-		{if !empty($order_all_list)}
-		{loop $order_all_list $order}
-        <div style="display:block;" class="order{$order['order_status']} order">
-			<div class="state">
-				<div class="state_T">
-					<div class="state_Left">
-						<img src="{php echo toimage($order['goods_thumb'])}" alt="">
-					</div>
-					<div class="state_Right">
-						<p>{$order['goods_name']}</p>
-						<span>&yen;{$order['order_fee']}</span>
-						<p>{$order['goods_name']}</p>
-						{if $order['order_status'] == 3}
-						<div class="tiX">
-							提醒发货
-						</div>
-						{/if}
-					</div>
-				</div>
-			</div>
-		</div>
-		{/loop}
-		{else}
-		{/if}
+    <!-- 商品列表 -->
+    <div>
+        {if !empty($order_all_list)}
+        {loop $order_all_list $order}
+        <div class="shopList">
+            <div class="shopList_T">
+                <div class="shopList_T_L">
+                    <p>{$order['class_name']}</p>
+                    <img src="{MODULE_URL}static/img/youjian.png" alt="">
+                </div>
+            </div>
+
+        <div class="shopList_B">
+            <div class="shopList_B_L">
+                <img src="{php echo toimage($order['goods_thumb'])}" alt="">
+            </div>
+            <div class="shopList_B_R">
+                <p class="xuanY">{$order['goods_name']}</p>
+                <p class="money">{$order['goods_score']}积分</p>
+                <p class="chiM">{if $order['is_real'] == 1}实物商品{else}虚拟物品{/if}</p>
+                <p class="tuiH">库存：{$order['goods_stock']}</p>
+            </div>
+        </div>
+        <!-- 提醒发货 -->
+        {if $order['order_status'] ==3}
+        <div class="tixing">
+            提醒发货
+        </div>
+        {/if}
+
+        {if $order['order_status'] ==2}
+        <div class="tixing">
+            确认收货
+        </div>
+        {/if}
+        {/loop}
+        {else}
+        <img src="{MODULE_URL}static/img/meiN.png" alt="">
+        <p>您还没有相关订单</p>
+
+        {/if}
+        
+
+        
     </div>
-    <script>
-		var hash = location.hash.replace('#','');
-		
-		if(hash !=''){
-			$(".order").hide();
-			$('.order'+hash).show();
-			$('.order_status'+hash).siblings('li').removeClass('selected');
-			$('.order_status'+hash).addClass('selected');
-			
-		}
-		
-		$(".order_status").on('click',function(){
-			$(this).addClass('selected');
-			$(this).siblings('li').removeClass('selected');
-			var status = $(this).attr('data');
-			if(status>0){
-				$(".order").hide();
-				$('.order'+status).show();
-				
-			}else{
-			
-				$(".order").show();
-			}
-		
-		})
-	</script>
-{template 'exchange_footer'}
+
+    
+
+    <!-- 可能喜欢 -->
+    {if !empty($recommend_list)}
+    <div class="keN">
+        <h3>你可能还喜欢</h3>
+        <div class="shopList_1">
+            {loop $recommend_list $recommend}
+            <div class="shopList">
+                <div class="shopList_T">
+                    <img src="{php echo toimage($recommend['goods_thumb'])}" alt="">
+                </div>
+                <div class="shopList_B">
+                    <p>{$recommend['goods_name']}</p>
+                    <span>{$recommend['goods_score']}</span>
+                    <a href="{php echo $this->createMobileUrl('exchange_goods',array('id'=>$recommend['goods_id']))}">
+                        <div class="duiH">
+                            兑换
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {/loop}
+        </div>
+    </div>
+    {/if}
+{template 'footer'}

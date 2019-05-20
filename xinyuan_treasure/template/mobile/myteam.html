@@ -1,78 +1,61 @@
 {template 'header'}
 {template 'style'}
-<link rel="stylesheet" href="{MODULE_URL}static/css/myteam.css">
-<div class="topB bgcolor">
-    我的团队
-</div>
+<link rel="stylesheet" href="{MODULE_URL}static/css/new/style.css">
+<link rel="stylesheet" href="{MODULE_URL}static/css/new/myteam.css">
+<!-- 顶部 -->
+    <div class="dingB">
+        <a href="javascript :;" onClick="javascript :history.back(-1);">
+            <img src="{MODULE_URL}static/img/jiantou_03.png" alt="">
+        </a>
+        邀请人数
+    </div>
 
-<div class="head_nav_wrap">
-    <ul class="head_nav">
-            <li class="option selected">一级</li>
-            <li class="option">二级</li>
-            <li class="option">三级</li>
+    <!-- 所有线下 -->
+    <p class="suoY">所有线下累计 <span style="color: red;">{php echo count($level1)+count($level2)+count($level3)}</span> 名</p>
+    <table class="biaoG">
+        <tr>
+            <td style="background: #f5f5f5;"></td>
+            <td style="background: #f5f5f5;">一级</td>
+            <td style="background: #f5f5f5;">二级</td>
+            <td style="background: #f5f5f5;">三级</td>
+        </tr>
+        <tr>
+            <td>人数</td>
+            <td>{php echo count($level1)}</td>
+            <td>{php echo count($level2)}</td>
+            <td>{php echo count($level3)}</td>
+        </tr>
+        <tr>
+            <td>佣金</td>
+            <td>{$total1}</td>
+            <td>{$total2}</td>
+            <td>{$total3}</td>
+        </tr>
+    </table>
+
+
+    <!-- 最新加入 -->
+    <p class="join">最新加入</p>
+
+
+    <div class="jiaR">
+        <ul>
+            <li class="first">加入时间</li>
+            <li class="second">级别</li>
+            <li class="thirdly">用户</li>
         </ul>
     </div>
-
-    <div class="chengY">
-        <img src="{MODULE_URL}static/img/xinxi.png" alt="">
-        <div class="chengY_left">
-            成员信息
-        </div>
-        <div class="chengY_right">
-            提现佣金/下级分销商
-        </div>
+    {loop $level1 $k $member}
+    {if $k >5}
+    {php break;}
+    {/if}
+    <div class="jiaR1">
+        <ul>
+            <li class="first">{php echo date("m/d H:i",strtotime($member['member_firsttime']))}</li>
+            <li class="second">1级</li>
+            <li class="thirdly">{php echo $this->member_pre}{$member['member_id']}</li>
+        </ul>
     </div>
-
-    <div class="reward-list" style="display:block;">
-        <table class="imagetable">
-            <tr>
-                <th>用户</th><th>佣金</th><th>时间</th>
-            </tr>
-            {loop $reward_list1 $reward}
-            <tr>
-                <td><img src="{$reward['member_avatar']}" alt=""></td>
-                <td>{$reward['money']}</td>
-                <td>{$reward['add_time']}</td>
-            </tr>
-            {/loop}
-        </table>
-    </div>
-
-
-    <div class="reward-list" style="display:none;">
-        <table class="imagetable">
-            <tr>
-                <th>用户</th><th>佣金</th><th>时间</th>
-            </tr>
-            {loop $reward_list2 $reward}
-            <tr>
-                <td><img src="{$reward['member_avatar']}" alt=""></td>
-                <td>{$reward['money']}</td>
-                <td>{$reward['add_time']}</td>
-            </tr>
-            {/loop}
-        </table>
-    </div>
-    <div class="reward-list" style="display:none;">
-        <table class="imagetable">
-            <tr>
-                <th>用户</th><th>佣金</th><th>时间</th>
-            </tr>
-            {loop $reward_list3 $reward}
-            <tr>
-                <td><img src="{$reward['member_avatar']}" alt=""></td>
-                <td>{$reward['money']}</td>
-                <td>{$reward['add_time']}</td>
-            </tr>
-            {/loop}
-        </table>
-    </div>
-    <script>
-       $('.option').on('click',function(){
-            $(this).addClass('selected');
-            $(this).siblings('li').removeClass('selected');
-            $('.reward-list').hide();
-            $('.reward-list').eq($(this).index()).show();
-       }) 
-    </script>
+    {/loop}
+    
 {template 'footer'}

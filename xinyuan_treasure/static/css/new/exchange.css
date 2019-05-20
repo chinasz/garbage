@@ -1,0 +1,234 @@
+*{
+    margin:0;
+    padding:0;
+	font-family: "微软雅黑";
+}
+body,html{
+    font-size: 26.67vw;
+    height: 100%;
+    /* display: -webkit-flex;
+    flex-direction: column; */
+    overflow-x: hidden!important;
+    /* overflow-y: hidden!important;  */
+    background: #FFF;
+    -webkit-overflow-scrolling:touch;
+}
+a{
+    text-decoration: none;
+}
+
+
+/* 头部 */
+.topB_1{
+    width: 100%;
+    height: .59rem;
+    line-height: .59rem;
+    margin: 0 auto;
+    font-size: .21rem;
+    color: #FFF;
+    text-align: center;
+    background: url('../../img/biaoT.png') no-repeat;
+}
+.topB_1 .fanH{
+    width: .11rem;
+    height: .22rem;
+    background: url('../../img/jiantou_03.png') no-repeat;
+    background-size: 100% 100%;
+    float: left;
+    margin-top: .2rem;
+    margin-left: 5%;
+}
+
+
+
+/* 导航 */
+
+.clearfix{*zoom:1;}
+ul,li{
+    list-style-type: none;
+}
+
+.head_nav_wrap {
+    height: 42px;
+    position: relative;
+    z-index: 10;
+    margin: 0 10px;
+    overflow: hidden;
+    background-color: #fff;
+}
+.head_nav {
+    height: 70px;
+    font-size: .14rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    overflow-x: auto;
+    margin-top: 2%;
+    -webkit-overflow-scrolling: touch;
+}
+.head_nav>li {
+    -webkit-box-flex: 0;
+    -webkit-flex: none;
+    -ms-flex: none;
+    flex: none;
+    padding-top: 4px;
+    margin-right: 31px;
+}
+.head_nav a {
+    display: block;
+    position: relative;
+    line-height: 38px;
+    color: #222;
+}
+.head_nav>li.active a {
+    color: #35c584;
+}
+.selected {
+    color: #f02929;
+    font-size: .14rem;
+}
+
+
+/* .chongT .container {
+        width: 100%;
+        border: 1px solid #ccc;
+    }
+    .chongT .swiper1 {
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+    .chongT .swiper1 .selected {
+        color: #f02929;
+        font-size: .16rem;
+    }
+    .chongT .swiper1 .swiper-slide {
+        width: .6rem !important;
+        height: .5rem !important;
+        box-sizing: border-box;
+        overflow: hidden;
+        text-align: center;
+        font-size: .16rem;
+        line-height: .5rem;
+    } */
+    ::-webkit-scrollbar {
+        /*隐藏滚轮*/
+        display: none;
+    }
+    .chongT_2{
+        overflow-y: hidden;
+    }
+    .chongT_2 .swiper2 {
+        width: 100%;
+        overflow-y: hidden;
+    }
+
+
+/* 会员精选 */
+.huiY{
+    font-size: .2rem;
+    color: #333333;
+    text-align: center;
+    margin-top: -0.08rem;
+}
+
+/* 商品列表 */
+.shopList_1{
+    width: 95%;
+    height: 2.62rem;
+    margin: 0 auto;
+    margin-top: .2rem;
+}
+.shopList{
+    width: 45%;
+    height: 2.62rem;
+    float: left;
+    border-radius: .1rem;
+    margin-left: .1rem;
+}
+.shopList_T{
+    width: 1.65rem;
+    height: 1.65rem;
+}
+.shopList_T img{
+    width: 100%;
+    height: 100%;
+    border-radius: .1rem;
+    border-bottom-right-radius: 0%;
+    border-bottom-left-radius: 0%;
+}
+.shopList_B{
+    width: 100%;
+    /* text-align: center; */
+}
+.shopList_B p{
+    font-size: .13rem;
+    color: #333333;
+    margin-top: .1rem;
+}
+.shopList_B span{
+    font-size: .16rem;
+    color: #ff6260;
+    float: left;
+    margin-top: .1rem;
+}
+.shopList_B .duiH{
+    width: .8rem;
+    height: .4rem;
+    text-align: center;
+    line-height: .4rem;
+    font-size: .16rem;
+    color: #FFF;
+    background:  linear-gradient(306deg, #fe6500, #ff3100);
+    float: right;
+    border-radius: .2rem;
+}
+
+.cheng{
+    width: 100%;
+    height: .6rem;
+}
+
+/* 底部 */
+footer{
+    width: 100%;
+    /* display: -webkit-flex; */
+    /* justify-content: space-around; */
+    padding-top: .05rem;
+    /* -webkit-box-shadow: 0 0 0.2rem 0 hsla(0,6%,58%,.6); */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #FFF;
+    z-index: 3333;
+}
+footer div{
+	width: 33.3%;height: 100%;
+    /* display: -webkit-flex; */
+    /* flex-direction: column; */
+    float: left;
+	/* justify-content: center;flex-wrap: wrap; */
+    text-align: center;
+    /* margin-top: 3%; */
+}
+footer div img{
+    width:.23rem;
+    height:.23rem;
+	display: block;
+    margin: 0 auto;
+}
+footer div p{
+    font-size:.1rem;
+    color:#666666;
+    margin: 0;
+    /* margin-top:.03rem; */
+    text-align: center;
+}
+
+
+.lianJ{
+    text-decoration: none;
+    color: #000;
+}/* margin-top:.03rem; */

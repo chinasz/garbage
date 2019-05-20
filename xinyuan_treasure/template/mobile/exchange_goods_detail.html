@@ -1,46 +1,53 @@
-{template 'exchange_header'}
-	<link rel="stylesheet" href="{MODULE_URL}static/css/exchange_goods.css">
-	<div class="topB">
-        <span onclick="goback()"><</span>
-        <h3>商品详情</h3>
-    </div>
+{template 'header'}
+{template 'style'}
+<link rel="stylesheet" href="{MODULE_URL}static/css/new/exchange_goods.css">
+<!-- 头部 -->
+<div class="topB">
+    <a href="javascript :;" onClick="javascript :history.back(-1);">
+        <div class="fanH">
 
-    <!-- 商品图片 -->
-    <div class="shangP" style="overflow:hidden;">
-        <img src="{php echo toimage($goods['goods_thumb'])}" alt="" style="width:100%;">
-    </div>
-
-    <!-- 商品详情 -->
-    <div class="shopBig">
-        <div class="shopName">
-            <div class="shopName_L">
-                <p class="mingC">{$goods['goods_name']}</p>
-                <p class="miaoS">{$goods['goods_title']}</p>
-            </div>
-            <div class="price">
-                {$goods['goods_score']}积分
-            </div>
         </div>
-        
-        <!-- 商品原价 -->
-        <div class="originalPrice">
-            
-            <h3>现价：&yen;{$goods['goods_oprice']}</h3>
-        </div>
+    </a>
+    <h3>商品详情</h3>
+</div>
 
-        <!-- 底部 -->
-        <div class="bottomB">
-            <div class="purchase_L" >
-                积分充值
-            </div>
-            <div class="purchase_R" id="shuiH">
-                兑换商品
-            </div>
+<!-- 商品图片 -->
+<div class="shangP" style="overflow: hidden;">
+    <img src="{php echo toimage($goods['goods_thumb'])}" style="width:100%;height: 100%;">
+</div>
+
+<!-- 商品详情 -->
+<div class="shopBig">
+    <div class="shopName">
+        <div class="shopName_L">
+            <p class="mingC">{$goods['goods_name']}</p>
+            <p class="miaoS">{$goods['goods_title']}</p>
+        </div>
+        <div class="price">
+            {$goods['goods_score']}积分
         </div>
     </div>
-	<script>
-		$("#shuiH").on('click',function(){
-		if(confirm('兑换？')){
+
+    <!-- 商品原价 -->
+    <div class="originalPrice">
+        <h3>现价：&yen;{$goods['goods_oprice']}</h3>
+    </div>
+
+    <!-- 底部 -->
+    <div class="bottomB">
+        <div class="purchase_L" onclick="javascript:location='{php echo $this->createMobileUrl("krypton")}';">
+            积分充值
+        </div>
+        <div id="update" class="purchase_R">
+            兑换商品
+        </div>
+    </div>
+</div> 
+
+{template 'footer'}
+<script>
+		$("#update").on('click',function(){
+		if(util.confirm('兑换？')){
 			{if $goods['is_real'] == 1}
 			wx.openAddress({
 				success:function(res){
@@ -67,10 +74,10 @@
 				dataType:"json",
 				success:function(res){
 					if(res.code ==0){
-						alert('下单成功');
+						util.message('下单成功');
 					
 					}else{
-						alert(res.error || '下单失败');
+						util.toast(res.error || '下单失败');
 					}
 				
 				}
@@ -78,5 +85,3 @@
 		}
 		
 	</script>
-
-{template 'exchange_footer'}

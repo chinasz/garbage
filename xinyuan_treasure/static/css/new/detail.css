@@ -95,7 +95,7 @@ img{
     font-size: .14rem;
     color:  hsla(0, 0%, 100%, .88);
     float: left;
-    margin-left: 31%;
+    margin-left: 20%;
     margin-top: 5%;
 }
 .detail ul li .qian{
@@ -224,8 +224,8 @@ img{
     overflow: hidden;
 }
 .diB ul li{
-    width: 33.3%;
-    height: .4.5rem;
+    width: 25%;
+    height: .45rem;
     float: left;
 }
 .diB ul li .tu{

@@ -95,7 +95,7 @@ img{
     font-size: .18rem;
     color: #383b45;
     font-weight: 600;
-    margin-top: 11%;
+    margin-top: 9%;
     text-align: right;
 }
 .account .account_R{
@@ -109,7 +109,6 @@ img{
     float: left;
     background: linear-gradient(306deg, #fe6500, #ff3100);
     border-radius: .1rem;
-    margin-left: 5%;
 }
 .account .account_R .account_R_L .tu{
     width: .21rem;
@@ -132,7 +131,7 @@ img{
     float: right;
     border: .01rem solid #a8a8a8;
     border-radius: .1rem;
-    margin-right: 10%;
+    margin-right: 5%;
 }
 .account .account_R .account_R_R .tu{
     width: .21rem;
@@ -238,8 +237,8 @@ img{
     overflow: hidden;
 }
 .diB ul li{
-    width: 33.3%;
-    height: .4.5rem;
+    width: 25%;
+    height: .45rem;
     float: left;
 }
 .diB ul li .tu{
@@ -266,6 +265,7 @@ img{
     height: .3rem;
     background: linear-gradient(306deg, #fe6500, #ff3100);
     position: fixed;
+    bottom: 10%;
     right: 0;
     border-top-left-radius: .2rem;
     border-bottom-left-radius: .2rem;
@@ -291,6 +291,8 @@ img{
     margin: 0 auto;
     margin-top: 5%;
 }
+
+
 .erweiM{
     width: 3rem;
     height: 5rem;

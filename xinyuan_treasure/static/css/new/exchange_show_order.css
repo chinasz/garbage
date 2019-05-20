@@ -1,0 +1,213 @@
+/* 头部 */
+.back{
+    width: 100%;
+    background: url('../../img/beiJa.png') no-repeat;
+    background-size: 100% 100%;
+}
+.topB_1{
+    width: 90%;
+    height: .59rem;
+    line-height: .59rem;
+    margin: 0 auto;
+    font-size: .18rem;
+    color: #FFF;
+    text-align: left;
+}
+.topB_1 .fanH{
+    width: .1rem;
+    height: .15rem;
+    background: url('../../img/jiantou_03.png') no-repeat;
+    background-size: 100% 100%;
+    float: left;
+    margin-top: .2rem;
+    margin-right: .2rem;
+}
+
+/* 导航 */
+.mac{
+    width: 100%;
+}
+.mac ul{
+    width: 100%;
+    overflow: hidden;
+}
+.mac ul li{
+    width: 25%;
+    float: left;
+    height: .49rem;
+    font-size: .16rem;
+    color: #000;
+    text-align: center;
+    line-height: .49rem;
+}
+
+
+/* 商品列表 */
+.shopList{
+    width: 100%;
+}
+.shopList .shopList_T{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 5%;
+    overflow: hidden;
+}
+.shopList .shopList_T .shopList_T_L{
+    width: 50%;
+    float: left;
+}
+.shopList .shopList_T .shopList_T_L p{
+    font-size: .14rem;
+    color: #000;
+    float: left;
+}
+.shopList .shopList_T .shopList_T_L img{
+    float: left;
+    width: .06rem;
+    height: .11rem;
+    margin-left: 5%;
+    margin-top: 4%;
+}
+.shopList .shopList_B{
+    width: 90%;
+    height: 1.5rem;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.shopList .shopList_B .shopList_B_L{
+    width: 25%;
+    height: .85rem;
+    float: left;
+    border-radius: .1rem;
+}
+.shopList .shopList_B .shopList_B_L img{
+    width: 100%;
+    height: 100%;
+    border-radius: .1rem;
+    margin-top: 20%;
+}
+.shopList .shopList_B .shopList_B_R{
+    width: 70%;
+    height: 1.5rem;
+    float: left;
+    margin-left: 4%;
+}
+.shopList .shopList_B .shopList_B_R .xuanY{
+    font-size: .14rem;
+    color: #000;
+    float: left;
+    width: 80%;
+}
+.shopList .shopList_B .shopList_B_R .money{
+    width: 20%;
+    font-size: .14rem;
+    height: .6rem;
+    color: #494a4c;
+    float: left;
+}
+.shopList .shopList_B .shopList_B_R .chiM{
+    font-size: .12rem;
+    color: #9a9a9a;
+    margin-bottom: 5%;
+}
+.shopList .shopList_B .shopList_B_R .tuiH{
+    font-size: .12rem;
+    color: #e66419;
+}
+
+
+/* 提醒发货 */
+.tixing{
+    width: 1rem;
+    height: .3rem;
+    border-radius: .2rem;
+    border: .01rem solid #ba9a85;
+    font-size: .14rem;
+    color: #e35910;
+    text-align: center;
+    line-height: .3rem;
+    margin-left: 67%;
+}
+
+
+/* 可能喜欢 */
+.keN{
+    width: 100%;
+}
+.keN h3{
+    font-size: .16rem;
+    color: #d25825;
+    text-align: center;
+    margin-top: 3%;
+}
+.keN .shopList_1{
+    width: 95%;
+    height: 2.62rem;
+    margin: 0 auto;
+    margin-top: .2rem;
+}
+.keN .shopList{
+    width: 45%;
+    height: 2.62rem;
+    float: left;
+    border-radius: .1rem;
+    margin-left: .1rem;
+}
+.keN .shopList_T{
+    width: 1.65rem;
+    height: 1.65rem;
+}
+.keN .shopList_T img{
+    width: 100%;
+    height: 100%;
+    border-radius: .1rem;
+    border-bottom-right-radius: 0%;
+    border-bottom-left-radius: 0%;
+}
+.keN .shopList_B{
+    width: 100%;
+    /* text-align: center; */
+}
+.keN .shopList_B p{
+    font-size: .13rem;
+    color: #333333;
+    margin-top: .1rem;
+}
+.keN .shopList_B span{
+    font-size: .16rem;
+    color: #ff6260;
+    float: left;
+    margin-top: .1rem;
+}
+.keN .shopList_B .duiH{
+    width: .8rem;
+    height: .4rem;
+    text-align: center;
+    line-height: .4rem;
+    font-size: .16rem;
+    color: #FFF;
+    background:  linear-gradient(306deg, #fe6500, #ff3100);
+    float: right;
+    border-radius: .2rem;
+}
+
+#test2{
+    width: 100%;
+}
+#test2 img{
+    width: 1rem;
+    height: 1rem;
+    margin: 10% auto;
+    border-radius: 50%;
+}
+#test2 p{
+    font-size: .16rem;
+    color: #000;
+    text-align: center;
+}
+.xian{
+    width: 100%;
+    height: .1rem;
+    background: #f5f5f5;
+}
+

@@ -1,5 +1,11 @@
 {template 'header'}
 {template 'style'}
+    <style>
+        .mui-toast-container{
+            margin-left: -.7rem !important;
+
+        }
+    </style>
     <link rel="stylesheet" href="{MODULE_URL}static/css/new/style.css">
     <link rel="stylesheet" href="{MODULE_URL}static/css/new/cash.css">
     <!-- 顶部 -->
@@ -59,6 +65,7 @@
             }
             if(verifty){
                 $(this).attr('id','');
+                util.loading().show();
                 $.ajax({
                     url:"{php echo $this->createMobileUrl('cash',array('cash'=>1))}",
                     data:{money:money,token:"{$_W['token']}",submit:1},
@@ -68,10 +75,10 @@
                         util.loading().hide();
                         if(res.code ==0){
                             
-                            alert('提现申请已提交!');
+                            util.message(res.msg || '提现成功');
                         }else{
                             
-                            alert(res.error || '提交失败');
+                            util.toast(res.error || '提交失败','','error');
                         }
                     
                     }

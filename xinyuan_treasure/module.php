@@ -30,6 +30,7 @@ class Xinyuan_treasureModule extends WeModule {
 			}
 			unset($data['web_menu_tem']);
 
+
 			if(!empty($data['cert1'])){
 				$cert1 = fopen(MODULE_ROOT.'/cert/'.md5('cert'.$_W['uniaccount']['uniacid']).'.pem','w');
 				fwrite($cert1, $data['cert1']);
@@ -56,7 +57,7 @@ class Xinyuan_treasureModule extends WeModule {
 		}
 
 		load()->func('tpl');
-
+		//var_dump($settings);
 		include $this->template('setting');
 
 	}

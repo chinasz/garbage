@@ -1,7 +1,7 @@
 <?php
 	global $_W,$_GPC;
 	
-	$_W['page']['sitename'] = '开始游戏';
+	$_W['page']['sitename'] = empty($this->settings['game_name'])?'开始游戏':$this->settings['game_name'];
 	
 	$option =array(
 		1=>'小',2=>'大',3=>'单',4=>'双'

@@ -34,13 +34,13 @@
 					</div>
 				</div>
 				
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">公告</label>
 					<div class="col-sm-8">
 						<input type="text" name="data[web_notice]" class="form-control" value="{$settings['web_notice']}" />
 					</div>
 					
-				</div>
+				</div> -->
 				<div class="form-group">
 					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">底部版权信息</label>
 					<div class="col-sm-8">
@@ -72,60 +72,60 @@
 			</div>
 		</div>
 
-	<div class="panel panel-info">
-		<div class="panel-heading">底部菜单设置</div>
-		<div class="panel-body">
-            <div class="form-group">
-				<div class="col-sm-12">
-					<table class="table">
-						<thead>
-							<tr>
-								<th style="width:60px;"></th>
-								<th style="width:400px;">图片</th>
-								<th style="width:200px;">文字</th>
-								<th style="width:200px;">链接</th>
-								<th>文字</th>
-							</tr> 
-						</thead>
-						<tbody id="tbody" class="ui-sortable" style="">
-							{loop $settings['web_menu'] $menu}
-							<tr class="recharge-item" style="">
-								<td>
+		<div class="panel panel-info">
+			<div class="panel-heading">底部菜单设置</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<div class="col-sm-12">
+						<table class="table">
+							<thead>
+								<tr>
+									<th style="width:60px;"></th>
+									<th style="width:400px;">图片</th>
+									<th style="width:200px;">文字</th>
+									<th style="width:200px;">链接</th>
+									<th>文字</th>
+								</tr> 
+							</thead>
+							<tbody id="tbody" class="ui-sortable" style="">
+								{loop $settings['web_menu'] $menu}
+								<tr class="recharge-item" style="">
+									<td>
 
-								</td>
-								<td>
-									<div class="input-group img-item">
-										<div class="input-group-addon">
-											<img src="{php echo toimage($menu['icon']);}" style="height:20px;width:50px">
+									</td>
+									<td>
+										<div class="input-group img-item">
+											<div class="input-group-addon">
+												<img src="{php echo toimage($menu['icon']);}" style="height:20px;width:50px">
+											</div>
+											<input type="text" name="data[web_menu_tem][icon][]" value="{$menu['icon']}" class="form-control" autocomplete="off">
+											<span class="input-group-btn">
+												<button class="btn btn-default btn-select-pic" type="button">选择图片</button>
+											</span>
 										</div>
-										<input type="text" name="data[web_menu_tem][icon][]" value="{$menu['icon']}" class="form-control" autocomplete="off">
-										<span class="input-group-btn">
-											<button class="btn btn-default btn-select-pic" type="button">选择图片</button>
-										</span>
-									</div>
-								</td>
-								<td>
-									<input type="text" class="form-control" name="data[web_menu_tem][font][]" value="{$menu['font']}"> 
-								</td>
-								<td>
-									<input type="text" class="form-control" name="data[web_menu_tem][link][]" value="{$menu['link']}"> 
-								</td>
-								<td>
-									<button type="button" class="btn btn-danger  btn-sm" onclick="removeRecharge(this)"><i class="fa fa-remove"></i></button>
-								</td> 
-							</tr>
-							{/loop}							
-						</tbody>
-						<tbody>
-							<tr>
-								<td colspan="4"><button type="button" class="btn btn-default  btn-sm" onclick="addRecharge()"><i class="fa fa-plus"></i> 添加</button></td>
-							</tr>
-						</tbody> 
-					</table>
+									</td>
+									<td>
+										<input type="text" class="form-control" name="data[web_menu_tem][font][]" value="{$menu['font']}"> 
+									</td>
+									<td>
+										<input type="text" class="form-control" name="data[web_menu_tem][link][]" value="{$menu['link']}"> 
+									</td>
+									<td>
+										<button type="button" class="btn btn-danger  btn-sm" onclick="removeRecharge(this)"><i class="fa fa-remove"></i></button>
+									</td> 
+								</tr>
+								{/loop}							
+							</tbody>
+							<tbody>
+								<tr>
+									<td colspan="4"><button type="button" class="btn btn-default  btn-sm" onclick="addRecharge()"><i class="fa fa-plus"></i> 添加</button></td>
+								</tr>
+							</tbody> 
+						</table>
+					</div>
 				</div>
 			</div>
-        </div>
-	</div>
+		</div>
 
 	</div>
 	<script>
@@ -143,6 +143,7 @@
 			html+='</tr>';
 			$('#tbody').append(html);
 		}
+
 		
 	</script>
 
@@ -153,7 +154,7 @@
 				<div class="form-group">
 					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">新人奖励</label>
 					<div class="col-sm-8">
-						<input type="text" name="data[reward]" class="form-control" value="{$settings['reward']}" />
+						<input type="number" name="data[reward]" class="form-control" value="{$settings['reward']}" />
 						<span class="help-block">不填或留空则表示新人无奖励</span>
 					</div>
 				</div>
@@ -171,24 +172,11 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">游戏设置</div>
 			<div class="panel-body">
-				<div class="form-group">
-					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">icon</label>
-					<div class="col-sm-8">
-						{php echo tpl_form_field_image('data[game_icon]',$settings['game_icon'],$settings['game_icon']);}
-					</div>
-				</div>
+				
 				<div class="form-group">
 					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">游戏名称</label>
 					<div class="col-sm-8">
 						<input type="text" name="data[game_name]" class="form-control" value="{$settings['game_name']}" />
-						<span class="help-block">字数不要过长建议4~8个字</span>
-					</div>
-					
-				</div>
-				<div class="form-group">
-					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">标注</label>
-					<div class="col-sm-8">
-						<input type="text" name="data[game_remark]" class="form-control" value="{$settings['game_remark']}" />
 						<span class="help-block">字数不要过长建议4~8个字</span>
 					</div>
 				</div>
@@ -315,10 +303,14 @@
 							<input type="text" name="data[cash_time]" class="form-control" value="{$settings['cash_time']}" />
 							<span class="input-group-addon">次</span>
 						</div>
-						<span class="help-block">0为不限制</span>
+						<span class="help-block"></span>
 					</div>
 				</div>
-				
+				<div class="col-sm-9">
+					<label><input type="radio" name="data[cash_auto]" {if $settings['cash_auto'] == 0 }checked="checked"{/if} value="0"> 关闭</label>
+					<label style="margin-left: 10px;"><input type="radio" name="data[codepay][status]" {if $settings['cash_auto'] == 1 }checked="checked"{/if} value="1"> 开启</label>
+					<div class="help-block">开启了则优先使用码支付；使用码支付微信收款功能</div>
+				</div>
 			</div>
 		</div>
 	</div>
