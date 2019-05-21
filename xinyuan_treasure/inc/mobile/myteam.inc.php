@@ -1,6 +1,6 @@
 <?php
     global $_W,$_GPC;
-    $_W['page']['sitename'] = '我的团队';
+    $_W['page']['sitename'] = '代理权益';
 
     $query = load()->object('query');
     $public_id = $_W['uniaccount']['uniacid'];

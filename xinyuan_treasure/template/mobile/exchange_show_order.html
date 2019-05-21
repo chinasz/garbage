@@ -5,7 +5,7 @@
  <!-- 头部 -->
     <div class="back">
         <div class="topB_1">
-            <a href="javascript :;" onClick="javascript :history.back(-1);">
+            <a href="{php echo $this->createMobileUrl('exchange_center')}" >
                 <div class="fanH">
 
                 </div>
@@ -17,16 +17,16 @@
     <!-- 导航 -->
     <div class="mac">
         <ul>
-            <li class="active">
+            <li onclick="javascript:location='{php echo $this->createMobileUrl("exchange_show_order")}';">
                 全部
             </li>
-            <li>
-                代发货
+            <li data = "3" onclick="javascript:location='{php echo $this->createMobileUrl("exchange_show_order",array("status"=>"3"))}';">
+                待发货
             </li>
-            <li>
+            <li data = "2" onclick="javascript:location='{php echo $this->createMobileUrl("exchange_show_order",array("status"=>"2"))}';">
                 待收货
             </li>
-            <li>
+            <li data = "1" onclick="javascript:location='{php echo $this->createMobileUrl("exchange_show_order",array("status"=>"1"))}';">
                 已完成
             </li>
         </ul>
@@ -63,14 +63,14 @@
         {/if}
 
         {if $order['order_status'] ==2}
-        <div class="tixing">
+        <div class="tixing receive" data="{$order['order_id']}">
             确认收货
         </div>
         {/if}
         {/loop}
         {else}
-        <img src="{MODULE_URL}static/img/meiN.png" alt="">
-        <p>您还没有相关订单</p>
+        <img src="{MODULE_URL}static/img/meiN.png" alt="" style="width: 1rem;height: 1rem;margin: 10% auto;border-radius: 50%;">
+        <p style="font-size: .16rem;color: #000;text-align: center;">您还没有相关订单</p>
 
         {/if}
         
@@ -104,4 +104,47 @@
         </div>
     </div>
     {/if}
+
+    <script>
+        var $status =  "{$_GPC['status']}" || false;
+        $('.mac li').eq(0).css('color',"#000");
+        if($status){
+            $('.mac li').each(function(i,e){
+                if($(this).attr('data') == $status){
+                    $(this).siblings('li').css('color','#000');
+                    $(this).css('color',"#F02929");
+                }
+            })
+        }else{
+            
+        
+            $('.mac li').eq(0).css('color',"#F02929");
+        }
+        var re_flag = true;
+        $(".receive").on('click',function(){ 
+            var that = $(this);
+            if(re_flag){
+                util.loading().show();
+                re_flag = false;
+                $.ajax({
+                    url:"{php echo $this->createMobileUrl('receive')}",
+                    data:{ordid:that.attr('data'),token:'{$_W["token"]}',submit:1},
+                    dataType:'json',
+                    type:"POST",
+                    success:function(){
+                        util.loading().hide();
+                        if(res.code ==0){
+                            that.remove(); 
+                        }else{
+
+                            util.toast(res.error || '服务器繁忙','','error');
+                        }
+
+                    }
+                })
+                
+            }
+        })
+    </script>
+
 {template 'footer'}

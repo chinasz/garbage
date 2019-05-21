@@ -6,7 +6,7 @@
 
 		<identifie><![CDATA[xinyuan_treasure]]></identifie>
 
-		<version><![CDATA[1.2.0]]></version>
+		<version><![CDATA[2.0.2]]></version>
 
 		<ability><![CDATA[财神夺宝]]></ability>
 
@@ -91,14 +91,16 @@
 	<bindings>
 		<cover>
 			<entry title="首页" do="home" state="" direct="true" />
+			<entry title="推广" do="detail" state="" direct="true" />
+			<entry title="积分商城" do="exchange" state="" direct="true" />
+			<entry title="我的" do="center" state="" direct="true" />
 			<entry title="开始游戏" do="index" state="" direct="true" />
 			<entry title="充值" do="krypton" state="" direct="true" />
-			<entry title="交易明细" do="detail" state="" direct="true" />
-			<entry title="积分商城" do="exchange" state="" direct="true" />
 			<entry title="新手教程" do="course" state="" direct="true" />
 			<entry title="排行榜" do="rank" state="" direct="true" />
 			<entry title="代理提现" do="cash" state="" direct="true" />
-			<entry title="我的团队" do="myteam" state="" direct="true" />
+			<entry title="代理权益" do="myteam" state="" direct="true" />
+			<entry title="商城我的" do="exchange_center" state="" direct="true" />
 		</cover>
 		<menu call="getMenus">
 			

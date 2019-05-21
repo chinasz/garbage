@@ -6,7 +6,7 @@
 	<script type="text/javascript" src="{MODULE_URL}static/js/index.js"></script>
 	<style>
 		body{width:100% !important;}
-		.xinshou{width: 100%;height: 6.367rem;background: url({if $this->settings['web_banner']} {php echo toimage($this->settings['web_banner']);}{else}{MODULE_URL}static/img/xinshou.png{/if}) no-repeat center center;background-size: cover;}
+		.xinshou{width: 100%;height: 6.367rem;background: url({if $this->settings['game_banner']} {php echo toimage($this->settings['game_banner']);}{else}{MODULE_URL}static/img/xinshou.png{/if}) no-repeat center center;background-size: cover;}
 		.res-layer{
 			background-color:#fff;width:16rem;position:fixed;z-index:5;top:5rem;left:3rem;padding:0 0 .8rem 0;
 		}

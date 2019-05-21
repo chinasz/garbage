@@ -15,19 +15,19 @@
             </div>
         </a>
         <div class="bottom">
-            <a class="lianJ" href="indent.html">
+            <a class="lianJ" href="{php echo $this->createMobileUrl('exchange_show_order',array('status'=>3))}">
                 <div>
                     <img src="{MODULE_URL}static/img/daiFF.png" alt="">
                     <p>待发货</p>
                 </div>
             </a>
-            <a class="lianJ" href="indent.html">
+            <a class="lianJ" href="{php echo $this->createMobileUrl('exchange_show_order',array('status'=>2))}">
                 <div>
                     <img src="{MODULE_URL}static/img/daiSH.png" alt="">
                     <p>待收货</p>
                 </div>
             </a>
-            <a class="lianJ" href="indent.html">
+            <a class="lianJ" href="{php echo $this->createMobileUrl('exchange_show_order',array('status'=>1))}">
                 <div>
                     <img src="{MODULE_URL}static/img/queR.png" alt="">
                     <p>已完成</p>
@@ -56,7 +56,7 @@
                 <img src="{MODULE_URL}static/img/centermy.jpg" alt="">
             </li>
             <li>
-                <a class="lianJ" href="javaScript:;">
+                <a class="lianJ" href="javaScript:kefu();">
                     <div>
                     <img src="{MODULE_URL}static/img/centerseection03.jpg" alt="">
                         <span>联系客服</span> 
@@ -87,4 +87,8 @@
         </div>
     </a>
 </footer>
+
+<div id="kefu" style="width: 100%;height: 100%;position: fixed;top: 0;background-color: rgba(0, 0, 0,0.41);z-index: 2;display:none;">
+    <img src="{php echo toimage($this->settings['qrcode'])}" style="width:80%;position: relative;left: 10%;top:10%;"/> 
+</div>
 {template 'footer'}

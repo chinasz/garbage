@@ -1,4 +1,21 @@
+	<div id="kefu" style="width: 100%;height: 100%;position: fixed;top: 0;background-color: rgba(0, 0, 0,0.41);z-index: 2;display:none;">
+		<img src="{php echo toimage($this->settings['qrcode'])}" style="width:80%;position: relative;left: 10%;top:10%;"/> 
+	</div>
+	<script>
+		function kefu(){
+			$("#kefu").show();
 		
+		}
+		$("#kefu").on('click',function(){
+			$(this).hide();
+		
+		})
+		function poster_layer(){
+			$("#kefu").children('img').attr('src','{php echo $this->createMobileUrl("showposter")}');
+			$("#kefu").show();
+		}
+	</script>
+			
 		<div class="text-center footer" style="margin:10px 0; width:100%; text-align:center; word-break:break-all;font-size:14px;">
 			{if !empty($this->settings['web_copy'])}{php echo $this->settings['web_copy']}{/if}
 		</div>

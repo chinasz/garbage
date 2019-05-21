@@ -33,8 +33,8 @@
 				$r_money = floatval($_GPC['money']);
 
 				//自动打款参数
-				$is_auto = 1;
-				$auto_num = 50;
+				$is_auto = empty($this->settings['cash_auto'])?0:intval($this->settings['cash_auto']);
+				$auto_num = empty($this->settings['auto_num'])?0:floatval($this->settings['auto_num']);
 
 				if(!empty($cash_low)){
 
@@ -65,7 +65,7 @@
 					//提现次数
 					$time = $query->from($this->table['cash'])->wher(array('cash_user'=>intval($_SESSION['ids']),'cash_time>='=>date("Y-m-d"),'cash_time<='=>date("Y-m-d",strtotime("+1 day"))))->count();
 					
-					if($time>$cash_time){
+					if($time>=$cash_time){
 						$return = array('code'=>1,'error'=>'今日提现次数已达上限!');
 						echo json_encode($return);
 						return;
@@ -92,7 +92,7 @@
 						'cash_num'	=>	$orderNum,
 						'cash_user'	=>	intval($_SESSION['ids']),
 						'cash_fee'	=>	$cash_fee,
-						'cash_money'=>	$member_reward,
+						'cash_money'=>	$r_money,
 						'cash_status'=>	2,
 						'cash_time'	=>	date("Y-m-d H:i:s")
 					);
@@ -120,7 +120,7 @@
 								'cash_fee'	=>	$cash_fee,
 								'cash_money'=>	$money,
 								'cash_status'=>	1,
-								'cash_msg'	=>	'用户提现，自动打款成功,打款金额为'.$money.'元',
+								'cash_msg'	=>	'用户提现'.$r_money.'，自动打款成功,打款金额为'.$money.'元',
 								'cash_time'	=>	date("Y-m-d H:i:s"),
 								'cash_otime'=>	date("Y-m-d H:i:s")
 							);
@@ -138,7 +138,7 @@
 
 					}
 					//减佣金
-					$sql = "update ".tablename($this->table['member'])." set reward = reward - ".floatval($money)." where member_id = :member_id";
+					$sql = "update ".tablename($this->table['member'])." set reward = reward - ".floatval($r_money)." where member_id = :member_id";
 					pdo_query("START TRANSACTION");
 					//cash order
 					$res = pdo_insert($this->table['cash'],$cash_insert);

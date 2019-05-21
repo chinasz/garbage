@@ -11,7 +11,7 @@
                 <table class="table table-hover">
                     <thead class="navbar-inner">
                     <tr>
-                        <th>用户</th>
+                        <th>提现时间<br>用户</th>
                         <th>提现总金额</th>
                         <th>微信打款单号</th>
                         <th>提现手续费<br>(当时设置的为准)</th>
@@ -23,7 +23,7 @@
                     <tbody id="level-list">
                         {loop $cash_list $cash}
                         <tr>
-                            <td><img src="{php echo toimage($cash['member_avatar'])}" style="width:60px;height:60px;"><br>{$cash['member_nickname']}</td>
+                            <td>{$cash['cash_time']}<br/><img src="{php echo toimage($cash['member_avatar'])}" style="width:60px;height:60px;"><br>{$cash['member_nickname']}</td>
                             <td>{$cash['cash_money']}元</td>
                             <td>{$cash['cash_three_num']}</td>
                             <td>{$cash['cash_fee']}%</td>
@@ -34,7 +34,7 @@
                                 <a class="btn btn-warning btn-sm cash" data-id ="{$cash['id']}" data-ment="0">手动打款</a><br>
                                 <a class="btn btn-info btn-sm cash" data-id ="{$cash['id']}" data-ment="1">自动打款</a><br>
                                 {/if}
-                                <a class="btn btn-sm btn-danger" data-id ="{$cash['id']}">删除</a>
+                                <!-- <a class="btn btn-sm btn-danger" data-id ="{$cash['id']}">删除</a> -->
                             </td>
                         </tr>
                         {/loop}
@@ -61,11 +61,10 @@
                 dataType:"json",
                 success:function(res){
                     if(res.code == 0){
-                        util.message('操作成功');
+                        util.message('操作成功','','success');
                     }else if(res.code ==1){
                         util.message(res.error || '','','error');
                     }
-
                 }
             })
         })

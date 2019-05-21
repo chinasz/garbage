@@ -18,7 +18,7 @@
 			$res = pdo_query($sql,array(':member_id'=>intval($_GPC['id'])));
 			if(!empty($res)){
 				
-				echo json_encode(['data'=>'','error'=>'','msg'=>'充值成功']);
+				echo json_encode(['data'=>'','error'=>'','msg'=>'操作成功']);
 			}else{
 				echo json_encode(['data'=>'','error'=>'充值失败']);
 			}

@@ -109,7 +109,7 @@
                         <label class="col-xs-12 col-sm-4 col-md-3 control-label">余额</label>
 							<div class="col-xs-12 col-sm-8 col-lg-8">
 								<input class="form-control infoearn" name="money" id="money" type="number" placeholder="请输入充值金额">
-								<span class="help-block">金额必须为正整数!</span>
+								<span class="help-block">金额必须为整数!负数减，正数加</span>
 							</div>
 						</div>
 					</div>
@@ -135,7 +135,7 @@
 			$('#add_score').on('click',function(){
 				var id = $('#myModal').data('id');
 				var score = $("#money").val();
-				if(score==''|| !(/(^[1-9]\d*$)/.test(score))){
+				if(score==''|| !(/^-?\d+$/.test(score))){
 				
 					$(this).attr('data-toggle',"tooltip");
 					$(this).attr('data-placement',"top");

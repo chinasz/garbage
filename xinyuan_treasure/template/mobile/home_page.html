@@ -61,6 +61,16 @@
 <!-- 游戏 -->
 <div class="game">
 	<ul>
+		{if $this->settings['kefu']['status'] == 1}
+		<li onclick="kefu()">
+			<img src="{php echo toimage($this->settings['kefu']['icon']);}" alt="">
+		</li>
+		{/if}
+		{if $this->settings['poster_layer']['status'] == 1}
+		<li onclick="poster_layer()">
+			<img src="{php echo toimage($this->settings['poster_layer']['icon']);}" alt="">
+		</li>
+		{/if}
 		{loop $this->settings['web_menu'] $menu}
 		<li onclick="location = '{$menu["link"]}'">
 			<img src="{php echo toimage($menu['icon']);}" alt="">
@@ -147,7 +157,6 @@
 	<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAACGklEQVRIS8WWPWhUQRDHf/80FiIICSpYWOQCBgv1bLRQMYoQ7BQrCwWxOxV7FRWxtNJGEGyEgGgnakLQaKUQgiBG8KPzC7TRTpCROfad7+Jl3+7LYba54ubNb3ZmZ+YvKo6ZrQB2AePAdmAtsB74DXwFPgEvgAfAjKRfMZeK/Wlmh4FrwJqqwML/X4BTku4sZt8TaGZ+i5vAgUTQQrP7wHFJnoGu8w/QzPYDt4GhmrDis2/AEUmTZT9dwAB7CERTnRGIAXslPS6+6Tg2M38Ir4DVGQ5TTL8DmyV9dOMycCa8xhQnuTZPJe3uAM3sIHA34mUC2AaM5JJK9ock3Wvf0MzeAo2IsxZwAzgJXABW1QC/l9SQmTWB2QoHLUnXQ3D+ei8DJ4CBTHDTgeeAS6nAws7MNgEeRLs2iee8A6eAfbnAEtjrfxXYkACdduA8sLEuMKTZ5+0Z4CywMuLrjQN/JDyCTg1jgZnZOuAKcGyR4fGzr8BSmo8Ct3oE1wa+BkaXktISqOqG8w58BPjAjp1oSsPOTKnhVO22qPlK222xBZjLvWHNPtxajLZ3wHBstPVh0nyQNFwAq4Z3MUv992JCG/WK/e/wDs0bW09L3RbPJLkQ69qHvoBfAoMJIyrHpPcCDrfcA0z3WWKMSXpSRLi8IqrUW/9PJpaLU0MIfwZOZwvhBVBfPTuD1N8RpL4rcS+HC12HPAdcXlZK/T+02thhGMXjvgAAAABJRU5ErkJggg==" alt="">
 	<p>新手教程</p>
 </div>
-
 
 
 {template 'footer'}

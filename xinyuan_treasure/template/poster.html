@@ -4,114 +4,107 @@
 <link href="{MODULE_URL}static/css/jquery.contextMenu.css" rel="stylesheet">
 <link href="{MODULE_URL}static/css/poster.css" rel="stylesheet">
 <div class='panel panel-default'>
-            <div class='panel-heading'>
-                分销二维码海报设置 <a class="btn btn-primary btn-sm" onclick="return confirm('确认清除海报信息吗？清除后将无法恢复');return false;" href="{php echo $this->createWebUrl('delposter')}">清除已生成海报图片</a>
+    <div class='panel-heading'>
+        分销二维码海报设置 <a class="btn btn-primary btn-sm" onclick="return confirm('确认清除海报信息吗？清除后将无法恢复');return false;" href="{php echo $this->createWebUrl('delposter')}">清除已生成海报图片</a>
+    </div>
+    <div class='panel-body'>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-1 control-label">海报功能</label>
+            <div class="col-sm-11 col-xs-12">
+                    <label><input type="radio" value="0" name='data[poster_status]' checked>关闭</label>
+                    <label><input type="radio" value="1" name='data[poster_status]' {if $settings['poster_status']}checked{/if}>开启</label>
             </div>
-            <div class='panel-body'>
-            	<div class="form-group">
-			        <label class="col-xs-12 col-sm-3 col-md-1 control-label">海报功能</label>
-			        <div class="col-sm-11 col-xs-12">
-			             <label><input type="radio" value="0" name='data[poster_status]' checked>关闭</label>
-			             <label><input type="radio" value="1" name='data[poster_status]' {if $settings['poster_status']}checked{/if}>开启</label>
-			        </div>
-				</div>
-                <div class="form-group">
-                    <label class="col-xs-12 col-sm-3 col-md-1 control-label">海报设计</label>
-                    <div class="col-sm-11 col-xs-12">
-                    	<input type="hidden" name="data[poster]">
-                        <table style='width:100%;'>
-                                <tr>
-                                    <td id="bgtd" style='padding:10px;' valign='top'>
-                                        <div id='jun_poster'>
-                                          {if !empty($settings['poster_bg'])}
-                                          <img src='{php echo toimage($settings['poster_bg'])}' class='bg'/>
-                                          {/if}
-                                          {if !empty($settings['poster'])}
-                                          {loop $settings['poster'] $key $d}
-                                          <div class="drag" type="{$d['type']}" index="{php echo $key+1}" style="zindex:{php echo $key+1};left:{$d['left']};top:{$d['top']};
-                                               width:{$d['width']};height:{$d['height']}" size="{$d['size']}" color="{$d['color']}" > 
-                                                {if $d['type']=='img' || $d['type']=='thumb'}
-                                                  <img src="{php echo MODULE_URL.'static/img/default.jpg'}" />
-                                                {elseif $d['type']=='qr'}
-                                                  <img src="{php echo MODULE_URL.'static/img/qr.png'}" />
-                                                {elseif $d['type']=='name'}
-                                                   <div class=text style="font-size:{$d['size']};color:{$d['color']}" >昵称</div> 
-                                                 {elseif $d['type']=='code'}
-                                                   <div class=text style="font-size:{$d['size']};color:{$d['color']}" >邀请码</div> 
-                                                {/if}
-                                              <div class="dRightDown"> </div><div class="dLeftDown"> </div><div class="dRightUp"> </div><div class="dLeftUp"> </div><div class="dRight"> </div><div class="dLeft"> </div><div class="rUp"> </div><div class="rDown"></div>
-                                          </div>
-                                          {/loop} 
-                                          {/if}
-                                        </div>
-                                    </td>
-                                    <td valign='top' style='padding:10px;'>
-                                          <div class='panel panel-default' style="border-color: yellowgreen;">
-                                              <div class='panel-body'>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-1 control-label">海报设计</label>
+            <div class="col-sm-11 col-xs-12">
+                <input type="hidden" name="data[poster]">
+                <table style='width:100%;'>
+                        <tr>
+                            <td id="bgtd" style='padding:10px;' valign='top'>
+                                <div id='jun_poster'>
+                                    {if !empty($settings['poster_bg'])}
+                                    <img src='{php echo toimage($settings['poster_bg'])}' class='bg'/>
+                                    {/if}
+                                    {if !empty($settings['poster'])}
+                                    {loop $settings['poster'] $key $d}
+                                    <div class="drag" type="{$d['type']}" index="{php echo $key+1}" style="zindex:{php echo $key+1};left:{$d['left']};top:{$d['top']};
+                                        width:{$d['width']};height:{$d['height']}" size="{$d['size']}" color="{$d['color']}" > 
+                                        {if $d['type']=='img' || $d['type']=='thumb'}
+                                            <img src="{php echo MODULE_URL.'static/img/default.jpg'}" />
+                                        {elseif $d['type']=='qr'}
+                                            <img src="{php echo MODULE_URL.'static/img/qr.png'}" />
+                                        {elseif $d['type']=='name'}
+                                            <div class=text style="font-size:{$d['size']};color:{$d['color']}" >昵称</div> 
+                                            {elseif $d['type']=='code'}
+                                            <div class=text style="font-size:{$d['size']};color:{$d['color']}" >邀请码</div> 
+                                        {/if}
+                                        <div class="dRightDown"> </div><div class="dLeftDown"> </div><div class="dRightUp"> </div><div class="dLeftUp"> </div><div class="dRight"> </div><div class="dLeft"> </div><div class="rUp"> </div><div class="rDown"></div>
+                                    </div>
+                                    {/loop} 
+                                    {/if}
+                                </div>
+                            </td>
+                            <td valign='top' style='padding:10px;'>
+                                    <div class='panel panel-default' style="border-color: yellowgreen;">
+                                        <div class='panel-body'>
+                                            <div class="form-group">
+                                                <label class="col-xs-12 col-sm-3 col-md-2 control-label">海报元素</label>
+                                                <div class="col-sm-9 col-xs-12">
+                                                    <button class='btn btn-info btn-poster' type='button' data-type='img' >头像</button>
+                                                        <button class='btn btn-primary btn-poster' type='button' data-type='name'>昵称</button>
+                                                        <button class='btn btn-warning btn-poster' type='button' data-type='qr' >专属二维码</button>
+                                                        <button class='btn btn-danger btn-poster' type='button' data-type='code' >邀请码(即会员ID)</button>
+                                                </div>
+                                            </div>
+                                            <div id='namesset' style='display:none'>
                                                     <div class="form-group">
-                                                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">海报元素</label>
-                                                        <div class="col-sm-9 col-xs-12">
-                                                        	<button class='btn btn-info btn-poster' type='button' data-type='img' >头像</button>
-                                                             <button class='btn btn-primary btn-poster' type='button' data-type='name'>昵称</button>
-                                                             <button class='btn btn-warning btn-poster' type='button' data-type='qr' >专属二维码</button>
-                                                             <button class='btn btn-danger btn-poster' type='button' data-type='code' >邀请码(即会员ID)</button>
+                                                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">名字颜色</label>
+                                                            <div class="col-sm-9 col-xs-12">
+                                                                {php echo tpl_form_field_color('color')}
                                                         </div>
                                                     </div>
-                                                  <div id='namesset' style='display:none'>
-		                                                  <div class="form-group">
-		                                                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">名字颜色</label>
-		                                                         <div class="col-sm-9 col-xs-12">
-		                                                              {php echo tpl_form_field_color('color')}
-		                                                        </div>
-		                                                    </div>
-		                                                  <div class="form-group">
-		                                                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">名字大小</label>
-		                                                        <div class="col-sm-6">
-		                                                             <div class='input-group'>
-		                                                                 <input type="text" id="namesize" class="form-control namesize" placeholder="例如: 15"  />
-		                                                                 <div class='input-group-addon'>px</div>
-		                                                            </div>
-		                                                        </div>
-		                                                    </div>
-		                                             </div>
-		                                            <div id='codeset' style='display:none'>
-		                                                  <div class="form-group">
-		                                                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">邀请码颜色</label>
-		                                                         <div class="col-sm-9 col-xs-12">
-		                                                              {php echo tpl_form_field_color('color')}
-		                                                        </div>
-		                                                    </div>
-		                                                  <div class="form-group">
-		                                                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">邀请码大小</label>
-		                                                        <div class="col-sm-6">
-		                                                             <div class='input-group'>
-		                                                                 <input type="text" id="codesize" class="form-control namesize" placeholder="例如: 15"  />
-		                                                                 <div class='input-group-addon'>px</div>
-		                                                            </div>
-		                                                        </div>
-		                                                    </div>
-		                                             </div>
-                                             	<div class="form-group" id="posterbg">
-                                                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">海报背景</label>
-                                                    <div class="col-sm-9 col-xs-12">
-                                                       {php echo tpl_form_field_image('data[poster_bg]',$settings['poster_bg']);}
+                                                    <div class="form-group">
+                                                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">名字大小</label>
+                                                        <div class="col-sm-6">
+                                                                <div class='input-group'>
+                                                                    <input type="text" id="namesize" class="form-control namesize" placeholder="例如: 15"  />
+                                                                    <div class='input-group-addon'>px</div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                          </div>
-                                   </div>
-                                    </td>
-                                </tr>
-                        </table>
-                    </div>
-	    		</div>
-		<div class="form-group">
-	        <label class="col-xs-12 col-sm-3 col-md-1 control-label">海报引导语</label>
-	        <div class="col-sm-11 col-xs-12">
-	             <textarea class="form-control" name='data[poster_tips]'>{$settings['poster_tips']}</textarea>
-	             <span class='help-block'>例如：点击按钮保存海报，分享至朋友圈;好友扫码进入后即可获得佣金</span>
-	        </div>
-		</div>
-		
+                                            <div id='codeset' style='display:none'>
+                                                    <div class="form-group">
+                                                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">邀请码颜色</label>
+                                                            <div class="col-sm-9 col-xs-12">
+                                                                {php echo tpl_form_field_color('color')}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">邀请码大小</label>
+                                                        <div class="col-sm-6">
+                                                                <div class='input-group'>
+                                                                    <input type="text" id="codesize" class="form-control namesize" placeholder="例如: 15"  />
+                                                                    <div class='input-group-addon'>px</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        <div class="form-group" id="posterbg">
+                                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">海报背景</label>
+                                            <div class="col-sm-9 col-xs-12">
+                                                {php echo tpl_form_field_image('data[poster_bg]',$settings['poster_bg']);}
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            </td>
+                        </tr>
+                </table>
+            </div>
+        </div>
+
 	</div>
 </div>
 <script src="{MODULE_URL}static/js/poster.js" type="text/javascript"></script>

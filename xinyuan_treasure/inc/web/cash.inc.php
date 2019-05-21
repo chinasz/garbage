@@ -13,17 +13,25 @@
     //打款
     if($_W['isajax']){
         if(checksubmit()){
+           
             if(empty($_GPC['id']) || !in_array($_GPC['ment'],array(0,1))){
                 echo json_encode(array('code'=>1,'error'=>'参数错误'));
                 return;
             }
             
-            $cash_info = $query->from($this->table['cash'])->where(array('id'=>$_GPC['id']))->get();
+            $cash_info = $query->from($this->table['cash'])->where(array('id'=>$_GPC['id'],'cash_status'=>2))->get();
             if(empty($cash_info)){
-                echo json_encode(array('code'=>1,'error'=>'提现订单不存在'));
+                echo json_encode(array('code'=>1,'error'=>'提现订单无效'));
                 return;
 
             }
+            $member = $query->from($this->table['member'])->where(array('member_id'=>$cash_info['cash_user'],'public_id'=>$public_id,'is_del'=>1))->get();
+            if(empty($member)){
+
+                echo json_encode(array('code'=>1,'error'=>'无效的用户'));
+                return;
+            }
+
 
             if($_GPC['ment'] == 1){
                 $jine = $cash_info['cash_money'] - $cash_info['cash_money'] * $cash_info['cash_fee'] / 100;
@@ -32,26 +40,27 @@
                     'cert'	=>	MODULE_ROOT.'/cert/'.md5('cert'.$_W['uniaccount']['uniacid']).'.pem',
                     'key'	=>	MODULE_ROOT.'/cert/'.md5('key'.$_W['uniaccount']['uniacid']).'.pem',
                 );
-                if(!file_exists($cert['cert']) || !file_exists($cert['key'])){
-                    
-                    echo json_encode(array('code'=>1,'error'=>'支付参数未配置'));
+            
+                if(empty($this->settings['mchid']) || empty($this->settings['appid'])|| empty($this->settings['secrect']) || !file_exists($cert['cert']) || !file_exists($cert['key'])){
+                            
+                    echo json_encode(array('code'=>1,'error'=>'支付参数未设置'));
                     return;
-
+                    
                 }
-
+    
                 //微信付款参数
                 $wechat = array(
                     'mch_appid'	=>	$this->settings['appid'],
                     'mchid'	=>	$this->settings['mchid'],
                     'nonce_str'=>	md5(uniqid(mt_rand(), true)),
                     'partner_trade_no'=>$cash_info['cash_num'],
-                    'openid'	=>	$_SESSION['openid'],
+                    'openid'	=>	$member['member_openid'],
                     'check_name'=>	'NO_CHECK',
                     'amount'	=>	$jine*100,
                     'desc'		=>	'企业付款',
                     'spbill_create_ip'=>	CLIENT_IP
                 );
-                
+                $url = 'https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers';
                 
                 
                 //微信付款
@@ -82,7 +91,8 @@
             }elseif ($_GPC['ment'] == 0) {
                 $data = array(
                     'cash_status'   =>  1,
-                    'cash_msg'      =>  '手动打款确认'
+                    'cash_msg'      =>  '手动打款确认',
+                    'cash_otime'        =>  date("Y-m-d H:i:s")
                 );
                 $return['code'] =   0;
             }

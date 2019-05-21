@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="{MODULE_URL}static/css/new/exchange.css">
 	<!-- 头部 -->
     <div class="topB_1">
-        <a href="javascript :;" onClick="javascript :history.back(-1);">
+        <a onClick="javascript :history.back(-1);">
             <div class="fanH">
 
             </div>
@@ -90,7 +90,7 @@
 
     <!--------------------------- footer --------------->
 	<footer>
-		<a href="{php echo $this->createMobileUrl('index')}">
+		<a href="{php echo $this->createMobileUrl('home')}">
 			<div id="footer1">
 				<img src="data:image/png;base64,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" alt="">
 				<p>首页</p>
