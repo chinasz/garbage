@@ -1,0 +1,75 @@
+{template 'exchange_header'}
+	{template 'style'}
+    <link rel="stylesheet" href="{MODULE_URL}static/css/exchange_order.css">
+<!-- 头部 -->
+    <div class="back bgcolor">
+        <div class="topB_1">
+            <div class="fanH" onclick="goback()">
+
+            </div>
+            积分兑换
+        </div>
+    </div>
+ 
+    <div class="head_nav_wrap">
+        <ul class="head_nav">
+            <li class="active selected order_status" data="0">全部</li>
+            <li class="address_li order_status order_status1" data="1">已完成</li>
+            <li class="address_li order_status order_status3" data="3">待发货</li>
+            <li class="address_li order_status order_status2" data="2">待收货</li>
+        </ul>
+    </div>
+
+    <div id="test" style="display:block;margin: 20px 0 0 0">
+		{if !empty($order_all_list)}
+		{loop $order_all_list $order}
+        <div style="display:block;" class="order{$order['order_status']} order">
+			<div class="state">
+				<div class="state_T">
+					<div class="state_Left">
+						<img src="{php echo toimage($order['goods_thumb'])}" alt="">
+					</div>
+					<div class="state_Right">
+						<p>{$order['goods_name']}</p>
+						<span>&yen;{$order['order_fee']}</span>
+						<p>{$order['goods_name']}</p>
+						{if $order['order_status'] == 3}
+						<div class="tiX">
+							提醒发货
+						</div>
+						{/if}
+					</div>
+				</div>
+			</div>
+		</div>
+		{/loop}
+		{else}
+		{/if}
+    </div>
+    <script>
+		var hash = location.hash.replace('#','');
+		
+		if(hash !=''){
+			$(".order").hide();
+			$('.order'+hash).show();
+			$('.order_status'+hash).siblings('li').removeClass('selected');
+			$('.order_status'+hash).addClass('selected');
+			
+		}
+		
+		$(".order_status").on('click',function(){
+			$(this).addClass('selected');
+			$(this).siblings('li').removeClass('selected');
+			var status = $(this).attr('data');
+			if(status>0){
+				$(".order").hide();
+				$('.order'+status).show();
+				
+			}else{
+			
+				$(".order").show();
+			}
+		
+		})
+	</script>
+{template 'exchange_footer'}

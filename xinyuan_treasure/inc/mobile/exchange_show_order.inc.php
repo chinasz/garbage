@@ -20,6 +20,6 @@
 	//$order_all_list = $query->from($this->table['order'],'o')->innerjoin($this->table['goods'],'g')->on('o.order_goods','g.goods_id')->select($field)->where($where)->getall();
 
 	//推荐
-	$recommend_list = $query->from($this->table['goods'])->where(array('public_id'=>$public_id))->limit(2)->getall();
+	$recommend_list = $query->from($this->table['goods'])->where(array('public_id'=>$public_id,'goods_status'=>1))->limit(2)->getall();
 
 	include $this->template('exchange_show_order');

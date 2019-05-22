@@ -71,7 +71,7 @@
 										<td>{$goods['class_name']}</td>
 										<td><img src="{php echo toimage($goods['goods_thumb'])}" style="width:60px;height:60px;"><br>{$goods['goods_name']}<br></td>
 										<td><span class="label label-info">{if $goods['is_real'] ==1}实体{else}虚拟{/if}</span></td>
-										<td>￥{$goods['goods_oprice']}<br>{php echo $goods['goods_price']==0?'':'￥'.$goods['goods_price'];}{if $goods['goods_score']!=0}+{/if}{php echo $goods['goods_score']==0?'':$goods['goods_score'].'积分';}</td>
+										<td>￥{$goods['goods_oprice']}<br>{$goods['goods_score']}积分</td>
 										<td>{$goods['goods_stock']}</td>
 										<td data-id="43">{if $goods['goods_status']==1}<label class="label label-success">显示</label>{else}<label class="label label-warning">不显示</label>{/if}</td>
 										<td>
