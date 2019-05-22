@@ -51,21 +51,6 @@ class Xinyuan_treasureModuleSite extends WeModuleSite {
 				'icon'	=>	'wi wi-user-group'
 			),
 			array(
-				'title'	=> '商品分类',
-				'url'	=>	$this->createWebUrl('gclass'),
-				'icon'	=>	'fa fa-pencil-square-o'
-			),
-			array(
-				'title'	=> '商品管理',
-				'url'	=>	$this->createWebUrl('goods'),
-				'icon'	=>	'fa fa-gift'
-			),
-			array(
-				'title'	=> '订单管理',
-				'url'	=>	$this->createWebUrl('order'),
-				'icon'	=>	'fa fa-truck',
-			),
-			array(
 				'title'	=> '游戏记录',
 				'url'	=>	$this->createWebUrl('game'),
 				'icon'	=>	'fa fa-keyboard-o',
