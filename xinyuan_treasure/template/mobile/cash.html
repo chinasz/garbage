@@ -19,7 +19,7 @@
     
         <!-- 余额 -->
         <div class="money">
-            <p class="balance">账户佣金</p>
+            <p class="balance">可提现</p>
             <p class="data">{if empty($member_reward)}0.00{else}{$member_reward}{/if}</p>
             <p class="unit">元</p>
         </div>
@@ -32,7 +32,11 @@
     
     
         <!-- 可提现金额 -->
-        <p class="yongJ">可提现佣金:{if empty($member_reward)}0.00{else}{$member_reward}{/if}元</p>
+        <p class="yongJ">佣金:{$member['reward']}元<br>
+            余额:{$member['member_score']}<br>
+            最低提现金额{$cash_low}元
+
+        </p>
     
     
         <!-- 微信充值 -->

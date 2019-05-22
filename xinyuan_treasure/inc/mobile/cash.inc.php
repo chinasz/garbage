@@ -3,19 +3,17 @@
 	
 	$_W['page']['sitename'] = '佣金提现';
 	$query = load()->object('query');
-	$member_reward = $query->from($this->table['member'])->where(array('member_id'=>intval($_SESSION['ids']),'is_del'=>1))->getcolumn('reward');
-	$cash_low = floatval($this->settings['cash_low']);
+	$member = $query->from($this->table['member'])->where(array('member_id'=>intval($_SESSION['ids']),'is_del'=>1))->get();
+	$member_reward = $member['reward']+$member['member_score'];
+
+	$cash_low = empty($this->settings['cash_low'])?1:floatval($this->settings['cash_low']);
 
 	$cert = array(
 		'cert'	=>	MODULE_ROOT.'/cert/'.md5('cert'.$_W['uniaccount']['uniacid']).'.pem',
 		'key'	=>	MODULE_ROOT.'/cert/'.md5('key'.$_W['uniaccount']['uniacid']).'.pem',
 	);
 
-	if(empty($cash_low)){
-		message('提现未设置');
-		
-		
-	}else if(empty($this->settings['mchid']) || empty($this->settings['appid'])|| empty($this->settings['secrect']) || !file_exists($cert['cert']) || !file_exists($cert['key'])){
+	if(empty($this->settings['mchid']) || empty($this->settings['appid'])|| empty($this->settings['secrect']) || !file_exists($cert['cert']) || !file_exists($cert['key'])){
 				
 		message('请联客服,支付参数未设置');
 		
@@ -137,8 +135,11 @@
 
 
 					}
+
+					$des_reward = $member['reward']>=$r_money?0:$member['reward'];
+					$des_score  = $r_money - $des_reward;
 					//减佣金
-					$sql = "update ".tablename($this->table['member'])." set reward = reward - ".floatval($r_money)." where member_id = :member_id";
+					$sql = "update ".tablename($this->table['member'])." set reward = reward - ".floatval($des_reward).",member_score = member_score - ".floatval($des_score)." where member_id = :member_id";
 					pdo_query("START TRANSACTION");
 					//cash order
 					$res = pdo_insert($this->table['cash'],$cash_insert);
