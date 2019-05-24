@@ -106,8 +106,7 @@
 	*登陆
 	*
 	*/
-	function login($table,$fid,$uniacid){
-
+	function login($table,$fid,$uniacid,$reward =0){
 		$mc = load()->model('mc');
 		$query = load()->object('query');
 		unset($_SESSION['ids']);
@@ -133,7 +132,7 @@
 				$data = array(
 					'member_nickname'	=>	$member['nickname'],
 					'member_openid'		=>	$_SESSION['openid'],
-					'member_score'		=>	0,
+					'member_score'		=>	$reward,
 					'member_avatar'		=>	$member['avatar'],
 					'member_fid'		=>	$fid,
 					'member_firsttime'	=>	$time,

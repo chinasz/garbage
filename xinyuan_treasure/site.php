@@ -6,7 +6,7 @@
  * @url
  */
 defined('IN_IA') or exit('Access Denied');
-
+error_reporting(0);
 include_once 'func.php';
 include_once 'pay.php';
 include_once 'codepay.php';
@@ -25,15 +25,14 @@ class Xinyuan_treasureModuleSite extends WeModuleSite {
 		$sql = 'SELECT `settings` FROM ' . tablename('uni_account_modules') . ' WHERE `uniacid` = :uniacid AND `module` = :module';
 		$settings = pdo_fetchcolumn($sql, array(':uniacid' => $_W['uniacid'], ':module' => 'xinyuan_treasure'));
 		$this->settings = iunserializer($settings);
-		
 
 		if($_W['container'] == 'wechat' and $_W['os'] == 'mobile'){
 			
 			$fid = $_GPC['fid']?$_GPC['fid']:0;
 			$fid = $fid == $_SESSION['ids']?0:$fid;
+			$reward = empty($this->settings['reward'])?0:intval($this->settings['reward']);
 			
-			
-			login($this->table,$fid,$_W['uniaccount']['uniacid']);
+			login($this->table,$fid,$_W['uniaccount']['uniacid'],$reward);
 		}
 	}
 	
