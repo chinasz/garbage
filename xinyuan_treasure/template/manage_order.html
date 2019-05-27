@@ -84,6 +84,7 @@
 							<td>{$order['add_time']}</td>
 							<td data-id = "{$order['order_id']}" data-real="{$order['is_real']}">
 								{if $order['order_status']==3}<button class="btn btn-primary btn-sm layer" data-toggle="modal" data-target="#myModal">发货</button>{/if}
+								<button class="btn btn-warning btn-sm del-order">删除</button>
 							</td>
 						</tr>
 						{/loop}
@@ -190,6 +191,29 @@
 
 		})
 
+
+		$('.del-order').on('click',function(){
+			var ordid = $(this).parent('td').attr("data-id");
+			
+			var that = $(this);
+			if(confirm('是否删除?')){
+				$.ajax({
+					url:"{php echo $this->createWebUrl('delorder')}",
+					type:"POST",
+					data:{ordid:ordid,token:"{$_W['token']}",submit:1},
+					dataType:'json',
+					success:function(res){
+						if(res.code ==0){
+							util.message('删除成功','','success');
+							that.parent('td').parent('tr').remove();
+						}else{
+							util.message(res.error || '删除失败','','error');
+						}
+					}
+				})
+			}
+
+		})
 
 	});
 	</script>

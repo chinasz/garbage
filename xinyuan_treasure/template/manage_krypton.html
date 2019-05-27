@@ -3,10 +3,22 @@
 		.form-group{
 			overflow:hidden;
 		}
+		.account-stat-num > div{width:50%; float:left; font-size:16px; text-align:center;}
+		.account-stat-num > div span{display:block; font-size:30px; font-weight:bold;}
 	</style>
 	<div class="main">
 		<div class="alert alert-info" role="alert"><h4>{$_W['page']['title']}</h4></div>
-		
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				数据统计
+			</div>
+			<div class="panel-body">
+				<div class="account-stat-num row">
+					<div>今日充值金额<span>&yen;{php echo empty($today_recharge)?0:$today_recharge}</span></div>
+					<div>总充值金额<span>&yen;{php echo empty($total_recharge)?0:$total_recharge}</span></div>
+				</div>
+			</div>
+		</div>
 		<div class="panel panel-info">
 			<div class="panel-heading">筛选</div>
 			<div class="panel-body">

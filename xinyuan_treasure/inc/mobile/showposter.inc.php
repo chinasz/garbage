@@ -1,5 +1,6 @@
 <?php
 	global	$_W,$_GPC;
+	$this->settings['poster_status'] ==1 or die('海报未开启');
 	load()->func('file');
 	load()->library('qrcode/phpqrcode');
 	$query = load()->object('query');

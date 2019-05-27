@@ -8,13 +8,22 @@
 	/* */
 
 	$_W['page']['title'] = '充值记录';
-	
+	$public_id = intval($_W['uniaccount']['uniacid']);
 	$query = load()->object('query');
 	$where = '';
 	$condition = "";
 	$page = empty($_GPC['page'])?1:intval($_GPC['page']);
 	
 	$pagesize = 10;
+
+	/* 数据统计 */
+	//今日充值金额
+	$today_sql = "select SUM(recharge_pay) from ".tablename($this->table['recharge'])." where status = 1 and add_time >= '".date('Y-m-d')."' and add_time < '".date('Y-m-d',strtotime('+1 day'))."' and public_id = ".$public_id;
+	$today_recharge = pdo_fetchcolumn($today_sql);
+
+	//总充值金额
+	$total_sql = "select SUM(recharge_pay) from ".tablename($this->table['recharge'])." where status = 1 and publid_id = ".$public_id;
+	$total_recharge = pdo_fetchcolumn($today_sql);
 	/*查询条件*/
 	if(checksubmit()){
 		$keyword = empty($_GPC['keyword'])?"":trim($_GPC['keyword']);
