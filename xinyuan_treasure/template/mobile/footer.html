@@ -4,7 +4,7 @@
 	<script>
 		function kefu(){
 			$("#kefu p").remove();
-			$("#kefu").children('img').attr('src','{php echo toimage($this->settings["qrcode"])');
+			$("#kefu").children('img').attr('src','{php echo toimage($this->settings["qrcode"])}');
 			$("#kefu").show();
 			$("#kefu").children('img').show();
 		}
