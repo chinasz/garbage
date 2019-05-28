@@ -4,7 +4,7 @@
 	<script>
 		function kefu(){
 			$("#kefu p").remove();
-			$("#kefu").children('img').attr('src','{php echo $this->createMobileUrl("qrcode")}');
+			$("#kefu").children('img').attr('src','{php echo toimage($this->settings["qrcode"])');
 			$("#kefu").show();
 			$("#kefu").children('img').show();
 		}
@@ -13,12 +13,20 @@
 		
 		})
 		function poster_layer(){
+			{if $this->settings['poster_status'] == 1}
 			$("#kefu").children('img').attr('src','{php echo $this->createMobileUrl("showposter")}');
 			$("#kefu").show();
 			
-						
+			{else}
+
+				var html = '<p style="font-size:.2rem;color:#fff;text-align:center;">海报功能未开启</p>';
+				$("#kefu").children('img').hide();
+				$("#kefu p").remove();
+				$("#kefu").append(html);
+				$("#kefu").show();
+			{/if}
+			
 		}
-	
 	</script>
 			
 		<div class="text-center footer" style="margin:10px 0; width:100%; text-align:center; word-break:break-all;font-size:14px;">
