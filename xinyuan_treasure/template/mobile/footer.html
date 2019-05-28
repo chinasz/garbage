@@ -3,8 +3,10 @@
 	</div>
 	<script>
 		function kefu(){
+			$("#kefu p").remove();
+			$("#kefu").children('img').attr('src','{php echo $this->createMobileUrl("qrcode")}');
 			$("#kefu").show();
-		
+			$("#kefu").children('img').show();
 		}
 		$("#kefu").on('click',function(){
 			$(this).hide();
@@ -13,7 +15,10 @@
 		function poster_layer(){
 			$("#kefu").children('img').attr('src','{php echo $this->createMobileUrl("showposter")}');
 			$("#kefu").show();
+			
+						
 		}
+	
 	</script>
 			
 		<div class="text-center footer" style="margin:10px 0; width:100%; text-align:center; word-break:break-all;font-size:14px;">
